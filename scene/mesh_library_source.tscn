@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://l7qa1wfoblws"]
+
+[ext_resource type="Texture2D" uid="uid://brx1p1qq7xq4m" path="res://resource/grass.png" id="1_1kn5j"]
+[ext_resource type="Texture2D" uid="uid://dfafx4d7ykv00" path="res://resource/bricks.png" id="2_ajdcc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2l8xd"]
+albedo_color = Color(2.71939e-06, 0.477149, 0.367867, 1)
+albedo_texture = ExtResource("1_1kn5j")
+uv1_scale = Vector3(1.25, 1.25, 1.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qrase"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_2l8xd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fsdns"]
+albedo_color = Color(0.474811, 0.200401, 0.133503, 1)
+albedo_texture = ExtResource("2_ajdcc")
+uv1_scale = Vector3(6, 6, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7awma"]
+material = SubResource("StandardMaterial3D_fsdns")
+uv2_padding = 0.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GrassTIle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.25, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_qrase")
+
+[node name="PlatformTile" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.25, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_7awma")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2es7rt7sbh5i"]
+
+[ext_resource type="Script" path="res://scene/tile.gd" id="1_veweb"]
+[ext_resource type="PackedScene" uid="uid://c3ipix8j1fjk4" path="res://glb/square_tile.glb" id="2_gb6er"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j13e2"]
+size = Vector3(2, 0.5, 2)
+
+[node name="Root" type="Node3D"]
+script = ExtResource("1_veweb")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0025985)
+shape = SubResource("BoxShape3D_j13e2")
+
+[node name="square_tile" parent="Area3D" instance=ExtResource("2_gb6er")]
