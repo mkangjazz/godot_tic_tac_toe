@@ -4,7 +4,9 @@ signal focused_tile_was_clicked();
 
 @export var building_type: Constants.TileStates = Constants.TileStates.EMPTY;
 
-@onready var focus_indicator = %MeshInstance3D
+@onready var focus_indicator = %FocusSelector
+@onready var x_marker = %X
+@onready var o_marker = %O
 
 var isFocused:bool = false;
 
@@ -16,6 +18,18 @@ func _physics_process(delta):
 		focus_indicator.show();
 	else:
 		focus_indicator.hide();
+
+	match (building_type):
+		Constants.TileStates.X:
+			x_marker.show();
+			o_marker.hide();
+		Constants.TileStates.O:
+			x_marker.hide();
+			o_marker.show();
+		_:
+			x_marker.hide();
+			o_marker.hide();
+
 	pass;
 
 func _unhandled_input(event):
@@ -31,7 +45,7 @@ func set_building_type(type: Constants.TileStates):
 func handle_click():
 	if !isFocused:
 		return;
-	
+
 	focused_tile_was_clicked.emit();
 	pass;
 

@@ -1,6 +1,7 @@
 extends Node3D
 
-signal player_win(state:Constants.TileStates)
+signal game_is_won (winner: Constants.TileStates);
+signal no_moves_remain;
 
 const winning_combinations:Array = [
 	[0, 1, 2],
@@ -15,6 +16,9 @@ const winning_combinations:Array = [
 
 @onready var children = get_children();
 
+var isPlayerTurn:bool = true;
+var isPlaying:bool = true; # toggle off after win?
+
 func _ready():
 	connect_tile_signals_to_grid();
 	focus_tile_at_index(0);
@@ -23,6 +27,8 @@ func _ready():
 	pass;
 
 func _unhandled_input(event):
+	#if !isPlayerTurn:
+		#return;
 	if event.is_action("move_right") and not event.is_echo():
 		if event.is_pressed():
 			handle_move("move_right");
@@ -38,20 +44,6 @@ func _unhandled_input(event):
 	pass;
 
 func _physics_process(delta):
-	pass;
-
-func check_win_conditions_for(state:Constants.TileStates) -> bool:
-	var found_match = false;
-
-	for combination in winning_combinations:
-		if (
-			state == children[combination[0]].building_type
-			and state == children[combination[1]].building_type
-			and state == children[combination[2]].building_type
-		):
-			found_match = true;
-	
-	return found_match;
 	pass;
 
 func handle_move(dir: String):
@@ -114,8 +106,7 @@ func focus_tile_at_index(index:int):
 
 	unfocus_all_tiles();
 	tile.focus();
-	print("focus: ", tile);
-	
+
 	pass;
 
 func get_focused_tile():
@@ -130,7 +121,28 @@ func get_focused_tile():
 	pass;
 
 func _on_tile_was_clicked(tile:Tile):
-	print("_on_tile_was_clicked ", tile);
+	var current_marker = get_current_turn_marker();
+
+	tile.set_building_type(current_marker);
+	
+	if check_win_conditions_for(current_marker):
+		game_is_won.emit(current_marker);
+	else:
+		isPlayerTurn = !isPlayerTurn;
+	pass;
+
+func check_win_conditions_for(state:Constants.TileStates) -> bool:
+	var found_match = false;
+
+	for combination in winning_combinations:
+		if (
+			state == children[combination[0]].building_type
+			and state == children[combination[1]].building_type
+			and state == children[combination[2]].building_type
+		):
+			found_match = true;
+	
+	return found_match;
 	pass;
 
 func connect_tile_signals_to_grid():
@@ -138,4 +150,11 @@ func connect_tile_signals_to_grid():
 		child.focused_tile_was_clicked.connect(
 			_on_tile_was_clicked.bind(child)
 		)
+	pass;
+
+func get_current_turn_marker() -> Constants.TileStates:
+	if isPlayerTurn:
+		return Constants.TileStates.X
+	else:
+		return Constants.TileStates.O
 	pass;

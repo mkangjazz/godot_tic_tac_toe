@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2es7rt7sbh5i"]
+[gd_scene load_steps=12 format=3 uid="uid://c2es7rt7sbh5i"]
 
 [ext_resource type="Script" path="res://script/tile.gd" id="1_veweb"]
 [ext_resource type="PackedScene" uid="uid://c3ipix8j1fjk4" path="res://resource/square_tile.glb" id="2_gb6er"]
@@ -14,6 +14,30 @@ material = SubResource("StandardMaterial3D_kbdgl")
 radius = 0.125
 height = 0.75
 
+[sub_resource type="SystemFont" id="SystemFont_emhld"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6b1sx"]
+albedo_color = Color(0.0509804, 0.337255, 0.619608, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_roy6h"]
+material = SubResource("StandardMaterial3D_6b1sx")
+text = "X	"
+font = SubResource("SystemFont_emhld")
+font_size = 48
+uppercase = true
+
+[sub_resource type="SystemFont" id="SystemFont_qkahi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smlic"]
+albedo_color = Color(0.662782, 0.3149, 0.0373907, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_gn44l"]
+material = SubResource("StandardMaterial3D_smlic")
+text = "O"
+font = SubResource("SystemFont_qkahi")
+font_size = 48
+uppercase = true
+
 [node name="Root" type="Node3D"]
 script = ExtResource("1_veweb")
 
@@ -25,7 +49,17 @@ shape = SubResource("BoxShape3D_j13e2")
 
 [node name="square_tile" parent="Area3D" instance=ExtResource("2_gb6er")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+[node name="FocusSelector" type="MeshInstance3D" parent="Area3D"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_omwl8")
+
+[node name="X" type="MeshInstance3D" parent="Area3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.25, 0)
+mesh = SubResource("TextMesh_roy6h")
+
+[node name="O" type="MeshInstance3D" parent="Area3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.25, 0)
+mesh = SubResource("TextMesh_gn44l")
