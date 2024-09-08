@@ -1,15 +1,15 @@
 extends Node3D
 
-var isKeyPressed:bool = false;
+# signal grid_changed
 
 func _ready():
 	focus_tile_at_index(0);
 	get_focused_tile();
+	
+	#for child in get_children():
+		#child.connect()
+		
 	pass;
-
-# 0, 1, 2
-# 3, 4, 5
-# 6, 7, 8
 
 func _unhandled_input(event):
 	if event.is_action("move_right") and not event.is_echo():
@@ -103,3 +103,39 @@ func get_focused_tile():
 
 	return tile;
 	pass;
+
+func _on_zero_zero_focused_tile_was_clicked(tile):
+	print("clicky 0")
+	pass # Replace with function body.
+
+func _on_one_zero_focused_tile_was_clicked(tile):
+	print("clicky 1")
+	pass # Replace with function body.
+
+func _on_two_zero_focused_tile_was_clicked(tile):
+	print("clicky 2")
+	pass # Replace with function body.
+
+func _on_zero_one_focused_tile_was_clicked(tile):
+	print("clicky 3")
+	pass # Replace with function body.
+
+func _on_one_one_focused_tile_was_clicked(tile):
+	print("clicky 4")
+	pass # Replace with function body.
+
+func _on_two_one_focused_tile_was_clicked(tile):
+	print("clicky 5")
+	pass # Replace with function body.
+
+func _on_zero_two_focused_tile_was_clicked(tile):
+	print("clicky 6")
+	pass # Replace with function body.
+
+func _on_one_two_focused_tile_was_clicked(tile):
+	print("clicky 7")
+	pass # Replace with function body.
+
+func _on_two_two_focused_tile_was_clicked(tile):
+	print("clicky 8")
+	pass # Replace with function body.

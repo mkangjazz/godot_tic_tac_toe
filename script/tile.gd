@@ -1,12 +1,30 @@
 class_name Tile extends Node3D
 
-signal clicked(tile:Tile);
-
-var isSelected:bool = false;
+signal focused_tile_was_clicked(tile:Tile);
 
 @export var building_type: Constants.TileStates = Constants.TileStates.EMPTY;
 
-# isSelected
+@onready var focus_indicator = %MeshInstance3D
+
+var isFocused:bool = false;
+
+func _ready():
+	pass;
+
+func _physics_process(delta):
+	if isFocused:
+		focus_indicator.show();
+	else:
+		focus_indicator.hide();
+	pass;
+
+func _unhandled_input(event):
+	if event.is_action("confirm") and not event.is_echo():
+		if event.is_pressed():
+			handle_click();
+	pass;
+
+# isFocused
 # texture?
 # Dynamically instance children conditionally
 # Empty, X, O
@@ -22,20 +40,21 @@ func set_building_type(type: Constants.TileStates):
 	pass;
 
 func handle_click():
-	print("handle_click: ", self);
-	# X or O based on whose turn it is?
-	# emit the clicked signal and pass in which tile it was (self?)
+	if !isFocused:
+		return;
+	
+	focused_tile_was_clicked.emit(self);
 	pass;
 
 func blur():
-	isSelected = false;
+	isFocused = false;
 	pass;
 
 func focus():
-	isSelected = true;
-	print("focus: ", isSelected);
+	isFocused = true;
+	print("focus: ", isFocused);
 	pass;
 
 func get_selected_state():
-	return isSelected;
+	return isFocused;
 	pass;
