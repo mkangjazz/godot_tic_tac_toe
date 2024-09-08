@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhevs2kgy42pf"]
+
+[ext_resource type="Script" path="res://script/tile_grid.gd" id="1_7dini"]
+[ext_resource type="PackedScene" uid="uid://c2es7rt7sbh5i" path="res://scene/tile.tscn" id="2_44403"]
+
+[node name="TileGrid" type="Node3D"]
+script = ExtResource("1_7dini")
+
+[node name="ZeroZero" parent="." instance=ExtResource("2_44403")]
+
+[node name="OneZero" parent="." instance=ExtResource("2_44403")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="TwoZero" parent="." instance=ExtResource("2_44403")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="ZeroOne" parent="." instance=ExtResource("2_44403")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="OneOne" parent="." instance=ExtResource("2_44403")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="TwoOne" parent="." instance=ExtResource("2_44403")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+
+[node name="ZeroTwo" parent="." instance=ExtResource("2_44403")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="OneTwo" parent="." instance=ExtResource("2_44403")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+
+[node name="TwoTwo" parent="." instance=ExtResource("2_44403")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
