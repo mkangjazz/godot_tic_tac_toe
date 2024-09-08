@@ -1,13 +1,24 @@
 extends Node3D
 
-# signal grid_changed
+signal player_win(state:Constants.TileStates)
+
+const winning_combinations:Array = [
+	[0, 1, 2],
+	[3, 4, 5],
+	[6, 7, 8],
+	[0, 3, 6],
+	[1, 4, 7],
+	[2, 5, 8],
+	[0, 4, 8],
+	[6, 4, 2],
+]
+
+@onready var children = get_children();
 
 func _ready():
+	connect_tile_signals_to_grid();
 	focus_tile_at_index(0);
 	get_focused_tile();
-	
-	#for child in get_children():
-		#child.connect()
 		
 	pass;
 
@@ -29,6 +40,20 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	pass;
 
+func check_win_conditions_for(state:Constants.TileStates) -> bool:
+	var found_match = false;
+
+	for combination in winning_combinations:
+		if (
+			state == children[combination[0]].building_type
+			and state == children[combination[1]].building_type
+			and state == children[combination[2]].building_type
+		):
+			found_match = true;
+	
+	return found_match;
+	pass;
+
 func handle_move(dir: String):
 	var focused_index = get_focused_tile().get_index();
 
@@ -46,7 +71,7 @@ func handle_move(dir: String):
 func handle_move_right(index:int):
 	var target_index:int = index + 1;
 
-	if target_index > get_children().size() - 1:
+	if target_index > children.size() - 1:
 		return;
 
 	focus_tile_at_index(target_index);
@@ -73,14 +98,14 @@ func handle_move_up(index:int):
 func handle_move_down(index:int):
 	var target_index:int = index + 3;
 
-	if target_index > get_children().size() - 1:
+	if target_index > children.size() - 1:
 		return;
 
 	focus_tile_at_index(target_index);
 	pass;
 
 func unfocus_all_tiles():
-	for tile in get_children():
+	for tile in children:
 		tile.blur();
 	pass;
 
@@ -96,7 +121,7 @@ func focus_tile_at_index(index:int):
 func get_focused_tile():
 	var tile:Tile;
 
-	for child in get_children():
+	for child in children:
 		if child.get_selected_state():
 			tile = child;
 		pass;
@@ -104,38 +129,13 @@ func get_focused_tile():
 	return tile;
 	pass;
 
-func _on_zero_zero_focused_tile_was_clicked(tile):
-	print("clicky 0")
-	pass # Replace with function body.
+func _on_tile_was_clicked(tile:Tile):
+	print("_on_tile_was_clicked ", tile);
+	pass;
 
-func _on_one_zero_focused_tile_was_clicked(tile):
-	print("clicky 1")
-	pass # Replace with function body.
-
-func _on_two_zero_focused_tile_was_clicked(tile):
-	print("clicky 2")
-	pass # Replace with function body.
-
-func _on_zero_one_focused_tile_was_clicked(tile):
-	print("clicky 3")
-	pass # Replace with function body.
-
-func _on_one_one_focused_tile_was_clicked(tile):
-	print("clicky 4")
-	pass # Replace with function body.
-
-func _on_two_one_focused_tile_was_clicked(tile):
-	print("clicky 5")
-	pass # Replace with function body.
-
-func _on_zero_two_focused_tile_was_clicked(tile):
-	print("clicky 6")
-	pass # Replace with function body.
-
-func _on_one_two_focused_tile_was_clicked(tile):
-	print("clicky 7")
-	pass # Replace with function body.
-
-func _on_two_two_focused_tile_was_clicked(tile):
-	print("clicky 8")
-	pass # Replace with function body.
+func connect_tile_signals_to_grid():
+	for child in children:
+		child.focused_tile_was_clicked.connect(
+			_on_tile_was_clicked.bind(child)
+		)
+	pass;

@@ -1,6 +1,6 @@
 class_name Tile extends Node3D
 
-signal focused_tile_was_clicked(tile:Tile);
+signal focused_tile_was_clicked();
 
 @export var building_type: Constants.TileStates = Constants.TileStates.EMPTY;
 
@@ -24,17 +24,6 @@ func _unhandled_input(event):
 			handle_click();
 	pass;
 
-# isFocused
-# texture?
-# Dynamically instance children conditionally
-# Empty, X, O
-
-# event emitter (signal)
-# should emit an event if
-# clicked or "enter/spacebar"
-# keyboard direction pressed:
-# wasd, arrow keys (navigate the grid)
-
 func set_building_type(type: Constants.TileStates):
 	building_type = type;
 	pass;
@@ -43,7 +32,7 @@ func handle_click():
 	if !isFocused:
 		return;
 	
-	focused_tile_was_clicked.emit(self);
+	focused_tile_was_clicked.emit();
 	pass;
 
 func blur():
