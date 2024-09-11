@@ -1,63 +1,47 @@
 class_name Tile extends Node3D
 
-signal focused_tile_was_clicked();
-
-@export var building_type: Constants.TileStates = Constants.TileStates.EMPTY;
+signal focused_tile_was_chosen;
 
 @onready var focus_indicator = %FocusSelector
 @onready var x_marker = %X
 @onready var o_marker = %O
 
 var isFocused:bool = false;
+var building_type: Constants.TileMarkers = Constants.TileMarkers.EMPTY;
 
 func _ready():
 	pass;
 
 func _physics_process(delta):
-	if isFocused:
-		focus_indicator.show();
-	else:
-		focus_indicator.hide();
-
 	match (building_type):
-		Constants.TileStates.X:
+		Constants.TileMarkers.X:
 			x_marker.show();
 			o_marker.hide();
-		Constants.TileStates.O:
+		Constants.TileMarkers.O:
 			x_marker.hide();
 			o_marker.show();
 		_:
 			x_marker.hide();
 			o_marker.hide();
-
 	pass;
 
-func _unhandled_input(event):
-	if event.is_action("confirm") and not event.is_echo():
-		if event.is_pressed():
-			handle_click();
-	pass;
-
-func set_building_type(type: Constants.TileStates):
-	building_type = type;
-	pass;
-
-func handle_click():
+func choose(type: Constants.TileMarkers):
 	if !isFocused:
 		return;
 
-	focused_tile_was_clicked.emit();
+	if building_type != Constants.TileMarkers.EMPTY:
+		return;
+
+	building_type = type;
+	focused_tile_was_chosen.emit();
 	pass;
 
 func blur():
 	isFocused = false;
+	focus_indicator.hide();
 	pass;
 
 func focus():
 	isFocused = true;
-	print("focus: ", isFocused);
-	pass;
-
-func get_selected_state():
-	return isFocused;
+	focus_indicator.show();
 	pass;

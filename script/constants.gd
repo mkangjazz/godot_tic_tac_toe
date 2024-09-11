@@ -1,7 +1,17 @@
 class_name Constants
 
-enum TileStates {
-	EMPTY, 
+enum TileMarkers {
+	EMPTY,
 	X,
 	O,
+}
+
+enum PlayerTypes {
+	PLAYER,
+	AI
+}
+
+enum GameModes {
+	SINGLEPLAYER,
+	MULTIPLAYER,
 }

@@ -45,6 +45,3 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [connection signal="pressed" from="CamMarker/2D_UI/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
-[connection signal="matched_three_o" from="TileGrid" to="." method="_on_tile_grid_matched_three_o"]
-[connection signal="matched_three_x" from="TileGrid" to="." method="_on_tile_grid_matched_three_x"]
-[connection signal="no_empty_tiles_left" from="TileGrid" to="." method="_on_tile_grid_no_empty_tiles_left"]
