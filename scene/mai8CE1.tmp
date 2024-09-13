@@ -23,11 +23,6 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "DEBUG"
 
-[node name="Scores" type="Label" parent="CamMarker/2D_UI/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Scores"
-
 [node name="WhoseTurn" type="Label" parent="CamMarker/2D_UI/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2

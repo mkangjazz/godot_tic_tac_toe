@@ -26,14 +26,19 @@ func _physics_process(delta):
 	pass;
 
 func choose(type: Constants.TileMarkers):
-	if !isFocused:
-		return;
-
 	if building_type != Constants.TileMarkers.EMPTY:
 		return;
 
 	building_type = type;
 	focused_tile_was_chosen.emit();
+	pass;
+
+func show_focus_indicator():
+	focus_indicator.show();
+	pass;
+
+func hide_focus_indicator():
+	focus_indicator.hide();
 	pass;
 
 func blur():

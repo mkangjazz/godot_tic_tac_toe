@@ -1,10 +1,6 @@
 extends Node3D
 
-#signal tile_chosen(tile:Tile);
-#signal tile_focused(tile:Tile);
-signal matched_three_x;
-signal matched_three_o;
-signal no_empty_tiles_left;
+signal focused_tile_chosen;
 
 const possible_match_threes:Array = [
 	[0, 1, 2],
@@ -22,18 +18,15 @@ const possible_match_threes:Array = [
 func _ready():
 	connect_tile_signals_to_grid();
 	reset_tile_grid();
-	children[0].focus();
+
 	pass;
 
 func reset_tile_grid():
-	reset_all_tiles();
-
-	pass;
-
-func reset_all_tiles():
 	for child in children:
 		child.building_type = Constants.TileMarkers.EMPTY;
 		child.blur();
+
+	children[0].focus();
 	pass;
 
 func _physics_process(delta):
@@ -54,7 +47,7 @@ func unfocus_all_tiles():
 		tile.blur();
 	pass;
 
-func check_if_empty_tiles_exist() -> bool:
+func do_empty_tiles_exist() -> bool:
 	var count_empty_tiles:int = 0;
 
 	for child in children:
@@ -62,17 +55,13 @@ func check_if_empty_tiles_exist() -> bool:
 			count_empty_tiles += 1;
 
 	if count_empty_tiles < 1:
-		no_empty_tiles_left.emit();
 		return false;
 	else:
 		return true;
 	pass;
 
-func check_if_matched_three() -> bool:
-	var found_match = false;
-
-	# need to draw a strike "through" the match
-	# from the first Tile to last
+func found_match_three_x() -> bool:
+	var found_match:bool = false;
 
 	for combination in possible_match_threes:
 		var x = Constants.TileMarkers.X;
@@ -83,8 +72,14 @@ func check_if_matched_three() -> bool:
 			and x == children[combination[2]].building_type
 		):
 			found_match = true;
-			matched_three_x.emit();
-			
+
+	return found_match;
+	pass;
+
+func found_match_three_o() -> bool:
+	var found_match:bool = false;
+
+	for combination in possible_match_threes:
 		var o = Constants.TileMarkers.O;
 
 		if (
@@ -93,15 +88,13 @@ func check_if_matched_three() -> bool:
 			and o == children[combination[2]].building_type
 		):
 			found_match = true;
-			matched_three_o.emit();
 
 	return found_match;
 	pass;
 
 func _on_focused_tile_was_chosen(tile:Tile):
-	var found_match = check_if_matched_three();
-	var empty_tiles_exist = check_if_empty_tiles_exist();
-		
+	focused_tile_chosen.emit();
+
 	pass;
 
 func connect_tile_signals_to_grid():
@@ -153,4 +146,40 @@ func move_up_one_tile():
 #
 	unfocus_all_tiles();
 	children[target_index].focus();
+	pass;
+
+func is_center_tile_open():
+	return children[4].building_type == Constants.TileMarkers.EMPTY
+	pass;
+
+func get_2_x_matches():
+	# need to block it if so
+	# or win
+	# or both
+	pass;
+	
+func get_2_o_matches():
+	# what strategies exist to help this along
+	pass;
+
+func choose_random_open_tile_for_ai():
+	var open_tiles:Array[Tile] = [];
+
+	for child in children:
+		if child.building_type == Constants.TileMarkers.EMPTY:
+			open_tiles.append(child);
+
+	if open_tiles.size() > 0:
+		var chosen_tile = open_tiles[randi() % open_tiles.size()]
+		chosen_tile.choose(Constants.TileMarkers.O)
+
+	pass;
+
+func hide_focus_indicator():
+	for child in children:
+		child.hide_focus_indicator();
+	pass;
+
+func show_focus_indicator():
+	get_focused_tile().show_focus_indicator();
 	pass;
