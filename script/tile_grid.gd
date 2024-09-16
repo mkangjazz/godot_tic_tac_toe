@@ -177,17 +177,48 @@ func find_a_winning_move_for_player(tileMarker: Constants.TileMarkers):
 
 	return false;
 
-func choose_random_open_tile_for_ai():
+func get_all_open_tiles() -> Array:
 	var open_tiles:Array[Tile] = [];
 
 	for child in children:
 		if child.building_type == Constants.TileMarkers.EMPTY:
 			open_tiles.append(child);
 
+	return open_tiles;
+
+func get_all_open_diagonal_tiles() -> Array:
+	var open_tiles = get_all_open_tiles();
+	var open_diagonals:Array = [];
+	
+	for tile in open_tiles:
+		if (
+			tile == children[0] or
+			tile == children[2] or
+			tile == children[6] or
+			tile == children[8]
+		):
+			open_diagonals.append(tile);
+	
+	return open_diagonals;
+
+func find_random_open_diagonal_for_ai():
+	var open_tiles = get_all_open_diagonal_tiles();
+
 	if open_tiles.size() > 0:
 		var chosen_tile = open_tiles[randi() % open_tiles.size()]
-		chosen_tile.choose(Constants.TileMarkers.O)
+		return chosen_tile;
 
+	return false;
+	pass;
+
+func find_random_open_tile_for_ai():
+	var open_tiles = get_all_open_tiles();
+
+	if open_tiles.size() > 0:
+		var chosen_tile = open_tiles[randi() % open_tiles.size()]
+		return chosen_tile;
+	
+	return false;
 	pass;
 
 func hide_focus_indicator():

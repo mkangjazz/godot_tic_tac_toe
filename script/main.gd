@@ -162,22 +162,28 @@ func _on_AI_turn_to_move():
 
 	if !isGamePaused:
 		var potential_o_win = tile_grid.find_a_winning_move_for_player(Constants.TileMarkers.O);
-		var potential_x_win = tile_grid.find_a_winning_move_for_player(Constants.TileMarkers.X);
-				
-		if tile_grid.is_center_tile_open():
-			tile_grid.children[4].choose(Constants.TileMarkers.O);
-			return;
-
 		if potential_o_win:
 			potential_o_win.choose(Constants.TileMarkers.O);
 			return;
 
+		var potential_x_win = tile_grid.find_a_winning_move_for_player(Constants.TileMarkers.X);
 		if potential_x_win:
 			potential_x_win.choose(Constants.TileMarkers.O);
 			return;
+	
+		if player_manager.who_moved_first_this_round.type != Constants.PlayerTypes.AI:
+			if tile_grid.is_center_tile_open():
+				tile_grid.children[4].choose(Constants.TileMarkers.O);
+				return;
 
-		# if no better move, move random
-		tile_grid.choose_random_open_tile_for_ai();
+		var random_diagonal = tile_grid.find_random_open_diagonal_for_ai();
+		if random_diagonal:
+			random_diagonal.choose(Constants.TileMarkers.O);
+			return;
+
+		var random_tile = tile_grid.find_random_open_tile_for_ai();
+		if random_tile:
+			random_tile.choose(Constants.TileMarkers.O);
 
 	pass;
 
