@@ -152,37 +152,30 @@ func found_match_three_o() -> bool:
 	return found_match;
 	pass;
 
-func find_a_winning_move_for_o():
+func find_a_winning_move_for_player(tileMarker: Constants.TileMarkers):
 	for combination in possible_match_threes:
-		var o = Constants.TileMarkers.O;
-		var found_match:bool = false;
-
-		# check all combinations for matches...
-		# 0 and 1, 0 and 2, 1 and 2
-
 		if (
-			o == children[combination[0]].building_type
-			and o == children[combination[1]].building_type
+			tileMarker == children[combination[0]].building_type
+			and tileMarker == children[combination[1]].building_type
 			and children[combination[2]].building_type == Constants.TileMarkers.EMPTY
 		):
 			return children[combination[2]];
 
 		if (
-			o == children[combination[0]].building_type
-			and o == children[combination[2]].building_type
+			tileMarker == children[combination[0]].building_type
+			and tileMarker == children[combination[2]].building_type
 			and children[combination[1]].building_type == Constants.TileMarkers.EMPTY
 		):
 			return children[combination[1]];
 		
 		if (
-			o == children[combination[1]].building_type
-			and o == children[combination[2]].building_type
+			tileMarker == children[combination[1]].building_type
+			and tileMarker == children[combination[2]].building_type
 			and children[combination[0]].building_type == Constants.TileMarkers.EMPTY
 		):
 			return children[combination[0]];
 
 	return false;
-	pass;
 
 func choose_random_open_tile_for_ai():
 	var open_tiles:Array[Tile] = [];

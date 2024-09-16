@@ -161,14 +161,19 @@ func _on_AI_turn_to_move():
 	tile_grid.hide_focus_indicator();
 
 	if !isGamePaused:
+		var potential_o_win = tile_grid.find_a_winning_move_for_player(Constants.TileMarkers.O);
+		var potential_x_win = tile_grid.find_a_winning_move_for_player(Constants.TileMarkers.X);
+				
 		if tile_grid.is_center_tile_open():
 			tile_grid.children[4].choose(Constants.TileMarkers.O);
 			return;
 
-		if tile_grid.find_a_winning_move_for_o():
-			var tile = tile_grid.find_a_winning_move_for_o();
+		if potential_o_win:
+			potential_o_win.choose(Constants.TileMarkers.O);
+			return;
 
-			tile.choose(Constants.TileMarkers.O);
+		if potential_x_win:
+			potential_x_win.choose(Constants.TileMarkers.O);
 			return;
 
 		# if no better move, move random
