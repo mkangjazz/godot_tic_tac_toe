@@ -19,7 +19,7 @@ func _ready():
 
 	pass;
 
-func _process(delta):
+func _process(_delta):
 	if !isGamePaused:
 		whose_turn.text = "Turn: " + str(player_manager.active_player.marker);
 		scores_label.text = "P1: " + str(player_manager.players.p1.score) + " | " + "P2: " + str(player_manager.players.p2.score)
@@ -165,7 +165,15 @@ func _on_AI_turn_to_move():
 			tile_grid.children[4].choose(Constants.TileMarkers.O);
 			return;
 
+		if tile_grid.find_a_winning_move_for_o():
+			var tile = tile_grid.find_a_winning_move_for_o();
+
+			tile.choose(Constants.TileMarkers.O);
+			return;
+
+		# if no better move, move random
 		tile_grid.choose_random_open_tile_for_ai();
+
 	pass;
 
 func _on_continue_pressed():

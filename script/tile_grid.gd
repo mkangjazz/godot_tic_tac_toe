@@ -76,22 +76,6 @@ func found_match_three_x() -> bool:
 	return found_match;
 	pass;
 
-func found_match_three_o() -> bool:
-	var found_match:bool = false;
-
-	for combination in possible_match_threes:
-		var o = Constants.TileMarkers.O;
-
-		if (
-			o == children[combination[0]].building_type
-			and o == children[combination[1]].building_type
-			and o == children[combination[2]].building_type
-		):
-			found_match = true;
-
-	return found_match;
-	pass;
-
 func _on_focused_tile_was_chosen(tile:Tile):
 	focused_tile_chosen.emit();
 
@@ -152,14 +136,52 @@ func is_center_tile_open():
 	return children[4].building_type == Constants.TileMarkers.EMPTY
 	pass;
 
-func get_2_x_matches():
-	# need to block it if so
-	# or win
-	# or both
+func found_match_three_o() -> bool:
+	var found_match:bool = false;
+
+	for combination in possible_match_threes:
+		var o = Constants.TileMarkers.O;
+
+		if (
+			o == children[combination[0]].building_type
+			and o == children[combination[1]].building_type
+			and o == children[combination[2]].building_type
+		):
+			found_match = true;
+
+	return found_match;
 	pass;
-	
-func get_2_o_matches():
-	# what strategies exist to help this along
+
+func find_a_winning_move_for_o():
+	for combination in possible_match_threes:
+		var o = Constants.TileMarkers.O;
+		var found_match:bool = false;
+
+		# check all combinations for matches...
+		# 0 and 1, 0 and 2, 1 and 2
+
+		if (
+			o == children[combination[0]].building_type
+			and o == children[combination[1]].building_type
+			and children[combination[2]].building_type == Constants.TileMarkers.EMPTY
+		):
+			return children[combination[2]];
+
+		if (
+			o == children[combination[0]].building_type
+			and o == children[combination[2]].building_type
+			and children[combination[1]].building_type == Constants.TileMarkers.EMPTY
+		):
+			return children[combination[1]];
+		
+		if (
+			o == children[combination[1]].building_type
+			and o == children[combination[2]].building_type
+			and children[combination[0]].building_type == Constants.TileMarkers.EMPTY
+		):
+			return children[combination[0]];
+
+	return false;
 	pass;
 
 func choose_random_open_tile_for_ai():
