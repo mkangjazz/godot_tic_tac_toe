@@ -10,6 +10,10 @@ extends Node3D
 # 
 @onready var controllers_container = %ControllersContainer
 @onready var tile_grid = %TileGrid;
+@onready var toggle_player_btn = %TogglePlayer;
+@onready var toggle_player_switch = %CheckButton2;
+@onready var toggle_wins_btn = %ToggleWins;
+@onready var toggle_wins_switch = %CheckButton;
 
 var player_manager:PlayerManager;
 var isGamePaused = true;
@@ -23,6 +27,7 @@ func _process(_delta):
 	if !isGamePaused:
 		whose_turn.text = "Turn: " + str(player_manager.active_player.marker);
 		scores_label.text = "P1: " + str(player_manager.players.p1.score) + " | " + "P2: " + str(player_manager.players.p2.score)
+	
 	pass;
 
 func _unhandled_input(event):
@@ -189,5 +194,15 @@ func _on_AI_turn_to_move():
 
 func _on_continue_pressed():
 	set_up_next_round();
+
+	pass
+
+func _on_toggle_player_pressed():
+	toggle_player_switch.button_pressed = toggle_player_btn.button_pressed
+
+	pass
+
+func _on_toggle_wins_pressed():
+	toggle_wins_switch.button_pressed = toggle_wins_btn.button_pressed
 
 	pass
