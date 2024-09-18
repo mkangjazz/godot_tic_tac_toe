@@ -1,9 +1,6 @@
 class_name Game
 extends Node3D
 
-# DEBUG
-@onready var debug_label = %DebugLabel;
-@onready var whose_turn = %WhoseTurn
 @onready var reset_button = %Continue;
 @onready var scores_label = %Scores
 
@@ -14,24 +11,24 @@ extends Node3D
 @onready var toggle_player_switch = %CheckButton2;
 @onready var toggle_wins_btn = %ToggleWins;
 @onready var toggle_wins_switch = %CheckButton;
+@onready var main_menu_scene = %MainMenu;
 
 var player_manager:PlayerManager;
-var isGamePaused = true;
+var game_manager:GameManager;
 
 func _ready():
-	set_up_initial_game();
-
+	set_up_managers();
+	main_menu_scene.show();
+	tile_grid.hide();
+	focus_first_menu_option();
+	player_manager.AI_turn_to_move.connect(_on_AI_turn_to_move);
 	pass;
 
 func _process(_delta):
-	if !isGamePaused:
-		whose_turn.text = "Turn: " + str(player_manager.active_player.marker);
-		scores_label.text = "P1: " + str(player_manager.players.p1.score) + " | " + "P2: " + str(player_manager.players.p2.score)
-	
 	pass;
 
 func _unhandled_input(event):
-	if !isGamePaused:
+	if !game_manager.isGamePaused:
 		if player_manager.active_player.type == Constants.PlayerTypes.PLAYER:
 			if event.is_action("move_right") and not event.is_echo():
 				if event.is_pressed():
@@ -50,18 +47,17 @@ func _unhandled_input(event):
 					handle_confirm();
 	pass;
 
-func set_up_initial_game():
-	set_up_managers();
-	player_manager.set_to_singleplayer();
-	player_manager.AI_turn_to_move.connect(_on_AI_turn_to_move);
-	isGamePaused = false;
+func focus_first_menu_option():
+	toggle_player_btn.grab_focus()
 	pass;
 
 func set_up_managers():
 	player_manager = PlayerManager.new();
 	controllers_container.add_child(player_manager);
 	
-	print("managers: ", controllers_container.get_children())
+	game_manager = GameManager.new()
+	controllers_container.add_child(game_manager);
+
 	pass;
 
 func handle_move_up():
@@ -128,11 +124,11 @@ func set_up_next_round():
 	player_manager.active_player = player_manager.who_moves_first_next_round;
 	player_manager.who_moved_first_this_round = player_manager.who_moves_first_next_round;
 
-	isGamePaused = false;
+	game_manager.isGamePaused = false;
 	pass;
 
 func show_win():
-	isGamePaused = true;
+	game_manager.isGamePaused = true;
 	tile_grid.hide_focus_indicator();
 
 	var active_player = get_key(
@@ -141,18 +137,25 @@ func show_win():
 	);
 
 	print("show_win: ", active_player);
-	debug_label.text = active_player + " wins!";
-
+	#debug_label.text = active_player + " wins!";
 	# show score
 	# show continue button
 	# show quit button ? 
+	#if !isGamePaused:
+		#whose_turn.text = "Turn: " + str(player_manager.active_player.marker);
+		#scores_label.text = "P1: " + str(player_manager.players.p1.score) + " | " + "P2: " + str(player_manager.players.p2.score)
+
 	pass;
 
 func show_tie():
-	isGamePaused = true;
+	game_manager.isGamePaused = true;
 	tile_grid.hide_focus_indicator();
 	
-	debug_label.text = "Cat's Game";
+	#debug_label.text = "Cat's Game";
+	#if !isGamePaused:
+		#whose_turn.text = "Turn: " + str(player_manager.active_player.marker);
+		#scores_label.text = "P1: " + str(player_manager.players.p1.score) + " | " + "P2: " + str(player_manager.players.p2.score)
+
 	# show score
 	# show continue button
 	# show quit button ?
@@ -163,9 +166,10 @@ func get_key(dictionary, index):
 	return dictionary.keys()[index]
 
 func _on_AI_turn_to_move():
+	print("_on_AI_turn_to_move")
 	tile_grid.hide_focus_indicator();
 
-	if !isGamePaused:
+	if !game_manager.isGamePaused:
 		var potential_o_win = tile_grid.find_a_winning_move_for_player(Constants.TileMarkers.O);
 		if potential_o_win:
 			potential_o_win.choose(Constants.TileMarkers.O);
@@ -198,11 +202,30 @@ func _on_continue_pressed():
 	pass
 
 func _on_toggle_player_pressed():
-	toggle_player_switch.button_pressed = toggle_player_btn.button_pressed
+	var pressed:bool = toggle_player_btn.button_pressed;
 
+	toggle_player_switch.button_pressed = pressed;
+
+	if pressed:
+		player_manager.set_to_multiplayer();
+	else:
+		player_manager.set_to_singleplayer();
 	pass
 
 func _on_toggle_wins_pressed():
-	toggle_wins_switch.button_pressed = toggle_wins_btn.button_pressed
+	var pressed:bool = toggle_wins_btn.button_pressed;
 
+	toggle_wins_switch.button_pressed = pressed;
+
+	if pressed:
+		game_manager.wins_per_round = 5;
+	else:
+		game_manager.wins_per_round = 3;
+	pass
+
+func _on_start_game_button_pressed():
+	main_menu_scene.hide();
+	tile_grid.reset_tile_grid();
+	tile_grid.show();
+	game_manager.isGamePaused = false;
 	pass

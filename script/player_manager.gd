@@ -13,7 +13,7 @@ var players:Dictionary = {
 		"score": 0,
 	},
 	"p2": {
-		"type": Constants.PlayerTypes.PLAYER,
+		"type": Constants.PlayerTypes.AI,
 		"marker": Constants.TileMarkers.O,
 		"score": 0,
 	}

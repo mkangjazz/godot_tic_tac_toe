@@ -17,8 +17,6 @@ const possible_match_threes:Array = [
 
 func _ready():
 	connect_tile_signals_to_grid();
-	reset_tile_grid();
-
 	pass;
 
 func reset_tile_grid():

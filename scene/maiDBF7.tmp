@@ -14,7 +14,6 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="Camera3D" type="Camera3D" parent="CamMarker"]
 
 [node name="MainMenu" type="CanvasLayer" parent="CamMarker"]
-unique_name_in_owner = true
 
 [node name="ColorRect" type="ColorRect" parent="CamMarker/MainMenu"]
 anchors_preset = 15
@@ -131,91 +130,28 @@ layout_mode = 2
 theme = ExtResource("3_p47nq")
 text = "Start Game"
 
-[node name="GameOver" type="CanvasLayer" parent="CamMarker"]
-
-[node name="ColorRect2" type="ColorRect" parent="CamMarker/GameOver"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-color = Color(0.133333, 0.133333, 0.133333, 1)
-
-[node name="CenterContainer" type="CenterContainer" parent="CamMarker/GameOver/ColorRect2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="CamMarker/GameOver/ColorRect2/CenterContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3"]
+visible = false
 layout_mode = 2
-theme_override_constants/separation = 48
 
-[node name="VictoryOrDefeat" type="Label" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2"]
+[node name="DebugLabel" type="Label" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("3_p47nq")
-theme_override_font_sizes/font_size = 76
-text = "Victor est X"
-horizontal_alignment = 1
+text = "DEBUG"
 
-[node name="MarginContainer" type="MarginContainer" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
-
-[node name="GridContainer" type="GridContainer" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer"]
-layout_mode = 2
-columns = 3
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 20
-
-[node name="Label" type="Label" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_p47nq")
-text = "X"
-horizontal_alignment = 1
-
-[node name="XScore" type="Label" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_p47nq")
-text = "I"
-horizontal_alignment = 1
-
-[node name="VSeparator" type="VSeparator" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 20
-
-[node name="Label2" type="Label" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_p47nq")
-text = "O"
-horizontal_alignment = 1
-
-[node name="OScore" type="Label" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_p47nq")
-text = "IV"
-horizontal_alignment = 1
-
-[node name="Continue" type="Button" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2"]
+[node name="Scores" type="Label" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("3_p47nq")
+text = "Scores"
+
+[node name="WhoseTurn" type="Label" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "WhoseTurnIsIt?"
+
+[node name="Continue" type="Button" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
 text = "Continue"
 
 [node name="LightMarker" type="Marker3D" parent="."]
@@ -231,6 +167,5 @@ unique_name_in_owner = true
 
 [connection signal="pressed" from="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer" to="." method="_on_toggle_player_pressed"]
 [connection signal="pressed" from="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins" to="." method="_on_toggle_wins_pressed"]
-[connection signal="pressed" from="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
-[connection signal="pressed" from="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="CamMarker/MainMenu/CenterContainer/VBoxContainer3/VBoxContainer2/Continue" to="." method="_on_continue_pressed"]
 [connection signal="focused_tile_chosen" from="TileGrid" to="." method="_on_tile_grid_focused_tile_chosen"]
