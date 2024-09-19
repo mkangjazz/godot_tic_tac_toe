@@ -19,17 +19,31 @@ var players:Dictionary = {
 	}
 };
 
-var who_moved_first_this_round:Dictionary = players.p1;
-var who_moves_first_next_round:Dictionary = players.p1;
-var active_player: Dictionary = players.p1;
+var who_moved_first_this_round:Dictionary;
+var who_moves_first_next_round:Dictionary;
+var active_player: Dictionary;
 
 func _ready():
+	reset_who_moves_first();
+	reset_player_scores();
 	pass;
 
 func _physics_process(delta):
 	if active_player.type == Constants.PlayerTypes.AI:
 		AI_turn_to_move.emit()
 
+	pass;
+
+func reset_who_moves_first():
+	who_moved_first_this_round = players.p1;
+	who_moves_first_next_round = players.p1;
+	active_player = players.p1;
+
+	pass;
+
+func reset_player_scores():
+	players.p1.score = 0;
+	players.p2.score = 0;
 	pass;
 
 func get_the_other_player(player:Dictionary) -> Dictionary:

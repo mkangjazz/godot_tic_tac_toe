@@ -123,8 +123,8 @@ func _on_tile_grid_focused_tile_chosen():
 func set_up_next_round():
 	game_over_scene.hide();
 	main_menu_scene.hide();
+
 	tile_grid.reset_tile_grid();
-	tile_grid.show();
 
 	# hmm
 	player_manager.who_moves_first_next_round = player_manager.get_the_other_player(
@@ -133,6 +133,7 @@ func set_up_next_round():
 	player_manager.active_player = player_manager.who_moves_first_next_round;
 	player_manager.who_moved_first_this_round = player_manager.who_moves_first_next_round;
 
+	tile_grid.show();
 	game_manager.isGamePaused = false;
 	pass;
 
@@ -167,7 +168,6 @@ func get_key(dictionary, index):
 	return dictionary.keys()[index]
 
 func _on_AI_turn_to_move():
-	print("_on_AI_turn_to_move")
 	tile_grid.hide_focus_indicator();
 
 	if !game_manager.isGamePaused:
@@ -198,7 +198,18 @@ func _on_AI_turn_to_move():
 	pass;
 
 func _on_continue_pressed():
-	set_up_next_round();
+	if (
+		player_manager.players.p1.score >= game_manager.wins_per_round or
+		player_manager.players.p2.score >= game_manager.wins_per_round
+	):
+		game_over_scene.hide();
+		tile_grid.hide();
+		main_menu_scene.show();
+		focus_player_switch();
+
+		pass;
+	else:
+		set_up_next_round();
 
 	pass
 
@@ -226,6 +237,8 @@ func _on_toggle_wins_pressed():
 
 func _on_start_game_button_pressed():
 	main_menu_scene.hide();
+	player_manager.reset_who_moves_first();
+	player_manager.reset_player_scores();
 	tile_grid.reset_tile_grid();
 	tile_grid.show();
 	game_manager.isGamePaused = false;
