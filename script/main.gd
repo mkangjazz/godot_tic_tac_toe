@@ -12,6 +12,11 @@ extends Node3D
 @onready var toggle_wins_btn = %ToggleWins;
 @onready var toggle_wins_switch = %CheckButton;
 @onready var main_menu_scene = %MainMenu;
+@onready var game_over_scene = %GameOver
+@onready var victory_label = %VictoryOrDefeat
+@onready var x_score_label = $CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer/VBoxContainer2/XScore
+@onready var o_score_label = $CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer/VBoxContainer/OScore
+@onready var continue_button = %Continue;
 
 var player_manager:PlayerManager;
 var game_manager:GameManager;
@@ -19,8 +24,9 @@ var game_manager:GameManager;
 func _ready():
 	set_up_managers();
 	main_menu_scene.show();
+	game_over_scene.hide();
 	tile_grid.hide();
-	focus_first_menu_option();
+	focus_player_switch();
 	player_manager.AI_turn_to_move.connect(_on_AI_turn_to_move);
 	pass;
 
@@ -47,8 +53,12 @@ func _unhandled_input(event):
 					handle_confirm();
 	pass;
 
-func focus_first_menu_option():
+func focus_player_switch():
 	toggle_player_btn.grab_focus()
+	pass;
+
+func focus_continue_button():
+	continue_button.grab_focus()
 	pass;
 
 func set_up_managers():
@@ -111,11 +121,10 @@ func _on_tile_grid_focused_tile_chosen():
 	pass
 
 func set_up_next_round():
+	game_over_scene.hide();
+	main_menu_scene.hide();
 	tile_grid.reset_tile_grid();
-
-	# hack to unfocus the continue button
-	reset_button.hide();
-	reset_button.show();
+	tile_grid.show();
 
 	# hmm
 	player_manager.who_moves_first_next_round = player_manager.get_the_other_player(
@@ -129,37 +138,29 @@ func set_up_next_round():
 
 func show_win():
 	game_manager.isGamePaused = true;
+	game_over_scene.show();
 	tile_grid.hide_focus_indicator();
+	focus_continue_button();
 
 	var active_player = get_key(
 		Constants.TileMarkers,
 		player_manager.active_player.marker
 	);
 
-	print("show_win: ", active_player);
-	#debug_label.text = active_player + " wins!";
-	# show score
-	# show continue button
-	# show quit button ? 
-	#if !isGamePaused:
-		#whose_turn.text = "Turn: " + str(player_manager.active_player.marker);
-		#scores_label.text = "P1: " + str(player_manager.players.p1.score) + " | " + "P2: " + str(player_manager.players.p2.score)
-
+	victory_label.text = active_player + " wins!"; 
+	x_score_label.text = str(player_manager.players.p1.score)
+	o_score_label.text = str(player_manager.players.p2.score)
 	pass;
 
 func show_tie():
 	game_manager.isGamePaused = true;
 	tile_grid.hide_focus_indicator();
-	
-	#debug_label.text = "Cat's Game";
-	#if !isGamePaused:
-		#whose_turn.text = "Turn: " + str(player_manager.active_player.marker);
-		#scores_label.text = "P1: " + str(player_manager.players.p1.score) + " | " + "P2: " + str(player_manager.players.p2.score)
+	game_over_scene.show();
+	focus_continue_button()
 
-	# show score
-	# show continue button
-	# show quit button ?
-
+	victory_label.text = "Cat's Game"; 
+	x_score_label.text = str(player_manager.players.p1.score)
+	o_score_label.text = str(player_manager.players.p2.score)
 	pass;
 
 func get_key(dictionary, index):

@@ -6,7 +6,7 @@
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_e7rks")
-metadata/_edit_vertical_guides_ = [960.0]
+metadata/_edit_vertical_guides_ = [2314.0]
 
 [node name="CamMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 1.521, 3, 6.5)
@@ -132,6 +132,7 @@ theme = ExtResource("3_p47nq")
 text = "Start Game"
 
 [node name="GameOver" type="CanvasLayer" parent="CamMarker"]
+unique_name_in_owner = true
 
 [node name="ColorRect2" type="ColorRect" parent="CamMarker/GameOver"]
 anchors_preset = 15
