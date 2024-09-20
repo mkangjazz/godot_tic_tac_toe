@@ -1,6 +1,7 @@
 extends Node3D
 
 signal focused_tile_chosen;
+signal tile_clicked;
 
 const possible_match_threes:Array = [
 	[0, 1, 2],
@@ -76,7 +77,10 @@ func found_match_three_x() -> bool:
 
 func _on_focused_tile_was_chosen(tile:Tile):
 	focused_tile_chosen.emit();
+	pass;
 
+func _on_tile_clicked():
+	tile_clicked.emit();
 	pass;
 
 func connect_tile_signals_to_grid():
@@ -84,6 +88,18 @@ func connect_tile_signals_to_grid():
 		child.focused_tile_was_chosen.connect(
 			_on_focused_tile_was_chosen.bind(child)
 		)
+		child.tile_entered_hover.connect(
+			_on_hovered_tile.bind(child)
+		);
+		child.tile_clicked.connect(
+			_on_tile_clicked
+		);
+	pass;
+
+func _on_hovered_tile(tile:Tile):
+	unfocus_all_tiles();
+	tile.focus();
+
 	pass;
 
 func move_down_one_tile():

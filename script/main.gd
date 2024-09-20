@@ -14,14 +14,17 @@ extends Node3D
 @onready var main_menu_scene = %MainMenu;
 @onready var game_over_scene = %GameOver
 @onready var victory_label = %VictoryOrDefeat
-@onready var x_score_label = $CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer/VBoxContainer2/XScore
-@onready var o_score_label = $CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer/VBoxContainer/OScore
+@onready var x_score_label = %XScore;
+@onready var o_score_label = %OScore;
 @onready var continue_button = %Continue;
 
 var player_manager:PlayerManager;
 var game_manager:GameManager;
 
 func _ready():
+	x_score_label.text = "";
+	o_score_label.text = "";
+
 	set_up_managers();
 	main_menu_scene.show();
 	game_over_scene.hide();
@@ -87,6 +90,7 @@ func handle_move_left():
 	pass;
 
 func handle_confirm():
+	print('handle_confirm')
 	var focused_tile = tile_grid.get_focused_tile();
 
 	if focused_tile.building_type == Constants.TileMarkers.EMPTY:
@@ -95,9 +99,12 @@ func handle_confirm():
 		);
 	pass;
 
+func _on_tile_grid_tile_clicked():
+	handle_confirm();
+	pass
+
 func _on_tile_grid_focused_tile_chosen():
 	print("_on_tile_grid_focused_tile_chosen")
-
 	if tile_grid.found_match_three_x():
 		player_manager.players.p1.score += 1;
 		show_win();
@@ -148,9 +155,9 @@ func show_win():
 		player_manager.active_player.marker
 	);
 
-	victory_label.text = active_player + " wins!"; 
-	x_score_label.text = str(player_manager.players.p1.score)
-	o_score_label.text = str(player_manager.players.p2.score)
+	victory_label.text = active_player + " Wins"; 
+	x_score_label.text = game_manager.numerals[str(player_manager.players.p1.score)]
+	o_score_label.text = game_manager.numerals[str(player_manager.players.p2.score)]
 	pass;
 
 func show_tie():
@@ -160,8 +167,8 @@ func show_tie():
 	focus_continue_button()
 
 	victory_label.text = "Cat's Game"; 
-	x_score_label.text = str(player_manager.players.p1.score)
-	o_score_label.text = str(player_manager.players.p2.score)
+	x_score_label.text = game_manager.numerals[str(player_manager.players.p1.score)]
+	o_score_label.text = game_manager.numerals[str(player_manager.players.p2.score)]
 	pass;
 
 func get_key(dictionary, index):

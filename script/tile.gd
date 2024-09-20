@@ -1,5 +1,7 @@
 class_name Tile extends Node3D
 
+signal tile_entered_hover;
+signal tile_clicked;
 signal focused_tile_was_chosen;
 
 @onready var focus_indicator = %FocusSelector
@@ -50,3 +52,13 @@ func focus():
 	isFocused = true;
 	focus_indicator.show();
 	pass;
+
+func _on_area_3d_mouse_entered():
+	tile_entered_hover.emit();
+	pass
+
+func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
+	if event.is_action("click"):
+		if event.pressed:
+			tile_clicked.emit();
+	pass

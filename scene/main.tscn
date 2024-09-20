@@ -13,6 +13,70 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="Camera3D" type="Camera3D" parent="CamMarker"]
 
+[node name="Scores" type="CanvasLayer" parent="CamMarker"]
+
+[node name="MarginContainer" type="MarginContainer" parent="CamMarker/Scores"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Grid" type="GridContainer" parent="CamMarker/Scores/MarginContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="XScore" type="VBoxContainer" parent="CamMarker/Scores/MarginContainer/Grid"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="X" type="Label" parent="CamMarker/Scores/MarginContainer/Grid/XScore"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_p47nq")
+text = "X"
+horizontal_alignment = 1
+
+[node name="XScore" type="Label" parent="CamMarker/Scores/MarginContainer/Grid/XScore"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_p47nq")
+text = "I"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CamMarker/Scores/MarginContainer/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="YScore" type="VBoxContainer" parent="CamMarker/Scores/MarginContainer/Grid"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Container" type="VBoxContainer" parent="CamMarker/Scores/MarginContainer/Grid/YScore"]
+layout_mode = 2
+alignment = 2
+
+[node name="O" type="Label" parent="CamMarker/Scores/MarginContainer/Grid/YScore/Container"]
+layout_mode = 2
+theme = ExtResource("3_p47nq")
+text = "O"
+horizontal_alignment = 1
+
+[node name="OScore" type="Label" parent="CamMarker/Scores/MarginContainer/Grid/YScore/Container"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_p47nq")
+text = "IV"
+horizontal_alignment = 1
+
 [node name="MainMenu" type="CanvasLayer" parent="CamMarker"]
 unique_name_in_owner = true
 
@@ -29,6 +93,8 @@ color = Color(0.133333, 0.133333, 0.133333, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -40,7 +106,7 @@ theme_override_constants/separation = 72
 layout_mode = 2
 theme = ExtResource("3_p47nq")
 theme_override_font_sizes/font_size = 138
-text = "T3 Tactics"
+text = "TacTicsToe"
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3"]
@@ -133,6 +199,7 @@ text = "Start Game"
 
 [node name="GameOver" type="CanvasLayer" parent="CamMarker"]
 unique_name_in_owner = true
+visible = false
 
 [node name="ColorRect2" type="ColorRect" parent="CamMarker/GameOver"]
 anchors_preset = 15
@@ -141,81 +208,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-color = Color(0, 0, 0, 0.784314)
+color = Color(0, 0, 0, 0.752941)
 
 [node name="CenterContainer" type="CenterContainer" parent="CamMarker/GameOver/ColorRect2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -481.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CamMarker/GameOver/ColorRect2/CenterContainer"]
 layout_mode = 2
-theme_override_constants/separation = 48
+theme_override_constants/separation = 20
 
 [node name="VictoryOrDefeat" type="Label" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("3_p47nq")
 theme_override_font_sizes/font_size = 76
-text = "Victor est X"
-horizontal_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
-
-[node name="GridContainer" type="GridContainer" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer"]
-layout_mode = 2
-columns = 3
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 20
-
-[node name="Label" type="Label" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_p47nq")
-text = "X"
-horizontal_alignment = 1
-
-[node name="XScore" type="Label" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_p47nq")
-text = "I"
-horizontal_alignment = 1
-
-[node name="VSeparator" type="VSeparator" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 20
-
-[node name="Label2" type="Label" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_p47nq")
-text = "O"
-horizontal_alignment = 1
-
-[node name="OScore" type="Label" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/MarginContainer/GridContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_p47nq")
-text = "IV"
+text = "X/O"
 horizontal_alignment = 1
 
 [node name="Continue" type="Button" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
 theme = ExtResource("3_p47nq")
 text = "Continue"
@@ -236,3 +253,4 @@ unique_name_in_owner = true
 [connection signal="pressed" from="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/Continue" to="." method="_on_continue_pressed"]
 [connection signal="focused_tile_chosen" from="TileGrid" to="." method="_on_tile_grid_focused_tile_chosen"]
+[connection signal="tile_clicked" from="TileGrid" to="." method="_on_tile_grid_tile_clicked"]

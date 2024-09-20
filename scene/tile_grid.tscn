@@ -31,13 +31,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
 
 [node name="TwoTwo" parent="." groups=["TileGroup"] instance=ExtResource("2_44403")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
-
-[connection signal="focused_tile_was_clicked" from="ZeroZero" to="." method="_on_zero_zero_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="OneZero" to="." method="_on_one_zero_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="TwoZero" to="." method="_on_two_zero_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="ZeroOne" to="." method="_on_zero_one_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="OneOne" to="." method="_on_one_one_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="TwoOne" to="." method="_on_two_one_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="ZeroTwo" to="." method="_on_zero_two_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="OneTwo" to="." method="_on_one_two_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="TwoTwo" to="." method="_on_two_two_focused_tile_was_clicked"]
