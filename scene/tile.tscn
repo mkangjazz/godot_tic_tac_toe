@@ -1,18 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2es7rt7sbh5i"]
+[gd_scene load_steps=11 format=3 uid="uid://c2es7rt7sbh5i"]
 
 [ext_resource type="Script" path="res://script/tile.gd" id="1_veweb"]
 [ext_resource type="PackedScene" uid="uid://c3ipix8j1fjk4" path="res://resource/square_tile.glb" id="2_gb6er"]
+[ext_resource type="PackedScene" uid="uid://byyvpeh2gnt5n" path="res://resource/tile_selector.glb" id="3_8y4wc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j13e2"]
 size = Vector3(2, 0.5, 2)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kbdgl"]
-albedo_color = Color(0.215686, 0.227451, 1, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_omwl8"]
-material = SubResource("StandardMaterial3D_kbdgl")
-radius = 0.125
-height = 0.75
 
 [sub_resource type="SystemFont" id="SystemFont_emhld"]
 
@@ -49,10 +42,9 @@ shape = SubResource("BoxShape3D_j13e2")
 
 [node name="square_tile" parent="Area3D" instance=ExtResource("2_gb6er")]
 
-[node name="FocusSelector" type="MeshInstance3D" parent="Area3D"]
+[node name="tile_selector" parent="Area3D" instance=ExtResource("3_8y4wc")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_omwl8")
+transform = Transform3D(1.85, 0, 0, 0, 1.762, 0, 0, 0, 1.85, 0, 0.275, 0)
 
 [node name="X" type="MeshInstance3D" parent="Area3D"]
 unique_name_in_owner = true

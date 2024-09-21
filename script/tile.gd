@@ -4,7 +4,7 @@ signal tile_entered_hover;
 signal tile_clicked;
 signal focused_tile_was_chosen;
 
-@onready var focus_indicator = %FocusSelector
+@onready var focus_indicator = %tile_selector
 @onready var x_marker = %X
 @onready var o_marker = %O
 

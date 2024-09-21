@@ -17,16 +17,16 @@ extends Node3D
 @onready var x_score_label = %XScore;
 @onready var o_score_label = %OScore;
 @onready var continue_button = %Continue;
+@onready var scores = %Scores
+@onready var map = %map
 
 var player_manager:PlayerManager;
 var game_manager:GameManager;
 
 func _ready():
-	x_score_label.text = "";
-	o_score_label.text = "";
-
 	set_up_managers();
 	main_menu_scene.show();
+	scores.hide();
 	game_over_scene.hide();
 	tile_grid.hide();
 	focus_player_switch();
@@ -34,6 +34,17 @@ func _ready():
 	pass;
 
 func _process(_delta):
+	if player_manager:
+		if player_manager.players.p1 and player_manager.players.p2:
+			x_score_label.text = game_manager.numerals[str(player_manager.players.p1.score)]
+			o_score_label.text = game_manager.numerals[str(player_manager.players.p2.score)]
+	else:
+		x_score_label.text = "0";
+		o_score_label.text = "0";
+		
+	if main_menu_scene:
+		map.visible = main_menu_scene.visible;
+
 	pass;
 
 func _unhandled_input(event):
@@ -128,6 +139,7 @@ func _on_tile_grid_focused_tile_chosen():
 	pass
 
 func set_up_next_round():
+	scores.show();
 	game_over_scene.hide();
 	main_menu_scene.hide();
 
@@ -156,8 +168,6 @@ func show_win():
 	);
 
 	victory_label.text = active_player + " Wins"; 
-	x_score_label.text = game_manager.numerals[str(player_manager.players.p1.score)]
-	o_score_label.text = game_manager.numerals[str(player_manager.players.p2.score)]
 	pass;
 
 func show_tie():
@@ -167,8 +177,6 @@ func show_tie():
 	focus_continue_button()
 
 	victory_label.text = "Cat's Game"; 
-	x_score_label.text = game_manager.numerals[str(player_manager.players.p1.score)]
-	o_score_label.text = game_manager.numerals[str(player_manager.players.p2.score)]
 	pass;
 
 func get_key(dictionary, index):
@@ -211,6 +219,7 @@ func _on_continue_pressed():
 	):
 		game_over_scene.hide();
 		tile_grid.hide();
+		scores.hide();
 		main_menu_scene.show();
 		focus_player_switch();
 
@@ -248,5 +257,6 @@ func _on_start_game_button_pressed():
 	player_manager.reset_player_scores();
 	tile_grid.reset_tile_grid();
 	tile_grid.show();
+	scores.show();
 	game_manager.isGamePaused = false;
 	pass

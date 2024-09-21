@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://v45x1kp6orko"]
+[gd_scene load_steps=8 format=3 uid="uid://v45x1kp6orko"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_e7rks"]
 [ext_resource type="PackedScene" uid="uid://dhevs2kgy42pf" path="res://scene/tile_grid.tscn" id="2_hb3t2"]
 [ext_resource type="Theme" uid="uid://b4145qp6hxvc3" path="res://resource/theme.tres" id="3_p47nq"]
+[ext_resource type="Texture2D" uid="uid://gvv1mk23m1qx" path="res://resource/title-map.png" id="4_g7w22"]
+[ext_resource type="Texture2D" uid="uid://ckfxsnra1s18v" path="res://resource/logo.png" id="5_twumo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sanw"]
+albedo_texture = ExtResource("4_g7w22")
+texture_filter = 0
+texture_repeat = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cm3g4"]
+material = SubResource("StandardMaterial3D_2sanw")
+size = Vector2(40, 40)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_e7rks")
@@ -13,9 +24,23 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="Camera3D" type="Camera3D" parent="CamMarker"]
 
-[node name="Scores" type="CanvasLayer" parent="CamMarker"]
+[node name="LightMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.209619, 0.977783, 0, -0.977783, 0.209619, 0.583143, 5, -4.339)
 
-[node name="MarginContainer" type="MarginContainer" parent="CamMarker/Scores"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="LightMarker"]
+
+[node name="TileGrid" parent="." instance=ExtResource("2_hb3t2")]
+unique_name_in_owner = true
+visible = false
+
+[node name="ControllersContainer" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Scores" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Scores"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,23 +51,23 @@ theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="Grid" type="GridContainer" parent="CamMarker/Scores/MarginContainer"]
+[node name="Grid" type="GridContainer" parent="Scores/MarginContainer"]
 layout_mode = 2
 columns = 3
 
-[node name="XScore" type="VBoxContainer" parent="CamMarker/Scores/MarginContainer/Grid"]
+[node name="XScore" type="VBoxContainer" parent="Scores/MarginContainer/Grid"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="X" type="Label" parent="CamMarker/Scores/MarginContainer/Grid/XScore"]
+[node name="X" type="Label" parent="Scores/MarginContainer/Grid/XScore"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
 text = "X"
 horizontal_alignment = 1
 
-[node name="XScore" type="Label" parent="CamMarker/Scores/MarginContainer/Grid/XScore"]
+[node name="XScore" type="Label" parent="Scores/MarginContainer/Grid/XScore"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -50,26 +75,26 @@ theme = ExtResource("3_p47nq")
 text = "I"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CamMarker/Scores/MarginContainer/Grid"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Scores/MarginContainer/Grid"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="YScore" type="VBoxContainer" parent="CamMarker/Scores/MarginContainer/Grid"]
+[node name="YScore" type="VBoxContainer" parent="Scores/MarginContainer/Grid"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Container" type="VBoxContainer" parent="CamMarker/Scores/MarginContainer/Grid/YScore"]
+[node name="Container" type="VBoxContainer" parent="Scores/MarginContainer/Grid/YScore"]
 layout_mode = 2
 alignment = 2
 
-[node name="O" type="Label" parent="CamMarker/Scores/MarginContainer/Grid/YScore/Container"]
+[node name="O" type="Label" parent="Scores/MarginContainer/Grid/YScore/Container"]
 layout_mode = 2
 theme = ExtResource("3_p47nq")
 text = "O"
 horizontal_alignment = 1
 
-[node name="OScore" type="Label" parent="CamMarker/Scores/MarginContainer/Grid/YScore/Container"]
+[node name="OScore" type="Label" parent="Scores/MarginContainer/Grid/YScore/Container"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -77,19 +102,63 @@ theme = ExtResource("3_p47nq")
 text = "IV"
 horizontal_alignment = 1
 
-[node name="MainMenu" type="CanvasLayer" parent="CamMarker"]
+[node name="GameOver" type="CanvasLayer" parent="Scores"]
 unique_name_in_owner = true
+visible = false
 
-[node name="ColorRect" type="ColorRect" parent="CamMarker/MainMenu"]
+[node name="ColorRect2" type="ColorRect" parent="Scores/GameOver"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-color = Color(0.133333, 0.133333, 0.133333, 1)
+color = Color(0, 0, 0, 0.752941)
 
-[node name="CenterContainer" type="CenterContainer" parent="CamMarker/MainMenu"]
+[node name="CenterContainer" type="CenterContainer" parent="Scores/GameOver/ColorRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Scores/GameOver/ColorRect2/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VictoryOrDefeat" type="Label" parent="Scores/GameOver/ColorRect2/CenterContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_p47nq")
+theme_override_font_sizes/font_size = 76
+text = "X/O"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="Scores/GameOver/ColorRect2/CenterContainer/VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(330, 0)
+layout_mode = 2
+theme = ExtResource("3_p47nq")
+text = "Continue"
+
+[node name="map" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+mesh = SubResource("PlaneMesh_cm3g4")
+
+[node name="MainMenu" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="MainMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+color = Color(0.505882, 0.392157, 0.027451, 0.529412)
+
+[node name="CenterContainer" type="CenterContainer" parent="MainMenu"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -98,34 +167,40 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="CamMarker/MainMenu/CenterContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainMenu/CenterContainer"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_constants/separation = 72
+alignment = 1
 
-[node name="Label" type="Label" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3"]
+[node name="MarginContainer2" type="MarginContainer" parent="MainMenu/CenterContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
-theme = ExtResource("3_p47nq")
-theme_override_font_sizes/font_size = 138
-text = "TacTicsToe"
-horizontal_alignment = 1
+theme_override_constants/margin_bottom = 80
 
-[node name="MarginContainer" type="MarginContainer" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer2"]
 layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_right = 100
+texture = ExtResource("5_twumo")
+expand_mode = 5
+stretch_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu/CenterContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 60
 
-[node name="TogglePlayer" type="Button" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer"]
+[node name="TogglePlayer" type="Button" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 toggle_mode = true
 flat = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -138,32 +213,32 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="CPU" type="Label" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer/HBoxContainer"]
+[node name="CPU" type="Label" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_p47nq")
 text = "CPU	"
 horizontal_alignment = 2
 
-[node name="CheckButton2" type="CheckButton" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer/HBoxContainer"]
+[node name="CheckButton2" type="CheckButton" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("3_p47nq")
 disabled = true
 
-[node name="Player" type="Label" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer/HBoxContainer"]
+[node name="Player" type="Label" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_p47nq")
 text = "Player"
 
-[node name="ToggleWins" type="Button" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer"]
+[node name="ToggleWins" type="Button" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 toggle_mode = true
 flat = true
 
-[node name="Container" type="HBoxContainer" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins"]
+[node name="Container" type="HBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -173,84 +248,33 @@ grow_vertical = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="Button2" type="Label" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins/Container"]
+[node name="Button2" type="Label" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins/Container"]
 layout_mode = 2
 theme = ExtResource("3_p47nq")
 text = "3 Wins"
 horizontal_alignment = 2
 
-[node name="CheckButton" type="CheckButton" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins/Container"]
+[node name="CheckButton" type="CheckButton" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins/Container"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 theme = ExtResource("3_p47nq")
 disabled = true
 
-[node name="Button4" type="Label" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins/Container"]
+[node name="Button4" type="Label" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins/Container"]
 layout_mode = 2
 theme = ExtResource("3_p47nq")
 text = "5 Wins"
 
-[node name="StartGameButton" type="Button" parent="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer"]
+[node name="StartGameButton" type="Button" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("3_p47nq")
 text = "Start Game"
 
-[node name="GameOver" type="CanvasLayer" parent="CamMarker"]
-unique_name_in_owner = true
-visible = false
-
-[node name="ColorRect2" type="ColorRect" parent="CamMarker/GameOver"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-color = Color(0, 0, 0, 0.752941)
-
-[node name="CenterContainer" type="CenterContainer" parent="CamMarker/GameOver/ColorRect2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="CamMarker/GameOver/ColorRect2/CenterContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="VictoryOrDefeat" type="Label" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("3_p47nq")
-theme_override_font_sizes/font_size = 76
-text = "X/O"
-horizontal_alignment = 1
-
-[node name="Continue" type="Button" parent="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(330, 0)
-layout_mode = 2
-theme = ExtResource("3_p47nq")
-text = "Continue"
-
-[node name="LightMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.209619, 0.977783, 0, -0.977783, 0.209619, 0.583143, 5, -4.339)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="LightMarker"]
-
-[node name="TileGrid" parent="." instance=ExtResource("2_hb3t2")]
-unique_name_in_owner = true
-
-[node name="ControllersContainer" type="Node3D" parent="."]
-unique_name_in_owner = true
-
-[connection signal="pressed" from="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer" to="." method="_on_toggle_player_pressed"]
-[connection signal="pressed" from="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins" to="." method="_on_toggle_wins_pressed"]
-[connection signal="pressed" from="CamMarker/MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
-[connection signal="pressed" from="CamMarker/GameOver/ColorRect2/CenterContainer/VBoxContainer2/Continue" to="." method="_on_continue_pressed"]
 [connection signal="focused_tile_chosen" from="TileGrid" to="." method="_on_tile_grid_focused_tile_chosen"]
 [connection signal="tile_clicked" from="TileGrid" to="." method="_on_tile_grid_tile_clicked"]
+[connection signal="pressed" from="Scores/GameOver/ColorRect2/CenterContainer/VBoxContainer2/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer" to="." method="_on_toggle_player_pressed"]
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins" to="." method="_on_toggle_wins_pressed"]
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
