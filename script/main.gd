@@ -41,9 +41,6 @@ func _process(_delta):
 	else:
 		x_score_label.text = "0";
 		o_score_label.text = "0";
-		
-	if main_menu_scene:
-		map.visible = main_menu_scene.visible;
 
 	pass;
 

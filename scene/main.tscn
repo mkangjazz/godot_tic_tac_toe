@@ -1,19 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://v45x1kp6orko"]
+[gd_scene load_steps=6 format=3 uid="uid://v45x1kp6orko"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_e7rks"]
 [ext_resource type="PackedScene" uid="uid://dhevs2kgy42pf" path="res://scene/tile_grid.tscn" id="2_hb3t2"]
 [ext_resource type="Theme" uid="uid://b4145qp6hxvc3" path="res://resource/theme.tres" id="3_p47nq"]
-[ext_resource type="Texture2D" uid="uid://gvv1mk23m1qx" path="res://resource/title-map.png" id="4_g7w22"]
+[ext_resource type="Texture2D" uid="uid://bmatkc1rkef5j" path="res://resource/tile-map.png" id="4_5o8i8"]
 [ext_resource type="Texture2D" uid="uid://ckfxsnra1s18v" path="res://resource/logo.png" id="5_twumo"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sanw"]
-albedo_texture = ExtResource("4_g7w22")
-texture_filter = 0
-texture_repeat = false
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_cm3g4"]
-material = SubResource("StandardMaterial3D_2sanw")
-size = Vector2(40, 40)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_e7rks")
@@ -142,41 +133,62 @@ layout_mode = 2
 theme = ExtResource("3_p47nq")
 text = "Continue"
 
-[node name="map" type="MeshInstance3D" parent="."]
-unique_name_in_owner = true
-mesh = SubResource("PlaneMesh_cm3g4")
-
 [node name="MainMenu" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 
-[node name="ColorRect" type="ColorRect" parent="MainMenu"]
+[node name="Control" type="Control" parent="MainMenu"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MapBG" type="TextureRect" parent="MainMenu/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -12.246
+offset_bottom = 332.247
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_5o8i8")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="MainMenu/Control"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-color = Color(0.505882, 0.392157, 0.027451, 0.529412)
+color = Color(0.65098, 0.427451, 0, 0.721569)
 
 [node name="CenterContainer" type="CenterContainer" parent="MainMenu"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 1.0
-offset_bottom = 1.0
+offset_bottom = -122.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="MainMenu/CenterContainer"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-theme_override_constants/separation = 72
+theme_override_constants/separation = 50
 alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="MainMenu/CenterContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
-theme_override_constants/margin_bottom = 80
+theme_override_constants/margin_bottom = 0
 
 [node name="TextureRect" type="TextureRect" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer2"]
 layout_mode = 2
@@ -191,7 +203,8 @@ theme_override_constants/margin_right = 200
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 60
+theme_override_constants/separation = 40
+alignment = 1
 
 [node name="TogglePlayer" type="Button" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -199,22 +212,20 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 toggle_mode = true
 flat = true
+alignment = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer"]
+[node name="HBoxContainer" type="GridContainer" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 33.0
-offset_top = -4.5
-offset_right = 33.0
-offset_bottom = 4.5
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
+columns = 3
 
 [node name="CPU" type="Label" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
 text = "CPU	"
 horizontal_alignment = 2
@@ -222,12 +233,15 @@ horizontal_alignment = 2
 [node name="CheckButton2" type="CheckButton" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 focus_mode = 0
 theme = ExtResource("3_p47nq")
 disabled = true
+alignment = 1
 
 [node name="Player" type="Label" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
 text = "Player"
 
@@ -238,7 +252,7 @@ layout_mode = 2
 toggle_mode = true
 flat = true
 
-[node name="Container" type="HBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins"]
+[node name="Container" type="GridContainer" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -246,10 +260,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-alignment = 1
+columns = 3
 
 [node name="Button2" type="Label" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins/Container"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
 text = "3 Wins"
 horizontal_alignment = 2
@@ -257,12 +272,15 @@ horizontal_alignment = 2
 [node name="CheckButton" type="CheckButton" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins/Container"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 focus_mode = 0
 theme = ExtResource("3_p47nq")
 disabled = true
+alignment = 1
 
 [node name="Button4" type="Label" parent="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins/Container"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
 text = "5 Wins"
 
