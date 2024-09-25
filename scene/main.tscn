@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://script/main.gd" id="1_e7rks"]
 [ext_resource type="PackedScene" uid="uid://dhevs2kgy42pf" path="res://scene/tile_grid.tscn" id="2_hb3t2"]
 [ext_resource type="Theme" uid="uid://b4145qp6hxvc3" path="res://resource/theme.tres" id="3_p47nq"]
-[ext_resource type="Texture2D" uid="uid://bmatkc1rkef5j" path="res://resource/tile-map.png" id="4_5o8i8"]
+[ext_resource type="Texture2D" uid="uid://dvawq6vfmelhp" path="res://resource/tile-map.png" id="4_5o8i8"]
 [ext_resource type="Texture2D" uid="uid://ckfxsnra1s18v" path="res://resource/logo.png" id="5_twumo"]
 
 [node name="Main" type="Node3D"]
@@ -135,6 +135,7 @@ text = "Continue"
 
 [node name="MainMenu" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="Control" type="Control" parent="MainMenu"]
 clip_contents = true
