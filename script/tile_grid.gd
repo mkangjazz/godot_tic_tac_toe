@@ -2,6 +2,7 @@ extends Node3D
 
 signal focused_tile_chosen;
 signal tile_clicked;
+signal tile_hovered(tile:Tile);
 
 const possible_match_threes:Array = [
 	[0, 1, 2],
@@ -106,8 +107,9 @@ func connect_tile_signals_to_grid():
 	pass;
 
 func _on_hovered_tile(tile:Tile):
-	unfocus_all_tiles();
-	tile.focus();
+	tile_hovered.emit(tile);
+	#unfocus_all_tiles();
+	#tile.focus();
 
 	pass;
 

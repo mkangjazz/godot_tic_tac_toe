@@ -1,11 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://v45x1kp6orko"]
+[gd_scene load_steps=10 format=3 uid="uid://v45x1kp6orko"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_e7rks"]
 [ext_resource type="PackedScene" uid="uid://dhevs2kgy42pf" path="res://scene/tile_grid.tscn" id="2_hb3t2"]
 [ext_resource type="PackedScene" uid="uid://bhr8vrw7c44ow" path="res://scene/ground_tile.tscn" id="3_frwe2"]
 [ext_resource type="Theme" uid="uid://b4145qp6hxvc3" path="res://resource/theme.tres" id="3_p47nq"]
 [ext_resource type="Texture2D" uid="uid://dvawq6vfmelhp" path="res://resource/tile-map.png" id="4_5o8i8"]
+[ext_resource type="StyleBox" uid="uid://xv4ev3w6rg4g" path="res://resource/dialoge_stylebox.tres" id="4_87y07"]
 [ext_resource type="Texture2D" uid="uid://ckfxsnra1s18v" path="res://resource/logo.png" id="5_twumo"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_we7cl"]
+size = Vector2(100, 5)
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c327i"]
+albedo_color = Color(0, 0.926046, 0.179242, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_e7rks")
@@ -21,6 +29,15 @@ transform = Transform3D(1, 0, 0, 0, 0.209619, 0.977783, 0, -0.977783, 0.209619, 
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="LightMarker"]
 
+[node name="MatteBackdrop" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MatteBackdrop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 11)
+mesh = SubResource("PlaneMesh_we7cl")
+surface_material_override/0 = SubResource("StandardMaterial3D_c327i")
+
 [node name="GroundGrid" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
 
@@ -32,6 +49,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 
 [node name="GroundTile3" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+
+[node name="GroundTile269" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+
+[node name="GroundTile270" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="GroundTile271" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="GroundTile272" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="GroundTile273" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="GroundTile294" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+
+[node name="GroundTile295" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="GroundTile296" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+
+[node name="GroundTile297" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
 
 [node name="GroundTile4" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
@@ -273,168 +316,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -10)
 [node name="GroundTile90" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10)
 
-[node name="GroundTile91" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -12)
-
-[node name="GroundTile92" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -12)
-
-[node name="GroundTile93" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -12)
-
-[node name="GroundTile94" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
-
-[node name="GroundTile95" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -12)
-
-[node name="GroundTile96" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -12)
-
-[node name="GroundTile97" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -12)
-
-[node name="GroundTile98" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -12)
-
-[node name="GroundTile99" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -12)
-
-[node name="GroundTile100" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -14)
-
-[node name="GroundTile101" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -14)
-
-[node name="GroundTile102" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -14)
-
-[node name="GroundTile103" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
-
-[node name="GroundTile104" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -14)
-
-[node name="GroundTile105" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -14)
-
-[node name="GroundTile106" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -14)
-
-[node name="GroundTile107" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -14)
-
-[node name="GroundTile108" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -14)
-
-[node name="GroundTile109" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -16)
-
-[node name="GroundTile110" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -16)
-
-[node name="GroundTile111" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -16)
-
-[node name="GroundTile112" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
-
-[node name="GroundTile113" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -16)
-
-[node name="GroundTile114" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -16)
-
-[node name="GroundTile115" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -16)
-
-[node name="GroundTile116" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -16)
-
-[node name="GroundTile117" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -16)
-
-[node name="GroundTile118" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -18)
-
-[node name="GroundTile119" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -18)
-
-[node name="GroundTile120" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -18)
-
-[node name="GroundTile121" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18)
-
-[node name="GroundTile122" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -18)
-
-[node name="GroundTile123" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -18)
-
-[node name="GroundTile124" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -18)
-
-[node name="GroundTile125" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -18)
-
-[node name="GroundTile126" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -18)
-
-[node name="GroundTile127" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -20)
-
-[node name="GroundTile128" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -20)
-
-[node name="GroundTile129" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -20)
-
-[node name="GroundTile130" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
-
-[node name="GroundTile131" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -20)
-
-[node name="GroundTile132" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -20)
-
-[node name="GroundTile133" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -20)
-
-[node name="GroundTile134" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -20)
-
-[node name="GroundTile135" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -20)
-
-[node name="GroundTile136" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -22)
-
-[node name="GroundTile137" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -22)
-
-[node name="GroundTile138" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -22)
-
-[node name="GroundTile139" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
-
-[node name="GroundTile140" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -22)
-
-[node name="GroundTile141" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -22)
-
-[node name="GroundTile142" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -22)
-
-[node name="GroundTile143" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -22)
-
-[node name="GroundTile144" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -22)
-
 [node name="GroundTile154" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -2)
 
@@ -468,24 +349,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -8)
 [node name="GroundTile164" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -10)
 
-[node name="GroundTile165" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -12)
-
-[node name="GroundTile166" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -14)
-
-[node name="GroundTile167" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -16)
-
-[node name="GroundTile168" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -18)
-
-[node name="GroundTile169" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -20)
-
-[node name="GroundTile170" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -22)
-
 [node name="GroundTile172" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -2)
 
@@ -518,24 +381,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -8)
 
 [node name="GroundTile182" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -10)
-
-[node name="GroundTile183" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -12)
-
-[node name="GroundTile184" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -14)
-
-[node name="GroundTile185" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -16)
-
-[node name="GroundTile186" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -18)
-
-[node name="GroundTile187" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -20)
-
-[node name="GroundTile188" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -22)
 
 [node name="GroundTile61" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2)
@@ -609,42 +454,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -10)
 [node name="GroundTile207" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -10)
 
-[node name="GroundTile208" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -12)
-
-[node name="GroundTile209" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -12)
-
-[node name="GroundTile210" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -14)
-
-[node name="GroundTile211" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -14)
-
-[node name="GroundTile212" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -16)
-
-[node name="GroundTile213" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -16)
-
-[node name="GroundTile214" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -18)
-
-[node name="GroundTile215" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -18)
-
-[node name="GroundTile216" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -20)
-
-[node name="GroundTile217" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -20)
-
-[node name="GroundTile218" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -22)
-
-[node name="GroundTile219" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -22)
-
 [node name="GroundTile226" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -10)
 
@@ -657,119 +466,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -10)
 [node name="GroundTile229" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -10)
 
-[node name="GroundTile230" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -12)
-
-[node name="GroundTile231" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -12)
-
-[node name="GroundTile232" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -12)
-
-[node name="GroundTile233" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -12)
-
-[node name="GroundTile234" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -14)
-
-[node name="GroundTile235" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -14)
-
-[node name="GroundTile236" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -14)
-
-[node name="GroundTile237" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -14)
-
-[node name="GroundTile238" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -16)
-
-[node name="GroundTile239" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16)
-
-[node name="GroundTile240" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -16)
-
-[node name="GroundTile241" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -16)
-
-[node name="GroundTile242" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -18)
-
-[node name="GroundTile243" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -18)
-
-[node name="GroundTile244" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -18)
-
-[node name="GroundTile245" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -18)
-
-[node name="GroundTile246" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -20)
-
-[node name="GroundTile247" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -20)
-
-[node name="GroundTile248" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -20)
-
-[node name="GroundTile249" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -20)
-
-[node name="GroundTile250" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -22)
-
-[node name="GroundTile251" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -22)
-
-[node name="GroundTile252" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -22)
-
-[node name="GroundTile253" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -22)
-
 [node name="GroundTile258" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -10)
 
 [node name="GroundTile259" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -10)
-
-[node name="GroundTile260" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -12)
-
-[node name="GroundTile261" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -12)
-
-[node name="GroundTile262" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -14)
-
-[node name="GroundTile263" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -14)
-
-[node name="GroundTile264" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -16)
-
-[node name="GroundTile265" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -16)
-
-[node name="GroundTile266" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -18)
-
-[node name="GroundTile267" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -18)
-
-[node name="GroundTile268" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -20)
-
-[node name="GroundTile269" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -20)
-
-[node name="GroundTile270" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -22)
-
-[node name="GroundTile271" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -22)
 
 [node name="GroundTile274" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -10)
@@ -783,119 +484,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -10)
 [node name="GroundTile277" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -10)
 
-[node name="GroundTile278" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -12)
-
-[node name="GroundTile279" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -12)
-
-[node name="GroundTile280" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -12)
-
-[node name="GroundTile281" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -12)
-
-[node name="GroundTile282" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -14)
-
-[node name="GroundTile283" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -14)
-
-[node name="GroundTile284" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -14)
-
-[node name="GroundTile285" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -14)
-
-[node name="GroundTile286" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -16)
-
-[node name="GroundTile287" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -16)
-
-[node name="GroundTile288" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -16)
-
-[node name="GroundTile289" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -16)
-
-[node name="GroundTile290" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -18)
-
-[node name="GroundTile291" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -18)
-
-[node name="GroundTile292" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -18)
-
-[node name="GroundTile293" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -18)
-
-[node name="GroundTile294" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -20)
-
-[node name="GroundTile295" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -20)
-
-[node name="GroundTile296" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -20)
-
-[node name="GroundTile297" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -20)
-
-[node name="GroundTile298" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -22)
-
-[node name="GroundTile299" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -22)
-
-[node name="GroundTile300" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -22)
-
-[node name="GroundTile301" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -22)
-
 [node name="GroundTile306" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -10)
 
 [node name="GroundTile307" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -10)
-
-[node name="GroundTile308" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -12)
-
-[node name="GroundTile309" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -12)
-
-[node name="GroundTile310" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -14)
-
-[node name="GroundTile311" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -14)
-
-[node name="GroundTile312" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -16)
-
-[node name="GroundTile313" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -16)
-
-[node name="GroundTile314" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -18)
-
-[node name="GroundTile315" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -18)
-
-[node name="GroundTile316" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -20)
-
-[node name="GroundTile317" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -20)
-
-[node name="GroundTile318" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -22)
-
-[node name="GroundTile319" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -22)
 
 [node name="GroundTile322" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -10)
@@ -909,98 +502,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -10)
 [node name="GroundTile325" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -10)
 
-[node name="GroundTile326" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -12)
-
-[node name="GroundTile327" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -12)
-
-[node name="GroundTile328" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -12)
-
-[node name="GroundTile329" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -12)
-
-[node name="GroundTile330" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -14)
-
-[node name="GroundTile331" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -14)
-
-[node name="GroundTile332" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -14)
-
-[node name="GroundTile333" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -14)
-
-[node name="GroundTile334" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -16)
-
-[node name="GroundTile335" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -16)
-
-[node name="GroundTile336" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -16)
-
-[node name="GroundTile337" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -16)
-
-[node name="GroundTile338" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -18)
-
-[node name="GroundTile339" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -18)
-
-[node name="GroundTile340" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -18)
-
-[node name="GroundTile341" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -18)
-
-[node name="GroundTile342" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -20)
-
-[node name="GroundTile343" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -20)
-
-[node name="GroundTile344" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -20)
-
-[node name="GroundTile345" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -20)
-
-[node name="GroundTile346" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -22)
-
-[node name="GroundTile347" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -22)
-
-[node name="GroundTile348" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -22)
-
-[node name="GroundTile349" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -22)
-
 [node name="GroundTile355" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -10)
-
-[node name="GroundTile357" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -12)
-
-[node name="GroundTile359" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -14)
-
-[node name="GroundTile361" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -16)
-
-[node name="GroundTile363" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -18)
-
-[node name="GroundTile365" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -20)
-
-[node name="GroundTile367" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -22)
 
 [node name="GroundTile370" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -10)
@@ -1011,101 +514,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -10)
 [node name="GroundTile372" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -10)
 
-[node name="GroundTile373" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -12)
-
-[node name="GroundTile374" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -12)
-
-[node name="GroundTile375" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -12)
-
-[node name="GroundTile376" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -14)
-
-[node name="GroundTile377" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -14)
-
-[node name="GroundTile378" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -14)
-
-[node name="GroundTile379" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -16)
-
-[node name="GroundTile380" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16)
-
-[node name="GroundTile381" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -16)
-
-[node name="GroundTile382" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -18)
-
-[node name="GroundTile383" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -18)
-
-[node name="GroundTile384" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -18)
-
-[node name="GroundTile385" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -20)
-
-[node name="GroundTile386" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -20)
-
-[node name="GroundTile387" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -20)
-
-[node name="GroundTile388" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -22)
-
-[node name="GroundTile389" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -22)
-
-[node name="GroundTile390" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -22)
-
 [node name="GroundTile394" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -10)
 
 [node name="GroundTile395" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -10)
-
-[node name="GroundTile396" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -12)
-
-[node name="GroundTile397" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -12)
-
-[node name="GroundTile398" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -14)
-
-[node name="GroundTile399" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -14)
-
-[node name="GroundTile400" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -16)
-
-[node name="GroundTile401" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -16)
-
-[node name="GroundTile402" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -18)
-
-[node name="GroundTile403" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -18)
-
-[node name="GroundTile404" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -20)
-
-[node name="GroundTile405" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -20)
-
-[node name="GroundTile406" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -22)
-
-[node name="GroundTile407" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -22)
 
 [node name="GroundTile410" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -10)
@@ -1119,119 +532,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -10)
 [node name="GroundTile413" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -10)
 
-[node name="GroundTile414" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -12)
-
-[node name="GroundTile415" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -12)
-
-[node name="GroundTile416" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -12)
-
-[node name="GroundTile417" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -12)
-
-[node name="GroundTile418" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -14)
-
-[node name="GroundTile419" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -14)
-
-[node name="GroundTile420" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -14)
-
-[node name="GroundTile421" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -14)
-
-[node name="GroundTile422" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -16)
-
-[node name="GroundTile423" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -16)
-
-[node name="GroundTile424" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -16)
-
-[node name="GroundTile425" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -16)
-
-[node name="GroundTile426" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -18)
-
-[node name="GroundTile427" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -18)
-
-[node name="GroundTile428" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -18)
-
-[node name="GroundTile429" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -18)
-
-[node name="GroundTile430" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -20)
-
-[node name="GroundTile431" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -20)
-
-[node name="GroundTile432" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -20)
-
-[node name="GroundTile433" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -20)
-
-[node name="GroundTile434" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -22)
-
-[node name="GroundTile435" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -22)
-
-[node name="GroundTile436" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -22)
-
-[node name="GroundTile437" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -22)
-
 [node name="GroundTile442" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -10)
 
 [node name="GroundTile443" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -10)
-
-[node name="GroundTile444" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -12)
-
-[node name="GroundTile445" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -12)
-
-[node name="GroundTile446" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -14)
-
-[node name="GroundTile447" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -14)
-
-[node name="GroundTile448" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -16)
-
-[node name="GroundTile449" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -16)
-
-[node name="GroundTile450" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -18)
-
-[node name="GroundTile451" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -18)
-
-[node name="GroundTile452" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -20)
-
-[node name="GroundTile453" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -20)
-
-[node name="GroundTile454" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -22)
-
-[node name="GroundTile455" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -22)
 
 [node name="GroundTile458" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -10)
@@ -1245,98 +550,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -10)
 [node name="GroundTile461" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -10)
 
-[node name="GroundTile462" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -12)
-
-[node name="GroundTile463" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -12)
-
-[node name="GroundTile464" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -12)
-
-[node name="GroundTile465" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -12)
-
-[node name="GroundTile466" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -14)
-
-[node name="GroundTile467" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -14)
-
-[node name="GroundTile468" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -14)
-
-[node name="GroundTile469" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -14)
-
-[node name="GroundTile470" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -16)
-
-[node name="GroundTile471" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -16)
-
-[node name="GroundTile472" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -16)
-
-[node name="GroundTile473" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -16)
-
-[node name="GroundTile474" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -18)
-
-[node name="GroundTile475" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -18)
-
-[node name="GroundTile476" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -18)
-
-[node name="GroundTile477" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -18)
-
-[node name="GroundTile478" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -20)
-
-[node name="GroundTile479" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -20)
-
-[node name="GroundTile480" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -20)
-
-[node name="GroundTile481" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -20)
-
-[node name="GroundTile482" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -22)
-
-[node name="GroundTile483" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -22)
-
-[node name="GroundTile484" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -22)
-
-[node name="GroundTile485" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -22)
-
 [node name="GroundTile491" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -10)
-
-[node name="GroundTile493" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -12)
-
-[node name="GroundTile495" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -14)
-
-[node name="GroundTile497" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -16)
-
-[node name="GroundTile499" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -18)
-
-[node name="GroundTile501" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -20)
-
-[node name="GroundTile503" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -22)
 
 [node name="GroundTile506" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 6)
@@ -2553,65 +1768,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -8)
 [node name="GroundTile354" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -10)
 
-[node name="GroundTile356" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -12)
-
-[node name="GroundTile358" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -14)
-
-[node name="GroundTile360" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -16)
-
-[node name="GroundTile362" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -18)
-
-[node name="GroundTile364" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -20)
-
-[node name="GroundTile366" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -22)
-
 [node name="GroundTile368" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -10)
 
 [node name="GroundTile490" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -10)
-
-[node name="GroundTile492" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -12)
-
-[node name="GroundTile494" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -12)
-
-[node name="GroundTile496" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -14)
-
-[node name="GroundTile498" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -14)
-
-[node name="GroundTile500" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -16)
-
-[node name="GroundTile502" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -16)
-
-[node name="GroundTile504" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -18)
-
-[node name="GroundTile910" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -18)
-
-[node name="GroundTile911" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -20)
-
-[node name="GroundTile912" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -20)
-
-[node name="GroundTile913" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -22)
-
-[node name="GroundTile914" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -22)
 
 [node name="GroundTile915" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -10)
@@ -2625,119 +1786,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -10)
 [node name="GroundTile918" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -10)
 
-[node name="GroundTile919" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -12)
-
-[node name="GroundTile920" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -12)
-
-[node name="GroundTile921" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -12)
-
-[node name="GroundTile922" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -12)
-
-[node name="GroundTile923" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -14)
-
-[node name="GroundTile924" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -14)
-
-[node name="GroundTile925" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -14)
-
-[node name="GroundTile926" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -14)
-
-[node name="GroundTile927" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -16)
-
-[node name="GroundTile928" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -16)
-
-[node name="GroundTile929" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -16)
-
-[node name="GroundTile930" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -16)
-
-[node name="GroundTile931" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -18)
-
-[node name="GroundTile932" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -18)
-
-[node name="GroundTile933" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -18)
-
-[node name="GroundTile934" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -18)
-
-[node name="GroundTile935" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -20)
-
-[node name="GroundTile936" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -20)
-
-[node name="GroundTile937" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -20)
-
-[node name="GroundTile938" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -20)
-
-[node name="GroundTile939" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -22)
-
-[node name="GroundTile940" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -22)
-
-[node name="GroundTile941" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -22)
-
-[node name="GroundTile942" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -22)
-
 [node name="GroundTile943" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -10)
 
 [node name="GroundTile944" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -10)
-
-[node name="GroundTile945" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -12)
-
-[node name="GroundTile946" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -12)
-
-[node name="GroundTile947" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -14)
-
-[node name="GroundTile948" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -14)
-
-[node name="GroundTile949" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -16)
-
-[node name="GroundTile950" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -16)
-
-[node name="GroundTile951" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -18)
-
-[node name="GroundTile952" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -18)
-
-[node name="GroundTile953" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -20)
-
-[node name="GroundTile954" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -20)
-
-[node name="GroundTile955" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -22)
-
-[node name="GroundTile956" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -22)
 
 [node name="GroundTile957" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -10)
@@ -2751,161 +1804,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -10)
 [node name="GroundTile960" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -10)
 
-[node name="GroundTile961" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -12)
-
-[node name="GroundTile962" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -12)
-
-[node name="GroundTile963" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -12)
-
-[node name="GroundTile964" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -12)
-
-[node name="GroundTile965" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -14)
-
-[node name="GroundTile966" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -14)
-
-[node name="GroundTile967" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -14)
-
-[node name="GroundTile968" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -14)
-
-[node name="GroundTile969" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -16)
-
-[node name="GroundTile970" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -16)
-
-[node name="GroundTile971" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -16)
-
-[node name="GroundTile972" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -16)
-
-[node name="GroundTile973" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -18)
-
-[node name="GroundTile974" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -18)
-
-[node name="GroundTile975" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -18)
-
-[node name="GroundTile976" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -18)
-
-[node name="GroundTile977" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -20)
-
-[node name="GroundTile978" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -20)
-
-[node name="GroundTile979" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -20)
-
-[node name="GroundTile980" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -20)
-
-[node name="GroundTile981" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -22)
-
-[node name="GroundTile982" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -22)
-
-[node name="GroundTile983" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -22)
-
-[node name="GroundTile984" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -22)
-
 [node name="GroundTile985" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -10)
 
-[node name="GroundTile986" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -12)
-
-[node name="GroundTile987" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -14)
-
-[node name="GroundTile988" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -16)
-
-[node name="GroundTile989" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -18)
-
-[node name="GroundTile990" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -20)
-
-[node name="GroundTile991" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -22)
-
 [node name="GroundTile992" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -10)
-
-[node name="GroundTile993" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -12)
-
-[node name="GroundTile994" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -14)
-
-[node name="GroundTile995" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -16)
-
-[node name="GroundTile996" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -18)
-
-[node name="GroundTile997" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -20)
-
-[node name="GroundTile998" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -22)
 
 [node name="GroundTile999" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -10)
 
 [node name="GroundTile1000" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -10)
-
-[node name="GroundTile1001" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -12)
-
-[node name="GroundTile1002" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -12)
-
-[node name="GroundTile1003" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -14)
-
-[node name="GroundTile1004" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -14)
-
-[node name="GroundTile1005" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -16)
-
-[node name="GroundTile1006" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -16)
-
-[node name="GroundTile1007" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -18)
-
-[node name="GroundTile1008" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -18)
-
-[node name="GroundTile1009" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -20)
-
-[node name="GroundTile1010" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -20)
-
-[node name="GroundTile1011" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -22)
-
-[node name="GroundTile1012" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -22)
 
 [node name="GroundTile1013" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -10)
@@ -2919,119 +1828,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -10)
 [node name="GroundTile1016" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -10)
 
-[node name="GroundTile1017" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -12)
-
-[node name="GroundTile1018" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -12)
-
-[node name="GroundTile1019" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -12)
-
-[node name="GroundTile1020" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -12)
-
-[node name="GroundTile1021" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -14)
-
-[node name="GroundTile1022" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -14)
-
-[node name="GroundTile1023" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -14)
-
-[node name="GroundTile1024" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -14)
-
-[node name="GroundTile1025" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -16)
-
-[node name="GroundTile1026" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -16)
-
-[node name="GroundTile1027" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -16)
-
-[node name="GroundTile1028" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -16)
-
-[node name="GroundTile1029" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -18)
-
-[node name="GroundTile1030" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -18)
-
-[node name="GroundTile1031" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -18)
-
-[node name="GroundTile1032" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -18)
-
-[node name="GroundTile1033" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -20)
-
-[node name="GroundTile1034" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -20)
-
-[node name="GroundTile1035" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -20)
-
-[node name="GroundTile1036" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -20)
-
-[node name="GroundTile1037" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -22)
-
-[node name="GroundTile1038" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -22)
-
-[node name="GroundTile1039" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -22)
-
-[node name="GroundTile1040" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -22)
-
 [node name="GroundTile1041" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -10)
 
 [node name="GroundTile1042" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -10)
-
-[node name="GroundTile1043" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -12)
-
-[node name="GroundTile1044" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -12)
-
-[node name="GroundTile1045" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -14)
-
-[node name="GroundTile1046" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -14)
-
-[node name="GroundTile1047" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -16)
-
-[node name="GroundTile1048" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -16)
-
-[node name="GroundTile1049" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -18)
-
-[node name="GroundTile1050" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -18)
-
-[node name="GroundTile1051" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -20)
-
-[node name="GroundTile1052" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -20)
-
-[node name="GroundTile1053" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -22)
-
-[node name="GroundTile1054" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -22)
 
 [node name="GroundTile1055" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -10)
@@ -3045,98 +1846,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -10)
 [node name="GroundTile1058" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -10)
 
-[node name="GroundTile1059" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -12)
-
-[node name="GroundTile1060" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -12)
-
-[node name="GroundTile1061" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -12)
-
-[node name="GroundTile1062" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -12)
-
-[node name="GroundTile1063" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -14)
-
-[node name="GroundTile1064" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -14)
-
-[node name="GroundTile1065" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -14)
-
-[node name="GroundTile1066" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -14)
-
-[node name="GroundTile1067" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -16)
-
-[node name="GroundTile1068" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -16)
-
-[node name="GroundTile1069" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -16)
-
-[node name="GroundTile1070" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -16)
-
-[node name="GroundTile1071" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -18)
-
-[node name="GroundTile1072" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -18)
-
-[node name="GroundTile1073" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -18)
-
-[node name="GroundTile1074" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -18)
-
-[node name="GroundTile1075" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -20)
-
-[node name="GroundTile1076" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -20)
-
-[node name="GroundTile1077" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -20)
-
-[node name="GroundTile1078" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -20)
-
-[node name="GroundTile1079" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -22)
-
-[node name="GroundTile1080" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -22)
-
-[node name="GroundTile1081" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -22)
-
-[node name="GroundTile1082" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -22)
-
 [node name="GroundTile1083" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -10)
-
-[node name="GroundTile1084" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -12)
-
-[node name="GroundTile1085" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -14)
-
-[node name="GroundTile1086" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -16)
-
-[node name="GroundTile1087" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -18)
-
-[node name="GroundTile1088" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -20)
-
-[node name="GroundTile1089" parent="GroundGrid" instance=ExtResource("3_frwe2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -22)
 
 [node name="GroundTile1090" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 6)
@@ -4146,6 +2857,1794 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -8)
 [node name="GroundTile1425" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -8)
 
+[node name="GroundTile91" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -12)
+
+[node name="GroundTile92" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -12)
+
+[node name="GroundTile93" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -12)
+
+[node name="GroundTile94" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="GroundTile95" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -12)
+
+[node name="GroundTile96" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -12)
+
+[node name="GroundTile97" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -12)
+
+[node name="GroundTile98" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -12)
+
+[node name="GroundTile99" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -12)
+
+[node name="GroundTile100" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -14)
+
+[node name="GroundTile101" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -14)
+
+[node name="GroundTile102" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -14)
+
+[node name="GroundTile103" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
+
+[node name="GroundTile104" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -14)
+
+[node name="GroundTile105" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -14)
+
+[node name="GroundTile106" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -14)
+
+[node name="GroundTile107" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -14)
+
+[node name="GroundTile108" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -14)
+
+[node name="GroundTile165" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -12)
+
+[node name="GroundTile166" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -14)
+
+[node name="GroundTile183" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -12)
+
+[node name="GroundTile184" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -14)
+
+[node name="GroundTile208" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -12)
+
+[node name="GroundTile209" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -12)
+
+[node name="GroundTile210" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -14)
+
+[node name="GroundTile211" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -14)
+
+[node name="GroundTile230" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -14)
+
+[node name="GroundTile231" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -14)
+
+[node name="GroundTile232" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -14)
+
+[node name="GroundTile233" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -14)
+
+[node name="GroundTile260" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -14)
+
+[node name="GroundTile261" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -14)
+
+[node name="GroundTile278" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -14)
+
+[node name="GroundTile279" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -14)
+
+[node name="GroundTile280" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -14)
+
+[node name="GroundTile281" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -14)
+
+[node name="GroundTile308" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -14)
+
+[node name="GroundTile309" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -14)
+
+[node name="GroundTile326" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -14)
+
+[node name="GroundTile327" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -14)
+
+[node name="GroundTile328" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -14)
+
+[node name="GroundTile329" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -14)
+
+[node name="GroundTile356" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -14)
+
+[node name="GroundTile373" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -14)
+
+[node name="GroundTile374" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -14)
+
+[node name="GroundTile375" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -14)
+
+[node name="GroundTile396" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -14)
+
+[node name="GroundTile397" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -14)
+
+[node name="GroundTile414" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -14)
+
+[node name="GroundTile415" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -14)
+
+[node name="GroundTile416" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -14)
+
+[node name="GroundTile417" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -14)
+
+[node name="GroundTile444" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -14)
+
+[node name="GroundTile445" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -14)
+
+[node name="GroundTile462" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -14)
+
+[node name="GroundTile463" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -14)
+
+[node name="GroundTile464" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -14)
+
+[node name="GroundTile465" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -14)
+
+[node name="GroundTile492" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -14)
+
+[node name="GroundTile910" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -12)
+
+[node name="GroundTile911" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -12)
+
+[node name="GroundTile912" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -12)
+
+[node name="GroundTile913" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -12)
+
+[node name="GroundTile914" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -12)
+
+[node name="GroundTile919" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -12)
+
+[node name="GroundTile920" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -12)
+
+[node name="GroundTile921" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -12)
+
+[node name="GroundTile922" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -12)
+
+[node name="GroundTile923" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -12)
+
+[node name="GroundTile924" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -12)
+
+[node name="GroundTile925" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -12)
+
+[node name="GroundTile926" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -12)
+
+[node name="GroundTile927" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -12)
+
+[node name="GroundTile928" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -12)
+
+[node name="GroundTile929" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -12)
+
+[node name="GroundTile930" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -12)
+
+[node name="GroundTile931" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -12)
+
+[node name="GroundTile932" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -12)
+
+[node name="GroundTile933" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -12)
+
+[node name="GroundTile934" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -12)
+
+[node name="GroundTile935" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -12)
+
+[node name="GroundTile936" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -12)
+
+[node name="GroundTile937" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -12)
+
+[node name="GroundTile938" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -12)
+
+[node name="GroundTile939" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -12)
+
+[node name="GroundTile940" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -12)
+
+[node name="GroundTile941" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -12)
+
+[node name="GroundTile942" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -12)
+
+[node name="GroundTile945" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -12)
+
+[node name="GroundTile946" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -12)
+
+[node name="GroundTile947" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -12)
+
+[node name="GroundTile948" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -12)
+
+[node name="GroundTile949" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -12)
+
+[node name="GroundTile357" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -14)
+
+[node name="GroundTile369" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -14)
+
+[node name="GroundTile493" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -14)
+
+[node name="GroundTile950" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -14)
+
+[node name="GroundTile951" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -14)
+
+[node name="GroundTile952" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -14)
+
+[node name="GroundTile953" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -14)
+
+[node name="GroundTile954" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -14)
+
+[node name="GroundTile955" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -14)
+
+[node name="GroundTile961" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -14)
+
+[node name="GroundTile962" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -14)
+
+[node name="GroundTile963" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -14)
+
+[node name="GroundTile964" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -14)
+
+[node name="GroundTile986" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -14)
+
+[node name="GroundTile993" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -14)
+
+[node name="GroundTile1001" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -14)
+
+[node name="GroundTile1002" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -14)
+
+[node name="GroundTile1017" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -14)
+
+[node name="GroundTile1018" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -14)
+
+[node name="GroundTile1019" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -14)
+
+[node name="GroundTile1020" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -14)
+
+[node name="GroundTile1043" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -14)
+
+[node name="GroundTile1044" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -14)
+
+[node name="GroundTile1059" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -14)
+
+[node name="GroundTile1060" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -14)
+
+[node name="GroundTile1061" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -14)
+
+[node name="GroundTile1062" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -14)
+
+[node name="GroundTile1084" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -14)
+
+[node name="GroundTile1426" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -12)
+
+[node name="GroundTile1427" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -12)
+
+[node name="GroundTile1428" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -12)
+
+[node name="GroundTile1429" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -12)
+
+[node name="GroundTile1430" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -12)
+
+[node name="GroundTile1431" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -12)
+
+[node name="GroundTile1432" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -12)
+
+[node name="GroundTile1433" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -12)
+
+[node name="GroundTile1434" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -12)
+
+[node name="GroundTile1435" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -12)
+
+[node name="GroundTile1436" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -12)
+
+[node name="GroundTile1437" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -12)
+
+[node name="GroundTile1438" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -12)
+
+[node name="GroundTile1439" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -12)
+
+[node name="GroundTile1440" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -12)
+
+[node name="GroundTile1441" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -12)
+
+[node name="GroundTile1442" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -12)
+
+[node name="GroundTile1443" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -12)
+
+[node name="GroundTile1444" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -12)
+
+[node name="GroundTile1445" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -12)
+
+[node name="GroundTile1446" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -12)
+
+[node name="GroundTile1447" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -12)
+
+[node name="GroundTile1448" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -12)
+
+[node name="GroundTile1449" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -12)
+
+[node name="GroundTile1450" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -12)
+
+[node name="GroundTile1451" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -12)
+
+[node name="GroundTile1452" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -12)
+
+[node name="GroundTile1453" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -12)
+
+[node name="GroundTile109" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -16)
+
+[node name="GroundTile110" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -16)
+
+[node name="GroundTile111" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -16)
+
+[node name="GroundTile112" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+
+[node name="GroundTile113" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -16)
+
+[node name="GroundTile114" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -16)
+
+[node name="GroundTile115" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -16)
+
+[node name="GroundTile116" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -16)
+
+[node name="GroundTile117" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -16)
+
+[node name="GroundTile118" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -18)
+
+[node name="GroundTile119" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -18)
+
+[node name="GroundTile120" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -18)
+
+[node name="GroundTile121" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18)
+
+[node name="GroundTile122" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -18)
+
+[node name="GroundTile123" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -18)
+
+[node name="GroundTile124" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -18)
+
+[node name="GroundTile125" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -18)
+
+[node name="GroundTile126" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -18)
+
+[node name="GroundTile167" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -16)
+
+[node name="GroundTile168" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -18)
+
+[node name="GroundTile185" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -16)
+
+[node name="GroundTile186" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -18)
+
+[node name="GroundTile212" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -16)
+
+[node name="GroundTile213" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -16)
+
+[node name="GroundTile214" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -18)
+
+[node name="GroundTile215" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -18)
+
+[node name="GroundTile234" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -18)
+
+[node name="GroundTile235" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -18)
+
+[node name="GroundTile236" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -18)
+
+[node name="GroundTile237" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -18)
+
+[node name="GroundTile262" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -18)
+
+[node name="GroundTile263" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -18)
+
+[node name="GroundTile282" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -18)
+
+[node name="GroundTile283" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -18)
+
+[node name="GroundTile284" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -18)
+
+[node name="GroundTile285" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -18)
+
+[node name="GroundTile310" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -18)
+
+[node name="GroundTile311" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -18)
+
+[node name="GroundTile330" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -18)
+
+[node name="GroundTile331" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -18)
+
+[node name="GroundTile332" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -18)
+
+[node name="GroundTile333" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -18)
+
+[node name="GroundTile358" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -18)
+
+[node name="GroundTile376" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -18)
+
+[node name="GroundTile377" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -18)
+
+[node name="GroundTile378" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -18)
+
+[node name="GroundTile398" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -18)
+
+[node name="GroundTile399" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -18)
+
+[node name="GroundTile418" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -18)
+
+[node name="GroundTile419" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -18)
+
+[node name="GroundTile420" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -18)
+
+[node name="GroundTile421" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -18)
+
+[node name="GroundTile446" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -18)
+
+[node name="GroundTile447" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -18)
+
+[node name="GroundTile466" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -18)
+
+[node name="GroundTile467" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -18)
+
+[node name="GroundTile468" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -18)
+
+[node name="GroundTile469" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -18)
+
+[node name="GroundTile494" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -18)
+
+[node name="GroundTile956" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16)
+
+[node name="GroundTile965" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -16)
+
+[node name="GroundTile966" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -16)
+
+[node name="GroundTile967" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -16)
+
+[node name="GroundTile968" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -16)
+
+[node name="GroundTile969" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -16)
+
+[node name="GroundTile970" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -16)
+
+[node name="GroundTile971" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -16)
+
+[node name="GroundTile972" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -16)
+
+[node name="GroundTile973" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -16)
+
+[node name="GroundTile974" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -16)
+
+[node name="GroundTile975" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -16)
+
+[node name="GroundTile976" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -16)
+
+[node name="GroundTile977" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -16)
+
+[node name="GroundTile978" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -16)
+
+[node name="GroundTile979" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -16)
+
+[node name="GroundTile980" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -16)
+
+[node name="GroundTile981" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16)
+
+[node name="GroundTile982" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -16)
+
+[node name="GroundTile983" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -16)
+
+[node name="GroundTile984" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -16)
+
+[node name="GroundTile987" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -16)
+
+[node name="GroundTile988" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -16)
+
+[node name="GroundTile989" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -16)
+
+[node name="GroundTile990" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -16)
+
+[node name="GroundTile991" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -16)
+
+[node name="GroundTile994" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -16)
+
+[node name="GroundTile995" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -16)
+
+[node name="GroundTile996" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -16)
+
+[node name="GroundTile997" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -16)
+
+[node name="GroundTile998" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -16)
+
+[node name="GroundTile1003" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -16)
+
+[node name="GroundTile1004" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -16)
+
+[node name="GroundTile1005" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -16)
+
+[node name="GroundTile359" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -18)
+
+[node name="GroundTile379" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -18)
+
+[node name="GroundTile495" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -18)
+
+[node name="GroundTile1006" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -18)
+
+[node name="GroundTile1007" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -18)
+
+[node name="GroundTile1008" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -18)
+
+[node name="GroundTile1009" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -18)
+
+[node name="GroundTile1010" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -18)
+
+[node name="GroundTile1011" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -18)
+
+[node name="GroundTile1012" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -18)
+
+[node name="GroundTile1021" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -18)
+
+[node name="GroundTile1022" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -18)
+
+[node name="GroundTile1023" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -18)
+
+[node name="GroundTile1024" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -18)
+
+[node name="GroundTile1025" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -18)
+
+[node name="GroundTile1026" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -18)
+
+[node name="GroundTile1027" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -18)
+
+[node name="GroundTile1028" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -18)
+
+[node name="GroundTile1029" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -18)
+
+[node name="GroundTile1030" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -18)
+
+[node name="GroundTile1031" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -18)
+
+[node name="GroundTile1045" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -18)
+
+[node name="GroundTile1046" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -18)
+
+[node name="GroundTile1063" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -18)
+
+[node name="GroundTile1064" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -18)
+
+[node name="GroundTile1065" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -18)
+
+[node name="GroundTile1066" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -18)
+
+[node name="GroundTile1085" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -18)
+
+[node name="GroundTile1454" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -16)
+
+[node name="GroundTile1455" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -16)
+
+[node name="GroundTile1456" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -16)
+
+[node name="GroundTile1457" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -16)
+
+[node name="GroundTile1458" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -16)
+
+[node name="GroundTile1459" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -16)
+
+[node name="GroundTile1460" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -16)
+
+[node name="GroundTile1461" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -16)
+
+[node name="GroundTile1462" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -16)
+
+[node name="GroundTile1463" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -16)
+
+[node name="GroundTile1464" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -16)
+
+[node name="GroundTile1465" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -16)
+
+[node name="GroundTile1466" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -16)
+
+[node name="GroundTile1467" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -16)
+
+[node name="GroundTile1468" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -16)
+
+[node name="GroundTile1469" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -16)
+
+[node name="GroundTile1470" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -16)
+
+[node name="GroundTile1471" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -16)
+
+[node name="GroundTile1472" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -16)
+
+[node name="GroundTile1473" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -16)
+
+[node name="GroundTile1474" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -16)
+
+[node name="GroundTile1475" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -16)
+
+[node name="GroundTile1476" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -16)
+
+[node name="GroundTile1477" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -16)
+
+[node name="GroundTile1478" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -16)
+
+[node name="GroundTile1479" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -16)
+
+[node name="GroundTile1480" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -16)
+
+[node name="GroundTile1481" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -16)
+
+[node name="GroundTile127" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -20)
+
+[node name="GroundTile128" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -20)
+
+[node name="GroundTile129" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -20)
+
+[node name="GroundTile130" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="GroundTile131" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -20)
+
+[node name="GroundTile132" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -20)
+
+[node name="GroundTile133" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -20)
+
+[node name="GroundTile134" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -20)
+
+[node name="GroundTile135" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -20)
+
+[node name="GroundTile136" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -22)
+
+[node name="GroundTile137" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -22)
+
+[node name="GroundTile138" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -22)
+
+[node name="GroundTile139" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
+
+[node name="GroundTile140" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -22)
+
+[node name="GroundTile141" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -22)
+
+[node name="GroundTile142" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -22)
+
+[node name="GroundTile143" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -22)
+
+[node name="GroundTile144" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -22)
+
+[node name="GroundTile169" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -20)
+
+[node name="GroundTile170" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -22)
+
+[node name="GroundTile187" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -20)
+
+[node name="GroundTile188" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -22)
+
+[node name="GroundTile216" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -20)
+
+[node name="GroundTile217" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -20)
+
+[node name="GroundTile218" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -22)
+
+[node name="GroundTile219" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -22)
+
+[node name="GroundTile238" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -22)
+
+[node name="GroundTile239" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -22)
+
+[node name="GroundTile240" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -22)
+
+[node name="GroundTile241" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -22)
+
+[node name="GroundTile264" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -22)
+
+[node name="GroundTile265" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -22)
+
+[node name="GroundTile286" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -22)
+
+[node name="GroundTile287" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -22)
+
+[node name="GroundTile288" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -22)
+
+[node name="GroundTile289" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -22)
+
+[node name="GroundTile312" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -22)
+
+[node name="GroundTile313" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -22)
+
+[node name="GroundTile334" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -22)
+
+[node name="GroundTile335" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -22)
+
+[node name="GroundTile336" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -22)
+
+[node name="GroundTile337" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -22)
+
+[node name="GroundTile360" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -22)
+
+[node name="GroundTile380" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -22)
+
+[node name="GroundTile381" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -22)
+
+[node name="GroundTile382" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -22)
+
+[node name="GroundTile400" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -22)
+
+[node name="GroundTile401" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -22)
+
+[node name="GroundTile422" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -22)
+
+[node name="GroundTile423" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -22)
+
+[node name="GroundTile424" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -22)
+
+[node name="GroundTile425" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -22)
+
+[node name="GroundTile448" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -22)
+
+[node name="GroundTile449" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -22)
+
+[node name="GroundTile470" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -22)
+
+[node name="GroundTile471" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -22)
+
+[node name="GroundTile472" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -22)
+
+[node name="GroundTile473" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -22)
+
+[node name="GroundTile496" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -22)
+
+[node name="GroundTile1032" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -20)
+
+[node name="GroundTile1033" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -20)
+
+[node name="GroundTile1034" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -20)
+
+[node name="GroundTile1035" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -20)
+
+[node name="GroundTile1036" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -20)
+
+[node name="GroundTile1037" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -20)
+
+[node name="GroundTile1038" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -20)
+
+[node name="GroundTile1039" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -20)
+
+[node name="GroundTile1040" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -20)
+
+[node name="GroundTile1047" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -20)
+
+[node name="GroundTile1048" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -20)
+
+[node name="GroundTile1049" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -20)
+
+[node name="GroundTile1050" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -20)
+
+[node name="GroundTile1051" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -20)
+
+[node name="GroundTile1052" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -20)
+
+[node name="GroundTile1053" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -20)
+
+[node name="GroundTile1054" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -20)
+
+[node name="GroundTile1067" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -20)
+
+[node name="GroundTile1068" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -20)
+
+[node name="GroundTile1069" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -20)
+
+[node name="GroundTile1070" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -20)
+
+[node name="GroundTile1071" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -20)
+
+[node name="GroundTile1072" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -20)
+
+[node name="GroundTile1073" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -20)
+
+[node name="GroundTile1074" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -20)
+
+[node name="GroundTile1075" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -20)
+
+[node name="GroundTile1076" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -20)
+
+[node name="GroundTile1077" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -20)
+
+[node name="GroundTile1078" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -20)
+
+[node name="GroundTile1079" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -20)
+
+[node name="GroundTile1080" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -20)
+
+[node name="GroundTile1081" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -20)
+
+[node name="GroundTile1082" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -20)
+
+[node name="GroundTile1086" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -20)
+
+[node name="GroundTile361" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -22)
+
+[node name="GroundTile383" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -22)
+
+[node name="GroundTile497" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -22)
+
+[node name="GroundTile1087" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -22)
+
+[node name="GroundTile1088" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -22)
+
+[node name="GroundTile1089" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -22)
+
+[node name="GroundTile1482" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -22)
+
+[node name="GroundTile1483" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -22)
+
+[node name="GroundTile1484" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -22)
+
+[node name="GroundTile1485" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -22)
+
+[node name="GroundTile1486" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -22)
+
+[node name="GroundTile1487" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -22)
+
+[node name="GroundTile1488" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -22)
+
+[node name="GroundTile1489" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -22)
+
+[node name="GroundTile1490" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -22)
+
+[node name="GroundTile1491" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -22)
+
+[node name="GroundTile1492" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -22)
+
+[node name="GroundTile1493" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -22)
+
+[node name="GroundTile1494" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -22)
+
+[node name="GroundTile1495" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -22)
+
+[node name="GroundTile1496" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -22)
+
+[node name="GroundTile1497" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -22)
+
+[node name="GroundTile1498" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -22)
+
+[node name="GroundTile1499" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -22)
+
+[node name="GroundTile1500" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -22)
+
+[node name="GroundTile1501" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -22)
+
+[node name="GroundTile1502" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -22)
+
+[node name="GroundTile1503" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -22)
+
+[node name="GroundTile1504" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -20)
+
+[node name="GroundTile1505" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -20)
+
+[node name="GroundTile1506" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -20)
+
+[node name="GroundTile1507" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -20)
+
+[node name="GroundTile1508" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -20)
+
+[node name="GroundTile1509" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -20)
+
+[node name="GroundTile1510" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -20)
+
+[node name="GroundTile1511" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -20)
+
+[node name="GroundTile1512" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -20)
+
+[node name="GroundTile1513" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -20)
+
+[node name="GroundTile1514" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -20)
+
+[node name="GroundTile1515" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -20)
+
+[node name="GroundTile1516" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -20)
+
+[node name="GroundTile1517" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -20)
+
+[node name="GroundTile1518" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -20)
+
+[node name="GroundTile1519" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -20)
+
+[node name="GroundTile1520" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -20)
+
+[node name="GroundTile1521" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -20)
+
+[node name="GroundTile1522" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -20)
+
+[node name="GroundTile1523" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -20)
+
+[node name="GroundTile1524" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -20)
+
+[node name="GroundTile1525" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -20)
+
+[node name="GroundTile1526" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -20)
+
+[node name="GroundTile1527" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -20)
+
+[node name="GroundTile1528" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -20)
+
+[node name="GroundTile1529" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -20)
+
+[node name="GroundTile1530" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -20)
+
+[node name="GroundTile1531" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -20)
+
+[node name="GroundTile145" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -24)
+
+[node name="GroundTile146" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -24)
+
+[node name="GroundTile147" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -24)
+
+[node name="GroundTile148" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
+
+[node name="GroundTile149" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -24)
+
+[node name="GroundTile150" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -24)
+
+[node name="GroundTile151" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -24)
+
+[node name="GroundTile152" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -24)
+
+[node name="GroundTile153" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -24)
+
+[node name="GroundTile171" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -26)
+
+[node name="GroundTile189" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -26)
+
+[node name="GroundTile220" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -26)
+
+[node name="GroundTile221" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -26)
+
+[node name="GroundTile242" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -26)
+
+[node name="GroundTile243" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -26)
+
+[node name="GroundTile244" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -26)
+
+[node name="GroundTile245" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -26)
+
+[node name="GroundTile246" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -26)
+
+[node name="GroundTile247" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -24)
+
+[node name="GroundTile248" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -26)
+
+[node name="GroundTile249" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -24)
+
+[node name="GroundTile250" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -26)
+
+[node name="GroundTile251" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -24)
+
+[node name="GroundTile252" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -24)
+
+[node name="GroundTile253" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -26)
+
+[node name="GroundTile254" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -26)
+
+[node name="GroundTile255" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -26)
+
+[node name="GroundTile256" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -26)
+
+[node name="GroundTile257" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -26)
+
+[node name="GroundTile266" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -26)
+
+[node name="GroundTile267" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -26)
+
+[node name="GroundTile268" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -26)
+
+[node name="GroundTile290" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -26)
+
+[node name="GroundTile291" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -26)
+
+[node name="GroundTile292" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -26)
+
+[node name="GroundTile293" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -26)
+
+[node name="GroundTile314" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -26)
+
+[node name="GroundTile315" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -26)
+
+[node name="GroundTile338" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -26)
+
+[node name="GroundTile339" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -26)
+
+[node name="GroundTile340" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -26)
+
+[node name="GroundTile341" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -26)
+
+[node name="GroundTile362" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -26)
+
+[node name="GroundTile384" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -26)
+
+[node name="GroundTile385" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -26)
+
+[node name="GroundTile386" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -26)
+
+[node name="GroundTile402" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -26)
+
+[node name="GroundTile403" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -26)
+
+[node name="GroundTile426" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -26)
+
+[node name="GroundTile427" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -26)
+
+[node name="GroundTile428" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -26)
+
+[node name="GroundTile429" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -26)
+
+[node name="GroundTile450" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -26)
+
+[node name="GroundTile451" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -26)
+
+[node name="GroundTile474" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -26)
+
+[node name="GroundTile475" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -26)
+
+[node name="GroundTile476" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -26)
+
+[node name="GroundTile477" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -26)
+
+[node name="GroundTile498" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -26)
+
+[node name="GroundTile1532" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -24)
+
+[node name="GroundTile1533" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -24)
+
+[node name="GroundTile1534" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -24)
+
+[node name="GroundTile1535" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -24)
+
+[node name="GroundTile1536" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -24)
+
+[node name="GroundTile1537" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -24)
+
+[node name="GroundTile1538" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -24)
+
+[node name="GroundTile1539" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -24)
+
+[node name="GroundTile1540" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -24)
+
+[node name="GroundTile1541" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -24)
+
+[node name="GroundTile1542" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -24)
+
+[node name="GroundTile1543" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -24)
+
+[node name="GroundTile1544" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -24)
+
+[node name="GroundTile1545" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -24)
+
+[node name="GroundTile1546" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -24)
+
+[node name="GroundTile1547" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -24)
+
+[node name="GroundTile1548" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -24)
+
+[node name="GroundTile1549" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -24)
+
+[node name="GroundTile1550" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -24)
+
+[node name="GroundTile1551" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -24)
+
+[node name="GroundTile1552" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -24)
+
+[node name="GroundTile1553" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -24)
+
+[node name="GroundTile1554" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -24)
+
+[node name="GroundTile1555" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -24)
+
+[node name="GroundTile1556" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -24)
+
+[node name="GroundTile1557" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -24)
+
+[node name="GroundTile1558" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -24)
+
+[node name="GroundTile1559" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -24)
+
+[node name="GroundTile1560" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -24)
+
+[node name="GroundTile1561" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, -24)
+
+[node name="GroundTile1562" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0, -24)
+
+[node name="GroundTile1563" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -24)
+
+[node name="GroundTile1564" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -24)
+
+[node name="GroundTile1565" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -24)
+
+[node name="GroundTile363" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -26)
+
+[node name="GroundTile387" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -26)
+
+[node name="GroundTile499" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -26)
+
+[node name="GroundTile1566" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -26)
+
+[node name="GroundTile1567" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -26)
+
+[node name="GroundTile1568" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -26)
+
+[node name="GroundTile1569" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -26)
+
+[node name="GroundTile1570" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -26)
+
+[node name="GroundTile1571" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -26)
+
+[node name="GroundTile1572" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -26)
+
+[node name="GroundTile1573" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -26)
+
+[node name="GroundTile1574" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -26)
+
+[node name="GroundTile1575" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -26)
+
+[node name="GroundTile1576" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -26)
+
+[node name="GroundTile1577" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -26)
+
+[node name="GroundTile1578" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -26)
+
+[node name="GroundTile1579" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -26)
+
+[node name="GroundTile1580" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -26)
+
+[node name="GroundTile1581" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -26)
+
+[node name="GroundTile1582" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -26)
+
+[node name="GroundTile1583" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -26)
+
+[node name="GroundTile1584" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -26)
+
+[node name="GroundTile1585" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -26)
+
+[node name="GroundTile1586" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -26)
+
+[node name="GroundTile1587" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -26)
+
+[node name="GroundTile1588" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -26)
+
+[node name="GroundTile1589" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -26)
+
+[node name="GroundTile1590" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -26)
+
+[node name="GroundTile1591" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -24)
+
+[node name="GroundTile1592" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -24)
+
+[node name="GroundTile1593" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -24)
+
+[node name="GroundTile1594" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -24)
+
+[node name="GroundTile1595" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -24)
+
+[node name="GroundTile1596" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -24)
+
+[node name="GroundTile1597" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -24)
+
+[node name="GroundTile1598" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -24)
+
+[node name="GroundTile1599" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -24)
+
+[node name="GroundTile1600" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -24)
+
+[node name="GroundTile1601" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -24)
+
+[node name="GroundTile1602" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -24)
+
+[node name="GroundTile1603" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -24)
+
+[node name="GroundTile1604" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -24)
+
+[node name="GroundTile1605" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -24)
+
+[node name="GroundTile1606" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -24)
+
+[node name="GroundTile1607" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -24)
+
+[node name="GroundTile1608" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -24)
+
+[node name="GroundTile1609" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -24)
+
+[node name="GroundTile1610" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -24)
+
+[node name="GroundTile1611" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -24)
+
+[node name="GroundTile1612" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -24)
+
+[node name="GroundTile1613" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -24)
+
+[node name="GroundTile1614" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -24)
+
+[node name="GroundTile1615" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -24)
+
+[node name="GroundTile1616" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -24)
+
+[node name="GroundTile1617" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -24)
+
+[node name="GroundTile1618" parent="GroundGrid" instance=ExtResource("3_frwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -24)
+
 [node name="GroundTile222" parent="GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -2)
 
@@ -4186,18 +4685,14 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 columns = 3
 
-[node name="XContainer" type="Panel" parent="Scores/MarginContainer/GridContainer"]
+[node name="XContainer" type="PanelContainer" parent="Scores/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_87y07")
 
 [node name="MarginContainer" type="MarginContainer" parent="Scores/MarginContainer/GridContainer/XContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_constants/margin_top = 0
 
 [node name="XScore" type="VBoxContainer" parent="Scores/MarginContainer/GridContainer/XContainer/MarginContainer"]
@@ -4209,6 +4704,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
+theme_override_font_sizes/font_size = 28
 text = "X Score"
 horizontal_alignment = 1
 
@@ -4217,39 +4713,43 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
+theme_override_font_sizes/font_size = 72
 text = "I"
 horizontal_alignment = 1
 
 [node name="GameContainer" type="PanelContainer" parent="Scores/MarginContainer/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_87y07")
 
 [node name="MarginContainer" type="MarginContainer" parent="Scores/MarginContainer/GridContainer/GameContainer"]
+custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 100
 
 [node name="GameOver" type="VBoxContainer" parent="Scores/MarginContainer/GridContainer/GameContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 20
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="VictoryOrDefeat" type="Label" parent="Scores/MarginContainer/GridContainer/GameContainer/MarginContainer/GameOver"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("3_p47nq")
+theme_override_font_sizes/font_size = 100
 text = "Battle!"
 horizontal_alignment = 1
 
-[node name="Continue" type="Button" parent="Scores/MarginContainer/GridContainer/GameContainer/MarginContainer/GameOver"]
+[node name="MarginContainer" type="MarginContainer" parent="Scores/MarginContainer/GridContainer/GameContainer/MarginContainer/GameOver"]
+layout_mode = 2
+theme_override_constants/margin_left = 180
+theme_override_constants/margin_right = 180
+
+[node name="Continue" type="Button" parent="Scores/MarginContainer/GridContainer/GameContainer/MarginContainer/GameOver/MarginContainer"]
 unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
 theme = ExtResource("3_p47nq")
 text = "Continue"
@@ -4258,6 +4758,7 @@ text = "Continue"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_87y07")
 
 [node name="MarginContainer" type="MarginContainer" parent="Scores/MarginContainer/GridContainer/YContainer"]
 layout_mode = 2
@@ -4265,12 +4766,12 @@ theme_override_constants/margin_top = 0
 
 [node name="YScore" type="VBoxContainer" parent="Scores/MarginContainer/GridContainer/YContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
 alignment = 1
 
 [node name="O" type="Label" parent="Scores/MarginContainer/GridContainer/YContainer/MarginContainer/YScore"]
 layout_mode = 2
 theme = ExtResource("3_p47nq")
+theme_override_font_sizes/font_size = 28
 text = "O Score"
 horizontal_alignment = 1
 
@@ -4279,6 +4780,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
+theme_override_font_sizes/font_size = 72
 text = "IV"
 horizontal_alignment = 1
 
@@ -4442,7 +4944,8 @@ text = "Start Game"
 
 [connection signal="focused_tile_chosen" from="TileGrid" to="." method="_on_tile_grid_focused_tile_chosen"]
 [connection signal="tile_clicked" from="TileGrid" to="." method="_on_tile_grid_tile_clicked"]
-[connection signal="pressed" from="Scores/MarginContainer/GridContainer/GameContainer/MarginContainer/GameOver/Continue" to="." method="_on_continue_pressed"]
+[connection signal="tile_hovered" from="TileGrid" to="." method="_on_tile_grid_tile_hovered"]
+[connection signal="pressed" from="Scores/MarginContainer/GridContainer/GameContainer/MarginContainer/GameOver/MarginContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer" to="." method="_on_toggle_player_pressed"]
 [connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins" to="." method="_on_toggle_wins_pressed"]
 [connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]

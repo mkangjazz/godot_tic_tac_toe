@@ -2,7 +2,7 @@ class_name GameManager
 extends Node
 
 const numerals:Dictionary = {
-	"0": "Nul",
+	"0": "Nulla",
 	"1": "I",
 	"2": "II",
 	"3": "III",

@@ -92,7 +92,6 @@ func handle_move_left():
 	pass;
 
 func handle_confirm():
-	print('handle_confirm')
 	var focused_tile = tile_grid.get_focused_tile();
 
 	if focused_tile.building_type == Constants.TileMarkers.EMPTY:
@@ -102,7 +101,8 @@ func handle_confirm():
 	pass;
 
 func _on_tile_grid_tile_clicked():
-	handle_confirm();
+	if !game_manager.isGamePaused:
+		handle_confirm();
 	pass
 
 func _on_tile_grid_focused_tile_chosen():
@@ -134,7 +134,7 @@ func set_up_next_round():
 	main_menu_scene.hide();
 	continue_button.hide();
 
-	reset_battle_text();
+	victory_label.show();
 	tile_grid.reset_tile_grid();
 
 	# hmm
@@ -159,8 +159,9 @@ func show_win():
 		player_manager.active_player.marker
 	);
 
+	victory_label.hide();
 	continue_button.show();
-	victory_label.text = active_player + " Wins!"; 
+	continue_button.text = active_player + " Wins!"; 
 	pass;
 
 func show_tie():
@@ -169,8 +170,9 @@ func show_tie():
 
 	focus_continue_button()
 
+	victory_label.hide();
 	continue_button.show();
-	victory_label.text = "Cat's Game!";
+	continue_button.text = "Cat's Game!";
 	pass;
 
 func get_key(dictionary, index):
@@ -218,7 +220,7 @@ func _on_continue_pressed():
 		tile_grid.hide();
 		scores.hide();
 		main_menu_scene.show();
-		reset_battle_text();
+		victory_label.show();
 		focus_player_switch();
 
 		pass;
@@ -257,7 +259,16 @@ func _on_start_game_button_pressed():
 	tile_grid.show();
 	scores.show();
 	continue_button.hide();
-	reset_battle_text();
+	victory_label.show();
 
 	game_manager.isGamePaused = false;
 	pass
+
+func _on_tile_grid_tile_hovered(tile):
+	if !game_manager.isGamePaused:
+		tile_grid.unfocus_all_tiles();
+		tile.focus();
+	else:
+		tile_grid.unfocus_all_tiles();
+	pass
+
