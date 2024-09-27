@@ -16,17 +16,18 @@ extends Node3D
 @onready var x_score_label = %XScore;
 @onready var o_score_label = %OScore;
 @onready var continue_button = %Continue;
-@onready var scores = %Scores
+@onready var in_game_ui = %InGameUI
 @onready var map = %map
+@onready var scene_transitions = %SceneTransitions
 
 var player_manager:PlayerManager;
 var game_manager:GameManager;
+var scene_is_transitioning: bool = false;
 
 func _ready():
 	set_up_managers();
 	main_menu_scene.show();
-	scores.hide();
-	tile_grid.hide();
+	in_game_ui.hide();
 	focus_player_switch();
 	player_manager.AI_turn_to_move.connect(_on_AI_turn_to_move);
 	pass;
@@ -39,7 +40,10 @@ func _process(_delta):
 	pass;
 
 func _unhandled_input(event):
-	if !game_manager.isGamePaused:
+	if scene_is_transitioning:
+		return;
+	
+	if !game_manager.isGamePaused and !scene_is_transitioning:
 		if player_manager.active_player.type == Constants.PlayerTypes.PLAYER:
 			if event.is_action("move_right") and not event.is_echo():
 				if event.is_pressed():
@@ -101,6 +105,9 @@ func handle_confirm():
 	pass;
 
 func _on_tile_grid_tile_clicked():
+	if scene_is_transitioning:
+		return;
+	
 	if !game_manager.isGamePaused:
 		handle_confirm();
 	pass
@@ -130,7 +137,7 @@ func _on_tile_grid_focused_tile_chosen():
 	pass
 
 func set_up_next_round():
-	scores.show();
+	in_game_ui.show();
 	main_menu_scene.hide();
 	continue_button.hide();
 
@@ -144,7 +151,6 @@ func set_up_next_round():
 	player_manager.active_player = player_manager.who_moves_first_next_round;
 	player_manager.who_moved_first_this_round = player_manager.who_moves_first_next_round;
 
-	tile_grid.show();
 	game_manager.isGamePaused = false;
 	pass;
 
@@ -217,8 +223,7 @@ func _on_continue_pressed():
 		player_manager.players.p1.score >= game_manager.wins_per_round or
 		player_manager.players.p2.score >= game_manager.wins_per_round
 	):
-		tile_grid.hide();
-		scores.hide();
+		in_game_ui.hide();
 		main_menu_scene.show();
 		victory_label.show();
 		focus_player_switch();
@@ -252,15 +257,20 @@ func _on_toggle_wins_pressed():
 	pass
 
 func _on_start_game_button_pressed():
-	main_menu_scene.hide();
+	scene_transitions.show();
+	scene_transitions.animation_player.queue("to_black");
 	player_manager.reset_who_moves_first();
 	player_manager.reset_player_scores();
 	tile_grid.reset_tile_grid();
-	tile_grid.show();
-	scores.show();
+	await get_tree().create_timer(1.0).timeout
+	main_menu_scene.hide();
+	in_game_ui.show();
 	continue_button.hide();
 	victory_label.show();
-
+	scene_transitions.animation_player.queue("from_black");
+	
+	await get_tree().create_timer(1.0).timeout
+	scene_transitions.hide();
 	game_manager.isGamePaused = false;
 	pass
 
@@ -272,3 +282,12 @@ func _on_tile_grid_tile_hovered(tile):
 		tile_grid.unfocus_all_tiles();
 	pass
 
+func _on_scene_transitions_transition_started():
+	scene_is_transitioning = true;
+	print("start transition",scene_is_transitioning);
+	pass
+
+func _on_scene_transitions_transition_ended():
+	scene_is_transitioning = false;
+	print("end transition", scene_is_transitioning);
+	pass

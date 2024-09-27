@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2es7rt7sbh5i"]
+[gd_scene load_steps=12 format=3 uid="uid://c2es7rt7sbh5i"]
 
 [ext_resource type="Script" path="res://script/tile.gd" id="1_yfdcu"]
 [ext_resource type="PackedScene" uid="uid://byyvpeh2gnt5n" path="res://resource/tile_selector.glb" id="4_5spic"]
@@ -20,6 +20,14 @@ material = SubResource("StandardMaterial3D_arb5o")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j13e2"]
 size = Vector3(2, 0.5, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_61wgt"]
+diffuse_mode = 3
+specular_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w7xmi"]
+diffuse_mode = 3
+specular_mode = 1
 
 [node name="GameTile" type="Node3D"]
 script = ExtResource("1_yfdcu")
@@ -48,12 +56,21 @@ transform = Transform3D(1.89, 0, 0, 0, 1.89, 0, 0, 0, 1.89, 0, 0, 0)
 [node name="x" parent="Area3D" instance=ExtResource("5_1b5ud")]
 unique_name_in_owner = true
 transform = Transform3D(0.212132, 0, 0.212132, 0, 0.3, 0, -0.212132, 0, 0.212132, 0, 0.15, 0)
-visible = false
+
+[node name="Flattened" parent="Area3D/x" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_61wgt")
 
 [node name="o" parent="Area3D" instance=ExtResource("6_lclkh")]
 unique_name_in_owner = true
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.15, 0)
 
+[node name="Cylinder" parent="Area3D/o" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_w7xmi")
+
 [connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
 [connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
+
+[editable path="Area3D/x"]
+[editable path="Area3D/o"]
