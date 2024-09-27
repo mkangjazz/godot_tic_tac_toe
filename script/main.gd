@@ -12,7 +12,6 @@ extends Node3D
 @onready var toggle_wins_btn = %ToggleWins;
 @onready var toggle_wins_switch = %CheckButton;
 @onready var main_menu_scene = %MainMenu;
-@onready var game_over_scene = %GameOver
 @onready var victory_label = %VictoryOrDefeat
 @onready var x_score_label = %XScore;
 @onready var o_score_label = %OScore;
@@ -27,7 +26,6 @@ func _ready():
 	set_up_managers();
 	main_menu_scene.show();
 	scores.hide();
-	game_over_scene.hide();
 	tile_grid.hide();
 	focus_player_switch();
 	player_manager.AI_turn_to_move.connect(_on_AI_turn_to_move);
@@ -38,10 +36,6 @@ func _process(_delta):
 		if player_manager.players.p1 and player_manager.players.p2:
 			x_score_label.text = game_manager.numerals[str(player_manager.players.p1.score)]
 			o_score_label.text = game_manager.numerals[str(player_manager.players.p2.score)]
-	else:
-		x_score_label.text = "0";
-		o_score_label.text = "0";
-
 	pass;
 
 func _unhandled_input(event):
@@ -137,9 +131,10 @@ func _on_tile_grid_focused_tile_chosen():
 
 func set_up_next_round():
 	scores.show();
-	game_over_scene.hide();
 	main_menu_scene.hide();
+	continue_button.hide();
 
+	reset_battle_text();
 	tile_grid.reset_tile_grid();
 
 	# hmm
@@ -155,8 +150,8 @@ func set_up_next_round():
 
 func show_win():
 	game_manager.isGamePaused = true;
-	game_over_scene.show();
 	tile_grid.hide_focus_indicator();
+
 	focus_continue_button();
 
 	var active_player = get_key(
@@ -164,20 +159,26 @@ func show_win():
 		player_manager.active_player.marker
 	);
 
-	victory_label.text = active_player + " Wins"; 
+	continue_button.show();
+	victory_label.text = active_player + " Wins!"; 
 	pass;
 
 func show_tie():
 	game_manager.isGamePaused = true;
 	tile_grid.hide_focus_indicator();
-	game_over_scene.show();
+
 	focus_continue_button()
 
-	victory_label.text = "Cat's Game"; 
+	continue_button.show();
+	victory_label.text = "Cat's Game!";
 	pass;
 
 func get_key(dictionary, index):
 	return dictionary.keys()[index]
+
+func reset_battle_text():
+	victory_label.text = "Battle!";
+	pass;
 
 func _on_AI_turn_to_move():
 	tile_grid.hide_focus_indicator();
@@ -214,10 +215,10 @@ func _on_continue_pressed():
 		player_manager.players.p1.score >= game_manager.wins_per_round or
 		player_manager.players.p2.score >= game_manager.wins_per_round
 	):
-		game_over_scene.hide();
 		tile_grid.hide();
 		scores.hide();
 		main_menu_scene.show();
+		reset_battle_text();
 		focus_player_switch();
 
 		pass;
@@ -255,5 +256,8 @@ func _on_start_game_button_pressed():
 	tile_grid.reset_tile_grid();
 	tile_grid.show();
 	scores.show();
+	continue_button.hide();
+	reset_battle_text();
+
 	game_manager.isGamePaused = false;
 	pass

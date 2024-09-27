@@ -17,6 +17,7 @@ const possible_match_threes:Array = [
 @onready var children = get_children();
 
 func _ready():
+	make_odd_tiles_lighter();
 	connect_tile_signals_to_grid();
 	pass;
 
@@ -81,6 +82,14 @@ func _on_focused_tile_was_chosen(tile:Tile):
 
 func _on_tile_clicked():
 	tile_clicked.emit();
+	pass;
+
+func make_odd_tiles_lighter():
+	for child in children:
+		if child.get_index() % 2 == 0:
+			child.isLighter = true;
+		else:
+			child.isLighter = false;
 	pass;
 
 func connect_tile_signals_to_grid():

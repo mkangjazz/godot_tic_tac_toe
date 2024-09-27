@@ -7,6 +7,9 @@ signal focused_tile_was_chosen;
 @onready var focus_indicator = %tile_selector
 @onready var x_marker = %x
 @onready var o_marker = %o
+@onready var lighter = %Lighter
+
+@export var isLighter:bool = false;
 
 var isFocused:bool = false;
 var building_type: Constants.TileMarkers = Constants.TileMarkers.EMPTY;
@@ -15,6 +18,11 @@ func _ready():
 	pass;
 
 func _physics_process(delta):
+	if isLighter:
+		lighter.show()
+	else:
+		lighter.hide();
+	
 	match (building_type):
 		Constants.TileMarkers.X:
 			x_marker.show();

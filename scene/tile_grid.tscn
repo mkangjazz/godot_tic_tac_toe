@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dhevs2kgy42pf"]
 
 [ext_resource type="Script" path="res://script/tile_grid.gd" id="1_7dini"]
-[ext_resource type="PackedScene" uid="uid://c2es7rt7sbh5i" path="res://scene/tile.tscn" id="2_44403"]
+[ext_resource type="PackedScene" uid="uid://c2es7rt7sbh5i" path="res://scene/game_tile.tscn" id="2_44403"]
 
 [node name="TileGrid" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)

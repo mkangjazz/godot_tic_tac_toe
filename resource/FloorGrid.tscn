@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://b68mqchvd7463"]
+
+[node name="FloorGrid" type="Node3D"]
