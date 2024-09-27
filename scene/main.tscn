@@ -31,7 +31,6 @@ transform = Transform3D(1, 0, 0, 0, 0.209619, 0.977783, 0, -0.977783, 0.209619, 
 
 [node name="MatteBackdrop" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18)
-visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MatteBackdrop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 11)

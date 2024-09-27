@@ -108,9 +108,6 @@ func connect_tile_signals_to_grid():
 
 func _on_hovered_tile(tile:Tile):
 	tile_hovered.emit(tile);
-	#unfocus_all_tiles();
-	#tile.focus();
-
 	pass;
 
 func move_down_one_tile():
