@@ -11,7 +11,7 @@ script = ExtResource("1_e7rks")
 metadata/_edit_vertical_guides_ = [2314.0]
 
 [node name="CamMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 1.521, 3, 6.5)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3, 5)
 
 [node name="Camera3D" type="Camera3D" parent="CamMarker"]
 
@@ -22,43 +22,55 @@ transform = Transform3D(1, 0, 0, 0, 0.209619, 0.977783, 0, -0.977783, 0.209619, 
 
 [node name="TileGrid" parent="." instance=ExtResource("2_hb3t2")]
 unique_name_in_owner = true
-visible = false
 
 [node name="ControllersContainer" type="Node3D" parent="."]
 unique_name_in_owner = true
 
 [node name="Scores" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="MarginContainer" type="MarginContainer" parent="Scores"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 803.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
-[node name="Grid" type="GridContainer" parent="Scores/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="Scores/MarginContainer"]
 layout_mode = 2
 columns = 3
 
-[node name="XScore" type="VBoxContainer" parent="Scores/MarginContainer/Grid"]
+[node name="XContainer" type="Panel" parent="Scores/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Scores/MarginContainer/GridContainer/XContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 20
+
+[node name="XScore" type="VBoxContainer" parent="Scores/MarginContainer/GridContainer/XContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
-alignment = 1
 
-[node name="X" type="Label" parent="Scores/MarginContainer/Grid/XScore"]
+[node name="X" type="Label" parent="Scores/MarginContainer/GridContainer/XContainer/MarginContainer/XScore"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
-text = "X"
+text = "X Score"
 horizontal_alignment = 1
 
-[node name="XScore" type="Label" parent="Scores/MarginContainer/Grid/XScore"]
+[node name="XScore" type="Label" parent="Scores/MarginContainer/GridContainer/XContainer/MarginContainer/XScore"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -66,72 +78,64 @@ theme = ExtResource("3_p47nq")
 text = "I"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Scores/MarginContainer/Grid"]
+[node name="GameContainer" type="PanelContainer" parent="Scores/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="YScore" type="VBoxContainer" parent="Scores/MarginContainer/Grid"]
+[node name="MarginContainer" type="MarginContainer" parent="Scores/MarginContainer/GridContainer/GameContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 100
+
+[node name="GameOver" type="VBoxContainer" parent="Scores/MarginContainer/GridContainer/GameContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 20
-alignment = 2
 
-[node name="Container" type="VBoxContainer" parent="Scores/MarginContainer/Grid/YScore"]
-layout_mode = 2
-alignment = 2
-
-[node name="O" type="Label" parent="Scores/MarginContainer/Grid/YScore/Container"]
+[node name="VictoryOrDefeat" type="Label" parent="Scores/MarginContainer/GridContainer/GameContainer/MarginContainer/GameOver"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("3_p47nq")
-text = "O"
+text = "X/O"
 horizontal_alignment = 1
 
-[node name="OScore" type="Label" parent="Scores/MarginContainer/Grid/YScore/Container"]
+[node name="Continue" type="Button" parent="Scores/MarginContainer/GridContainer/GameContainer/MarginContainer/GameOver"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(330, 0)
+layout_mode = 2
+theme = ExtResource("3_p47nq")
+text = "Continue"
+
+[node name="YContainer" type="PanelContainer" parent="Scores/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Scores/MarginContainer/GridContainer/YContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="YScore" type="VBoxContainer" parent="Scores/MarginContainer/GridContainer/YContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="O" type="Label" parent="Scores/MarginContainer/GridContainer/YContainer/MarginContainer/YScore"]
+layout_mode = 2
+theme = ExtResource("3_p47nq")
+text = "O Score"
+horizontal_alignment = 1
+
+[node name="OScore" type="Label" parent="Scores/MarginContainer/GridContainer/YContainer/MarginContainer/YScore"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
 text = "IV"
 horizontal_alignment = 1
-
-[node name="GameOver" type="CanvasLayer" parent="Scores"]
-unique_name_in_owner = true
-visible = false
-
-[node name="ColorRect2" type="ColorRect" parent="Scores/GameOver"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-color = Color(0, 0, 0, 0.752941)
-
-[node name="CenterContainer" type="CenterContainer" parent="Scores/GameOver/ColorRect2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Scores/GameOver/ColorRect2/CenterContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="VictoryOrDefeat" type="Label" parent="Scores/GameOver/ColorRect2/CenterContainer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("3_p47nq")
-theme_override_font_sizes/font_size = 76
-text = "X/O"
-horizontal_alignment = 1
-
-[node name="Continue" type="Button" parent="Scores/GameOver/ColorRect2/CenterContainer/VBoxContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(330, 0)
-layout_mode = 2
-theme = ExtResource("3_p47nq")
-text = "Continue"
 
 [node name="MainMenu" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -293,7 +297,7 @@ text = "Start Game"
 
 [connection signal="focused_tile_chosen" from="TileGrid" to="." method="_on_tile_grid_focused_tile_chosen"]
 [connection signal="tile_clicked" from="TileGrid" to="." method="_on_tile_grid_tile_clicked"]
-[connection signal="pressed" from="Scores/GameOver/ColorRect2/CenterContainer/VBoxContainer2/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Scores/MarginContainer/GridContainer/GameContainer/MarginContainer/GameOver/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/TogglePlayer" to="." method="_on_toggle_player_pressed"]
 [connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/ToggleWins" to="." method="_on_toggle_wins_pressed"]
 [connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer3/MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c2es7rt7sbh5i" path="res://scene/tile.tscn" id="2_44403"]
 
 [node name="TileGrid" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
 script = ExtResource("1_7dini")
 
 [node name="ZeroZero" parent="." groups=["TileGroup"] instance=ExtResource("2_44403")]

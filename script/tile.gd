@@ -5,8 +5,8 @@ signal tile_clicked;
 signal focused_tile_was_chosen;
 
 @onready var focus_indicator = %tile_selector
-@onready var x_marker = %X
-@onready var o_marker = %O
+@onready var x_marker = %x
+@onready var o_marker = %o
 
 var isFocused:bool = false;
 var building_type: Constants.TileMarkers = Constants.TileMarkers.EMPTY;
