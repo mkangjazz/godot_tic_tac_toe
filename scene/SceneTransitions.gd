@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-@onready var animation_player = %AnimationPlayer
 @onready var scene_transitions = %SceneTransitions
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 signal transition_started;
 signal transition_ended;
