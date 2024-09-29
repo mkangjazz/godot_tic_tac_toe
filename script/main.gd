@@ -223,11 +223,16 @@ func _on_continue_pressed():
 		player_manager.players.p1.score >= game_manager.wins_per_round or
 		player_manager.players.p2.score >= game_manager.wins_per_round
 	):
+		scene_transitions.show();
+		scene_transitions.fade_ap.queue("fade_to_black");
+		await get_tree().create_timer(0.5).timeout
+
 		in_game_ui.hide();
 		main_menu_scene.show();
-		victory_label.show();
+		scene_transitions.fade_ap.queue("fade_from_black");
+		await get_tree().create_timer(0.5).timeout
+		scene_transitions.hide();
 		focus_player_switch();
-
 		pass;
 	else:
 		set_up_next_round();
@@ -258,7 +263,7 @@ func _on_toggle_wins_pressed():
 
 func _on_start_game_button_pressed():
 	scene_transitions.show();
-	scene_transitions.animation_player.queue("to_black");
+	scene_transitions.diamond_ap.queue("to_black");
 	player_manager.reset_who_moves_first();
 	player_manager.reset_player_scores();
 	tile_grid.reset_tile_grid();
@@ -267,7 +272,7 @@ func _on_start_game_button_pressed():
 	in_game_ui.show();
 	continue_button.hide();
 	victory_label.show();
-	scene_transitions.animation_player.queue("from_black");
+	scene_transitions.diamond_ap.queue("from_black");
 	
 	await get_tree().create_timer(1.0).timeout
 	scene_transitions.hide();

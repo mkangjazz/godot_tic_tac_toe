@@ -6,7 +6,7 @@ uniform float blur_amount = 2.0;
 void fragment() {
 	vec4 input_color = texture(TEXTURE, UV);
 
-	COLOR = vec4(1.0, 1.0, 1.0, input_color.b);
+	COLOR = vec4(1.0, 0.5, 1.0, input_color.b);
 }
 
 //const float scale = 2.0;
