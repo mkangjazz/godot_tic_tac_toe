@@ -19,6 +19,7 @@ extends Node3D
 @onready var in_game_ui = %InGameUI
 @onready var map = %map
 @onready var scene_transitions = %SceneTransitions
+@onready var camera_ap: AnimationPlayer = %CameraAP
 
 var player_manager:PlayerManager;
 var game_manager:GameManager;
@@ -272,8 +273,8 @@ func _on_start_game_button_pressed():
 	continue_button.hide();
 	victory_label.show();
 	scene_transitions.diamond_ap.queue("from_black");
-	
-	await get_tree().create_timer(1.0).timeout
+	camera_ap.queue("begin_battle");
+	await get_tree().create_timer(2.0).timeout
 	scene_transitions.hide();
 	game_manager.isGamePaused = false;
 	pass

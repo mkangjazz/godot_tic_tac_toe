@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://v45x1kp6orko"]
+[gd_scene load_steps=29 format=3 uid="uid://v45x1kp6orko"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_e7rks"]
 [ext_resource type="PackedScene" uid="uid://ivf4hhmg6bao" path="res://ground_plane.glb" id="2_0xp7r"]
@@ -25,6 +25,67 @@ albedo_texture = ExtResource("2_8rjbt")
 uv1_scale = Vector3(50, 50, 50)
 texture_filter = 2
 distance_fade_mode = 1
+
+[sub_resource type="Animation" id="Animation_k07ju"]
+resource_name = "begin_battle"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.594603, 0.307786),
+"update": 0,
+"values": [Vector3(0, 15, 8), Vector3(0, 3, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.34151, 0.329877),
+"update": 0,
+"values": [Vector3(-1.39626, 0, 0), Vector3(-0.785398, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_43ek1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3, 4.7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i6ysd"]
+_data = {
+"RESET": SubResource("Animation_43ek1"),
+"begin_battle": SubResource("Animation_k07ju")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jcft5"]
 shader = ExtResource("9_syiaa")
@@ -120,10 +181,9 @@ unique_name_in_owner = true
 
 [node name="InGameUI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="ground_plane" parent="InGameUI" instance=ExtResource("2_0xp7r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -3.1, 6)
 
 [node name="Ground" parent="InGameUI/ground_plane" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_0nlas")
@@ -132,6 +192,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0nlas")
 unique_name_in_owner = true
 
 [node name="TextureRect" type="TextureRect" parent="InGameUI"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -269,11 +330,20 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="Camera3D" type="Camera3D" parent="InGameUI/CamMarker"]
 
+[node name="CameraAP" type="AnimationPlayer" parent="InGameUI/CamMarker"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_i6ysd")
+}
+
 [node name="LightMarker" type="Marker3D" parent="InGameUI"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2831, 11, 7.661)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2831, -21, -8.339)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="InGameUI/LightMarker"]
 transform = Transform3D(0.174647, -0.83803, 0.516918, 0.198026, 0.544154, 0.815281, -0.964513, -0.0400236, 0.260987, 0, 3, -1)
+light_color = Color(0.937255, 0.854902, 0.509804, 1)
+light_energy = 1.518
+light_volumetric_fog_energy = 1.057
 shadow_enabled = true
 shadow_opacity = 0.45
 shadow_blur = 1.465
@@ -281,6 +351,7 @@ directional_shadow_blend_splits = true
 
 [node name="MainMenu" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="Control" type="Control" parent="MainMenu"]
 clip_contents = true
@@ -332,14 +403,14 @@ theme_override_styles/panel = ExtResource("10_o4x4j")
 [node name="MarginContainer" type="MarginContainer" parent="MainMenu/CenterContainer/Panel"]
 custom_minimum_size = Vector2(920, 0)
 layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="MainMenu/CenterContainer/Panel/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 40
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3"]
