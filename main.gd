@@ -18,12 +18,14 @@ extends Node3D
 @onready var continue_button = %Continue;
 @onready var in_game_ui = %InGameUI
 @onready var map = %map
-@onready var scene_transitions = %SceneTransitions
+@onready var scene_transitions: CanvasLayer = %SceneTransitions
 @onready var camera_ap: AnimationPlayer = %CameraAP
 
 var player_manager:PlayerManager;
 var game_manager:GameManager;
 var scene_is_transitioning: bool = false;
+
+signal scene_has_transitioned;
 
 func _ready():
 	set_up_managers();
@@ -223,20 +225,40 @@ func _on_continue_pressed():
 		player_manager.players.p1.score >= game_manager.wins_per_round or
 		player_manager.players.p2.score >= game_manager.wins_per_round
 	):
-		scene_transitions.show();
-		scene_transitions.fade_ap.queue("fade_to_black");
-		await get_tree().create_timer(0.5).timeout
-
+		scene_transitions.fade_to_black();
+		await scene_transitions.transition_ended;
 		in_game_ui.hide();
 		main_menu_scene.show();
-		scene_transitions.fade_ap.queue("fade_from_black");
-		await get_tree().create_timer(0.5).timeout
-		scene_transitions.hide();
+		scene_transitions.fade_from_black();
+		await scene_transitions.transition_ended;
 		focus_player_switch();
 		pass;
 	else:
 		set_up_next_round();
+	pass
 
+func reset_game_managers():
+	player_manager.reset_who_moves_first();
+	player_manager.reset_player_scores();
+	tile_grid.reset_tile_grid();
+	pass;
+
+func start_battle():
+	main_menu_scene.hide();
+	in_game_ui.show();
+	continue_button.hide();
+	victory_label.show();
+	scene_transitions.diamond_from_black();
+	camera_ap.queue("begin_battle");
+	await scene_transitions.transition_ended;
+	game_manager.isGamePaused = false;
+	pass;
+
+func _on_start_game_button_pressed():
+	reset_game_managers();
+	scene_transitions.diamond_to_black();
+	await scene_transitions.transition_ended;
+	start_battle();
 	pass
 
 func _on_toggle_player_pressed():
@@ -261,24 +283,6 @@ func _on_toggle_wins_pressed():
 		game_manager.wins_per_round = 3;
 	pass
 
-func _on_start_game_button_pressed():
-	scene_transitions.show();
-	scene_transitions.diamond_ap.queue("to_black");
-	player_manager.reset_who_moves_first();
-	player_manager.reset_player_scores();
-	tile_grid.reset_tile_grid();
-	await get_tree().create_timer(1.0).timeout
-	main_menu_scene.hide();
-	in_game_ui.show();
-	continue_button.hide();
-	victory_label.show();
-	scene_transitions.diamond_ap.queue("from_black");
-	camera_ap.queue("begin_battle");
-	await get_tree().create_timer(2.0).timeout
-	scene_transitions.hide();
-	game_manager.isGamePaused = false;
-	pass
-
 func _on_tile_grid_tile_hovered(tile):
 	if !game_manager.isGamePaused:
 		tile_grid.unfocus_all_tiles();
@@ -287,12 +291,12 @@ func _on_tile_grid_tile_hovered(tile):
 		tile_grid.unfocus_all_tiles();
 	pass
 
-func _on_scene_transitions_transition_started():
-	scene_is_transitioning = true;
-	print("start transition",scene_is_transitioning);
-	pass
-
-func _on_scene_transitions_transition_ended():
-	scene_is_transitioning = false;
-	print("end transition", scene_is_transitioning);
-	pass
+#func _on_scene_transitions_transition_ended() -> void:
+	#print("ENDED");
+	#scene_is_transitioning = false;
+	#scene_has_transitioned.emit();
+	#pass
+#
+#func _on_scene_transitions_transition_started() -> void:
+	#print("STARTED");
+	#pass

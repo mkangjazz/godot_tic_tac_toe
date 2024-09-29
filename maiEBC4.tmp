@@ -422,7 +422,5 @@ unique_name_in_owner = true
 [connection signal="pressed" from="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/TogglePlayer" to="." method="_on_toggle_player_pressed"]
 [connection signal="pressed" from="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/ToggleWins" to="." method="_on_toggle_wins_pressed"]
 [connection signal="pressed" from="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/StartGameButton" to="." method="_on_start_game_button_pressed"]
-[connection signal="transition_ended" from="SceneTransitions" to="." method="_on_scene_transitions_transition_ended"]
-[connection signal="transition_started" from="SceneTransitions" to="." method="_on_scene_transitions_transition_started"]
 
 [editable path="InGameUI/ground_plane"]
