@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://l7qa1wfoblws"]
 
-[ext_resource type="Texture2D" uid="uid://brx1p1qq7xq4m" path="res://resource/grass.png" id="1_1kn5j"]
-[ext_resource type="Texture2D" uid="uid://dfafx4d7ykv00" path="res://resource/bricks.png" id="2_ajdcc"]
+[ext_resource type="Texture2D" uid="uid://brx1p1qq7xq4m" path="res://grass.png" id="1_1kn5j"]
+[ext_resource type="Texture2D" uid="uid://dfafx4d7ykv00" path="res://bricks.png" id="2_ajdcc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2l8xd"]
 albedo_color = Color(2.71939e-06, 0.477149, 0.367867, 1)

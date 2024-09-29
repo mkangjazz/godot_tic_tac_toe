@@ -1,24 +1,31 @@
-[gd_scene load_steps=26 format=3 uid="uid://v45x1kp6orko"]
+[gd_scene load_steps=27 format=3 uid="uid://v45x1kp6orko"]
 
-[ext_resource type="Script" path="res://script/main.gd" id="1_e7rks"]
-[ext_resource type="PackedScene" uid="uid://dhevs2kgy42pf" path="res://scene/tile_grid.tscn" id="2_hb3t2"]
-[ext_resource type="Texture2D" uid="uid://d1d5afhj84nbl" path="res://resource/matte-background.png" id="2_md1gv"]
-[ext_resource type="PackedScene" uid="uid://bhr8vrw7c44ow" path="res://scene/ground_tile.tscn" id="3_frwe2"]
-[ext_resource type="Theme" uid="uid://b4145qp6hxvc3" path="res://resource/theme.tres" id="3_p47nq"]
-[ext_resource type="Texture2D" uid="uid://dvawq6vfmelhp" path="res://resource/tile-map.png" id="4_5o8i8"]
-[ext_resource type="StyleBox" uid="uid://xv4ev3w6rg4g" path="res://resource/dialoge_stylebox.tres" id="4_87y07"]
-[ext_resource type="Texture2D" uid="uid://ckfxsnra1s18v" path="res://resource/logo.png" id="5_twumo"]
-[ext_resource type="Shader" path="res://scene/logo.gdshader" id="8_aqm38"]
-[ext_resource type="Script" path="res://scene/SceneTransitions.gd" id="9_4eih5"]
-[ext_resource type="Shader" path="res://resource/diamond.gdshader" id="9_syiaa"]
-[ext_resource type="Texture2D" uid="uid://b2x1h28h541q7" path="res://resource/mask-diamond.png" id="10_706gg"]
-[ext_resource type="Animation" uid="uid://bghxfh1tt0pmx" path="res://resource/from_black.res" id="12_i30ul"]
-[ext_resource type="Shader" path="res://resource/practice_scale.gdshader" id="12_w3uop"]
+[ext_resource type="Script" path="res://main.gd" id="1_e7rks"]
+[ext_resource type="PackedScene" uid="uid://ivf4hhmg6bao" path="res://ground_plane.glb" id="2_0xp7r"]
+[ext_resource type="Texture2D" uid="uid://1sv2v50r1au2" path="res://ground-texture.png" id="2_8rjbt"]
+[ext_resource type="PackedScene" uid="uid://dhevs2kgy42pf" path="res://tile_grid.tscn" id="2_hb3t2"]
+[ext_resource type="Texture2D" uid="uid://d1d5afhj84nbl" path="res://matte-background.png" id="2_md1gv"]
+[ext_resource type="PackedScene" uid="uid://bhr8vrw7c44ow" path="res://ground_tile.tscn" id="3_frwe2"]
+[ext_resource type="Theme" uid="uid://b4145qp6hxvc3" path="res://theme.tres" id="3_p47nq"]
+[ext_resource type="Texture2D" uid="uid://dvawq6vfmelhp" path="res://tile-map.png" id="4_5o8i8"]
+[ext_resource type="Texture2D" uid="uid://ckfxsnra1s18v" path="res://logo.png" id="5_twumo"]
+[ext_resource type="Script" path="res://SceneTransitions.gd" id="9_4eih5"]
+[ext_resource type="Shader" path="res://diamond.gdshader" id="9_syiaa"]
+[ext_resource type="Texture2D" uid="uid://b2x1h28h541q7" path="res://mask-diamond.png" id="10_706gg"]
+[ext_resource type="StyleBox" uid="uid://dmqcipnuf3pog" path="res://blue_stylebox.tres" id="10_o4x4j"]
+[ext_resource type="Animation" uid="uid://bghxfh1tt0pmx" path="res://from_black.res" id="12_i30ul"]
+[ext_resource type="Shader" path="res://practice_scale.gdshader" id="12_w3uop"]
 [ext_resource type="Texture2D" uid="uid://do1j211xk5nrd" path="res://icon.svg" id="13_dppgk"]
-[ext_resource type="Animation" uid="uid://c63ng25gf5r1o" path="res://resource/to_black.res" id="13_ywrjl"]
+[ext_resource type="Animation" uid="uid://c63ng25gf5r1o" path="res://to_black.res" id="13_ywrjl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x1o1t"]
-shader = ExtResource("8_aqm38")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0nlas"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.741176, 0.643137, 0.356863, 1)
+albedo_texture = ExtResource("2_8rjbt")
+uv1_scale = Vector3(50, 50, 50)
+texture_filter = 2
+distance_fade_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jcft5"]
 shader = ExtResource("9_syiaa")
@@ -115,8 +122,15 @@ unique_name_in_owner = true
 [node name="InGameUI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 
+[node name="ground_plane" parent="InGameUI" instance=ExtResource("2_0xp7r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
+
+[node name="Ground" parent="InGameUI/ground_plane" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_0nlas")
+
 [node name="GroundGrid" type="Node3D" parent="InGameUI"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+visible = false
 
 [node name="GroundTile" parent="InGameUI/GroundGrid" instance=ExtResource("3_frwe2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
@@ -4741,7 +4755,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 unique_name_in_owner = true
 
 [node name="TextureRect" type="TextureRect" parent="InGameUI"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -4774,7 +4787,7 @@ columns = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_87y07")
+theme_override_styles/panel = ExtResource("10_o4x4j")
 
 [node name="MarginContainer" type="MarginContainer" parent="InGameUI/BottomUI/GridContainer/XContainer"]
 layout_mode = 2
@@ -4808,7 +4821,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_87y07")
+theme_override_styles/panel = ExtResource("10_o4x4j")
 
 [node name="MarginContainer" type="MarginContainer" parent="InGameUI/BottomUI/GridContainer/GameContainer"]
 custom_minimum_size = Vector2(800, 0)
@@ -4846,7 +4859,7 @@ text = "Continue"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_87y07")
+theme_override_styles/panel = ExtResource("10_o4x4j")
 
 [node name="MarginContainer" type="MarginContainer" parent="InGameUI/BottomUI/GridContainer/YContainer"]
 layout_mode = 2
@@ -4880,7 +4893,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="Camera3D" type="Camera3D" parent="InGameUI/CamMarker"]
 
 [node name="LightMarker" type="Marker3D" parent="InGameUI"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2831, 10, 5.661)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2831, 11, 7.661)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="InGameUI/LightMarker"]
 transform = Transform3D(0.174647, -0.83803, 0.516918, 0.198026, 0.544154, 0.815281, -0.964513, -0.0400236, 0.260987, 0, 3, -1)
@@ -4936,23 +4949,30 @@ offset_bottom = -122.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenu/CenterContainer"]
-custom_minimum_size = Vector2(610, 0)
+[node name="Panel" type="PanelContainer" parent="MainMenu/CenterContainer"]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("10_o4x4j")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="MainMenu/CenterContainer/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu/CenterContainer/Panel"]
+custom_minimum_size = Vector2(920, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainMenu/CenterContainer/Panel/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MainMenu/CenterContainer/MarginContainer/VBoxContainer3"]
-material = SubResource("ShaderMaterial_x1o1t")
+[node name="TextureRect" type="TextureRect" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3"]
 layout_mode = 2
 texture = ExtResource("5_twumo")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="TogglePlayer" type="Button" parent="MainMenu/CenterContainer/MarginContainer/VBoxContainer3"]
+[node name="TogglePlayer" type="Button" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
@@ -4960,7 +4980,7 @@ toggle_mode = true
 flat = true
 alignment = 0
 
-[node name="HBoxContainer" type="GridContainer" parent="MainMenu/CenterContainer/MarginContainer/VBoxContainer3/TogglePlayer"]
+[node name="HBoxContainer" type="GridContainer" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/TogglePlayer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4969,14 +4989,14 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 3
 
-[node name="CPU" type="Label" parent="MainMenu/CenterContainer/MarginContainer/VBoxContainer3/TogglePlayer/HBoxContainer"]
+[node name="CPU" type="Label" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/TogglePlayer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
 text = "vs. CPU	"
 horizontal_alignment = 2
 
-[node name="CheckButton2" type="CheckButton" parent="MainMenu/CenterContainer/MarginContainer/VBoxContainer3/TogglePlayer/HBoxContainer"]
+[node name="CheckButton2" type="CheckButton" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/TogglePlayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -4985,20 +5005,20 @@ theme = ExtResource("3_p47nq")
 disabled = true
 alignment = 1
 
-[node name="Player" type="Label" parent="MainMenu/CenterContainer/MarginContainer/VBoxContainer3/TogglePlayer/HBoxContainer"]
+[node name="Player" type="Label" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/TogglePlayer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
 text = "vs. Player"
 
-[node name="ToggleWins" type="Button" parent="MainMenu/CenterContainer/MarginContainer/VBoxContainer3"]
+[node name="ToggleWins" type="Button" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 toggle_mode = true
 flat = true
 
-[node name="Container" type="GridContainer" parent="MainMenu/CenterContainer/MarginContainer/VBoxContainer3/ToggleWins"]
+[node name="Container" type="GridContainer" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/ToggleWins"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -5008,14 +5028,14 @@ grow_vertical = 2
 size_flags_horizontal = 4
 columns = 3
 
-[node name="Button2" type="Label" parent="MainMenu/CenterContainer/MarginContainer/VBoxContainer3/ToggleWins/Container"]
+[node name="Button2" type="Label" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/ToggleWins/Container"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
 text = "First to 3"
 horizontal_alignment = 2
 
-[node name="CheckButton" type="CheckButton" parent="MainMenu/CenterContainer/MarginContainer/VBoxContainer3/ToggleWins/Container"]
+[node name="CheckButton" type="CheckButton" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/ToggleWins/Container"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -5024,13 +5044,13 @@ theme = ExtResource("3_p47nq")
 disabled = true
 alignment = 1
 
-[node name="Button4" type="Label" parent="MainMenu/CenterContainer/MarginContainer/VBoxContainer3/ToggleWins/Container"]
+[node name="Button4" type="Label" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/ToggleWins/Container"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_p47nq")
 text = "First to 5"
 
-[node name="StartGameButton" type="Button" parent="MainMenu/CenterContainer/MarginContainer/VBoxContainer3"]
+[node name="StartGameButton" type="Button" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("3_p47nq")
@@ -5091,8 +5111,10 @@ libraries = {
 [connection signal="tile_clicked" from="InGameUI/TileGrid" to="." method="_on_tile_grid_tile_clicked"]
 [connection signal="tile_hovered" from="InGameUI/TileGrid" to="." method="_on_tile_grid_tile_hovered"]
 [connection signal="pressed" from="InGameUI/BottomUI/GridContainer/GameContainer/MarginContainer/GameOver/MarginContainer/Continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="MainMenu/CenterContainer/MarginContainer/VBoxContainer3/TogglePlayer" to="." method="_on_toggle_player_pressed"]
-[connection signal="pressed" from="MainMenu/CenterContainer/MarginContainer/VBoxContainer3/ToggleWins" to="." method="_on_toggle_wins_pressed"]
-[connection signal="pressed" from="MainMenu/CenterContainer/MarginContainer/VBoxContainer3/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/TogglePlayer" to="." method="_on_toggle_player_pressed"]
+[connection signal="pressed" from="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/ToggleWins" to="." method="_on_toggle_wins_pressed"]
+[connection signal="pressed" from="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="transition_ended" from="SceneTransitions" to="." method="_on_scene_transitions_transition_ended"]
 [connection signal="transition_started" from="SceneTransitions" to="." method="_on_scene_transitions_transition_started"]
+
+[editable path="InGameUI/ground_plane"]

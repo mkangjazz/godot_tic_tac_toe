@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://dhevs2kgy42pf"]
 
-[ext_resource type="Script" path="res://script/tile_grid.gd" id="1_7dini"]
-[ext_resource type="PackedScene" uid="uid://c2es7rt7sbh5i" path="res://scene/tile.tscn" id="2_44403"]
+[ext_resource type="Script" path="res://tile_grid.gd" id="1_7dini"]
+[ext_resource type="PackedScene" uid="uid://c2es7rt7sbh5i" path="res://game_tile.tscn" id="2_44403"]
 
 [node name="TileGrid" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
 script = ExtResource("1_7dini")
 
 [node name="ZeroZero" parent="." groups=["TileGroup"] instance=ExtResource("2_44403")]
@@ -31,13 +32,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
 
 [node name="TwoTwo" parent="." groups=["TileGroup"] instance=ExtResource("2_44403")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
-
-[connection signal="focused_tile_was_clicked" from="ZeroZero" to="." method="_on_zero_zero_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="OneZero" to="." method="_on_one_zero_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="TwoZero" to="." method="_on_two_zero_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="ZeroOne" to="." method="_on_zero_one_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="OneOne" to="." method="_on_one_one_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="TwoOne" to="." method="_on_two_one_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="ZeroTwo" to="." method="_on_zero_two_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="OneTwo" to="." method="_on_one_two_focused_tile_was_clicked"]
-[connection signal="focused_tile_was_clicked" from="TwoTwo" to="." method="_on_two_two_focused_tile_was_clicked"]

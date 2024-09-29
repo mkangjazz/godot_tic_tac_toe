@@ -215,7 +215,6 @@ func _on_AI_turn_to_move():
 		var random_tile = tile_grid.find_random_open_tile_for_ai();
 		if random_tile:
 			random_tile.choose(Constants.TileMarkers.O);
-
 	pass;
 
 func _on_continue_pressed():

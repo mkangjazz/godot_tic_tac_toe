@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1d5afhj84nbl"
-path.s3tc="res://.godot/imported/matte-background.png-86364d5a031a5eac6612d84170b8eafc.s3tc.ctex"
+path.s3tc="res://.godot/imported/matte-background.png-876c79e622b4f23f0808ffc805a78c25.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://resource/matte-background.png"
-dest_files=["res://.godot/imported/matte-background.png-86364d5a031a5eac6612d84170b8eafc.s3tc.ctex"]
+source_file="res://matte-background.png"
+dest_files=["res://.godot/imported/matte-background.png-876c79e622b4f23f0808ffc805a78c25.s3tc.ctex"]
 
 [params]
 

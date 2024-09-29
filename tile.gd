@@ -7,7 +7,8 @@ signal focused_tile_was_chosen;
 @onready var focus_indicator = %tile_selector
 @onready var x_marker = %x
 @onready var o_marker = %o
-@onready var lighter = %Lighter
+@onready var lighter: MeshInstance3D = %Lighter;
+@onready var darker: MeshInstance3D = %Darker;
 
 @export var isLighter:bool = false;
 
@@ -20,7 +21,9 @@ func _ready():
 func _physics_process(delta):
 	if isLighter:
 		lighter.show()
+		darker.hide()
 	else:
+		darker.show();
 		lighter.hide();
 	
 	match (building_type):
