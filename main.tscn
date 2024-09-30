@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://v45x1kp6orko"]
+[gd_scene load_steps=15 format=3 uid="uid://v45x1kp6orko"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_e7rks"]
 [ext_resource type="PackedScene" uid="uid://ivf4hhmg6bao" path="res://ground_plane.glb" id="2_0xp7r"]
@@ -13,37 +13,25 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0nlas"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.741176, 0.643137, 0.356863, 1)
+albedo_color = Color(0.538837, 0.45914, 0.225779, 0.756863)
 albedo_texture = ExtResource("2_8rjbt")
-uv1_scale = Vector3(50, 50, 50)
+uv1_scale = Vector3(40, 40, 40)
 texture_filter = 2
 distance_fade_mode = 1
 
 [sub_resource type="Animation" id="Animation_43ek1"]
-length = 0.001
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("Camera3D:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 3, 4.7)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.785398, 0, 0)]
+"values": [20.0]
 }
 
 [sub_resource type="Animation" id="Animation_k07ju"]
@@ -73,10 +61,27 @@ tracks/1/keys = {
 "values": [Vector3(-1.39626, 0, 0), Vector3(-0.785398, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_oe62c"]
+resource_name = "begin_battle_ortho"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [20.0, 9.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i6ysd"]
 _data = {
 "RESET": SubResource("Animation_43ek1"),
-"begin_battle": SubResource("Animation_k07ju")
+"begin_battle": SubResource("Animation_k07ju"),
+"begin_battle_ortho": SubResource("Animation_oe62c")
 }
 
 [node name="Main" type="Node3D"]
@@ -98,6 +103,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0nlas")
 
 [node name="TileGrid" parent="InGameUI" instance=ExtResource("2_hb3t2")]
 unique_name_in_owner = true
+transform = Transform3D(1.125, 0, 0, 0, 1.125, 0, 0, 0, 1.125, 0, 0, -5)
 
 [node name="RoundWinnerContainer" type="MarginContainer" parent="InGameUI"]
 unique_name_in_owner = true
@@ -258,30 +264,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 72
 text = "IV"
 horizontal_alignment = 1
-
-[node name="CamMarker" type="Marker3D" parent="InGameUI"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3, 4.7)
-
-[node name="Camera3D" type="Camera3D" parent="InGameUI/CamMarker"]
-
-[node name="CameraAP" type="AnimationPlayer" parent="InGameUI/CamMarker"]
-unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_i6ysd")
-}
-
-[node name="LightMarker" type="Marker3D" parent="InGameUI"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2831, -21, -8.339)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="InGameUI/LightMarker"]
-transform = Transform3D(0.174647, -0.83803, 0.516918, 0.198026, 0.544154, 0.815281, -0.964513, -0.0400236, 0.260987, 0, 3, -1)
-light_color = Color(0.937255, 0.854902, 0.509804, 1)
-light_energy = 1.518
-light_volumetric_fog_energy = 1.057
-shadow_enabled = true
-shadow_opacity = 0.45
-shadow_blur = 1.465
-directional_shadow_blend_splits = true
 
 [node name="MainMenu" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -451,6 +433,34 @@ vertical_alignment = 1
 [node name="SceneTransitions" parent="." instance=ExtResource("10_gsd7b")]
 unique_name_in_owner = true
 visible = false
+
+[node name="CamMarker" type="Marker3D" parent="."]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CamMarker"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 77, 75)
+projection = 1
+current = true
+size = 20.0
+
+[node name="CameraAP" type="AnimationPlayer" parent="CamMarker"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_i6ysd")
+}
+
+[node name="LightMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7169, -63, -69.339)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="LightMarker"]
+transform = Transform3D(0.174647, -0.83803, 0.516918, 0.198026, 0.544154, 0.81528, -0.964512, -0.0400231, 0.260986, 19, 3, -1)
+light_color = Color(0.970808, 0.924657, 0.729373, 1)
+light_energy = 1.518
+light_volumetric_fog_energy = 1.057
+shadow_enabled = true
+shadow_opacity = 0.45
+shadow_blur = 1.465
+directional_shadow_mode = 0
 
 [connection signal="focused_tile_chosen" from="InGameUI/TileGrid" to="." method="_on_tile_grid_focused_tile_chosen"]
 [connection signal="tile_clicked" from="InGameUI/TileGrid" to="." method="_on_tile_grid_tile_clicked"]

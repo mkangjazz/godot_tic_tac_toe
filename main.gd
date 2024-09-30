@@ -272,7 +272,7 @@ func start_battle():
 	continue_button.hide();
 	victory_label.show();
 	scene_transitions.shutter_from_black();
-	camera_ap.queue("begin_battle");
+	camera_ap.queue("begin_battle_ortho");
 	await scene_transitions.transition_ended;
 	game_manager.isGamePaused = false;
 	pass;
