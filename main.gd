@@ -4,7 +4,7 @@ extends Node3D
 @onready var reset_button = %Continue;
 @onready var scores_label = %Scores
 
-# 
+#
 @onready var controllers_container = %ControllersContainer
 @onready var tile_grid = %TileGrid;
 @onready var toggle_player_btn = %TogglePlayer;
@@ -20,6 +20,9 @@ extends Node3D
 @onready var map = %map
 @onready var scene_transitions: CanvasLayer = %SceneTransitions
 @onready var camera_ap: AnimationPlayer = %CameraAP
+@onready var continue_button_label: Label = %ContinueButtonLabel
+@onready var round_winner_label: Label = %RoundWinnerLabel
+@onready var round_winner_container: MarginContainer = %RoundWinnerContainer
 
 var player_manager:PlayerManager;
 var game_manager:GameManager;
@@ -141,6 +144,7 @@ func _on_tile_grid_focused_tile_chosen():
 
 func set_up_next_round():
 	in_game_ui.show();
+	round_winner_container.hide();
 	main_menu_scene.hide();
 	continue_button.hide();
 
@@ -157,6 +161,16 @@ func set_up_next_round():
 	game_manager.isGamePaused = false;
 	pass;
 
+func set_continue_button_text():
+	if (
+		player_manager.players.p1.score >= game_manager.wins_per_round or
+		player_manager.players.p2.score >= game_manager.wins_per_round
+	):
+		continue_button_label.text = "Fin";
+	else:
+		continue_button_label.text = "Next Round";
+	pass;
+
 func show_win():
 	game_manager.isGamePaused = true;
 	tile_grid.hide_focus_indicator();
@@ -169,8 +183,11 @@ func show_win():
 	);
 
 	victory_label.hide();
+	
+	set_continue_button_text();
 	continue_button.show();
-	continue_button.text = active_player + " Wins!"; 
+	round_winner_container.show();
+	round_winner_label.text = active_player + " Wins!"; 
 	pass;
 
 func show_tie():
@@ -180,8 +197,10 @@ func show_tie():
 	focus_continue_button()
 
 	victory_label.hide();
+	set_continue_button_text();
 	continue_button.show();
-	continue_button.text = "Cat's Game!";
+	round_winner_container.show();
+	round_winner_label.text = "Cat's Game!";
 	pass;
 
 func get_key(dictionary, index):
@@ -221,20 +240,23 @@ func _on_AI_turn_to_move():
 	pass;
 
 func _on_continue_pressed():
+	scene_transitions.fade_to_black();
+	await scene_transitions.transition_ended;
+
 	if (
 		player_manager.players.p1.score >= game_manager.wins_per_round or
 		player_manager.players.p2.score >= game_manager.wins_per_round
 	):
-		scene_transitions.fade_to_black();
-		await scene_transitions.transition_ended;
 		in_game_ui.hide();
 		main_menu_scene.show();
-		scene_transitions.fade_from_black();
-		await scene_transitions.transition_ended;
 		focus_player_switch();
 		pass;
 	else:
 		set_up_next_round();
+
+	scene_transitions.fade_from_black();
+	#scene_transitions.shutter_from_black();
+	await scene_transitions.transition_ended;
 	pass
 
 func reset_game_managers():
@@ -246,9 +268,10 @@ func reset_game_managers():
 func start_battle():
 	main_menu_scene.hide();
 	in_game_ui.show();
+	round_winner_container.hide();
 	continue_button.hide();
 	victory_label.show();
-	scene_transitions.diamond_from_black();
+	scene_transitions.shutter_from_black();
 	camera_ap.queue("begin_battle");
 	await scene_transitions.transition_ended;
 	game_manager.isGamePaused = false;
@@ -290,13 +313,3 @@ func _on_tile_grid_tile_hovered(tile):
 	else:
 		tile_grid.unfocus_all_tiles();
 	pass
-
-#func _on_scene_transitions_transition_ended() -> void:
-	#print("ENDED");
-	#scene_is_transitioning = false;
-	#scene_has_transitioned.emit();
-	#pass
-#
-#func _on_scene_transitions_transition_started() -> void:
-	#print("STARTED");
-	#pass

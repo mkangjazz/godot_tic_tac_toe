@@ -3,12 +3,7 @@ shader_type canvas_item;
 uniform sampler2D mask;
 uniform float scale: hint_range(0.0, 1.0, 0.1);
 
-void vertex() {
-	// Called for every vertex the material is visible on.
-}
-
 void fragment() {
-	//float s = scale * 75.0f;
 	float s = scale == 0.0 ? 0.0 : pow(2.0, 10.0 * scale - 10.0);
 	s *= 75.0f;
 	

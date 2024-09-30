@@ -1,12 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://bo7o207lrnw1g"]
+[gd_scene load_steps=20 format=3 uid="uid://bo7o207lrnw1g"]
 
 [ext_resource type="Script" path="res://SceneTransitions.gd" id="1_uge1h"]
 [ext_resource type="Shader" path="res://diamond.gdshader" id="2_qeejn"]
 [ext_resource type="Texture2D" uid="uid://b2x1h28h541q7" path="res://mask-diamond.png" id="3_r4o58"]
 [ext_resource type="Animation" uid="uid://bghxfh1tt0pmx" path="res://from_black.res" id="4_530en"]
 [ext_resource type="Animation" uid="uid://c63ng25gf5r1o" path="res://to_black.res" id="5_uh3c1"]
-[ext_resource type="Shader" path="res://practice_scale.gdshader" id="6_1m6ap"]
-[ext_resource type="Texture2D" uid="uid://do1j211xk5nrd" path="res://icon.svg" id="7_vs1mq"]
+[ext_resource type="Shader" path="res://vertical_shutter.gdshader" id="6_yaq0q"]
+[ext_resource type="Texture2D" uid="uid://hesv73t5ckmm" path="res://from_center.png" id="7_y2x0x"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jcft5"]
 shader = ExtResource("2_qeejn")
@@ -35,10 +35,6 @@ _data = {
 "to_black": ExtResource("5_uh3c1")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u80qd"]
-shader = ExtResource("6_1m6ap")
-shader_parameter/blur_amount = 2.0
-
 [sub_resource type="Animation" id="Animation_inv4e"]
 length = 0.001
 tracks/0/type = "value"
@@ -56,7 +52,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_4fh3g"]
 resource_name = "fade_from_black"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -64,7 +60,7 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -72,7 +68,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_3np3g"]
 resource_name = "fade_to_black"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -80,7 +76,7 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -93,10 +89,71 @@ _data = {
 "to_black": SubResource("Animation_3np3g")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nj6hm"]
+shader = ExtResource("6_yaq0q")
+shader_parameter/smooth_size = 0.257
+shader_parameter/cutoff = 0.0
+shader_parameter/mask = ExtResource("7_y2x0x")
+
+[sub_resource type="Animation" id="Animation_4nphm"]
+resource_name = "to_black"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_qd046"]
+resource_name = "from_black"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2.2974, 0.420448),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_xcdds"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fwbbk"]
+_data = {
+"RESET": SubResource("Animation_xcdds"),
+"from_black": SubResource("Animation_qd046"),
+"to_black": SubResource("Animation_4nphm")
+}
+
 [node name="SceneTransitions" type="CanvasLayer"]
 script = ExtResource("1_uge1h")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="DiamondRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_jcft5")
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,24 +165,14 @@ size_flags_vertical = 3
 mouse_filter = 1
 color = Color(0, 0, 0, 1)
 
-[node name="DiamondAP" type="AnimationPlayer" parent="ColorRect"]
+[node name="DiamondAP" type="AnimationPlayer" parent="DiamondRect"]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_wj4ay")
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-texture_filter = 1
-texture_repeat = 1
-material = SubResource("ShaderMaterial_u80qd")
-offset_top = 1.0
-offset_right = 974.0
-offset_bottom = 975.0
-texture = ExtResource("7_vs1mq")
-stretch_mode = 4
-
-[node name="FadeInOut" type="ColorRect" parent="."]
+[node name="FadeRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,13 +183,33 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0, 0, 0, 1)
 
-[node name="FadeAP" type="AnimationPlayer" parent="FadeInOut"]
+[node name="FadeAP" type="AnimationPlayer" parent="FadeRect"]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_k6tem")
 }
 
-[connection signal="animation_finished" from="ColorRect/DiamondAP" to="." method="_on_diamond_ap_animation_finished"]
-[connection signal="animation_started" from="ColorRect/DiamondAP" to="." method="_on_diamond_ap_animation_started"]
-[connection signal="animation_finished" from="FadeInOut/FadeAP" to="." method="_on_fade_ap_animation_finished"]
-[connection signal="animation_started" from="FadeInOut/FadeAP" to="." method="_on_fade_ap_animation_started"]
+[node name="VShutterRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_nj6hm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
+
+[node name="VerticalShutterAP" type="AnimationPlayer" parent="VShutterRect"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_fwbbk")
+}
+
+[connection signal="animation_finished" from="DiamondRect/DiamondAP" to="." method="_on_diamond_ap_animation_finished"]
+[connection signal="animation_started" from="DiamondRect/DiamondAP" to="." method="_on_diamond_ap_animation_started"]
+[connection signal="animation_finished" from="FadeRect/FadeAP" to="." method="_on_fade_ap_animation_finished"]
+[connection signal="animation_started" from="FadeRect/FadeAP" to="." method="_on_fade_ap_animation_started"]
+[connection signal="animation_finished" from="VShutterRect/VerticalShutterAP" to="." method="_on_vertical_shutter_ap_animation_finished"]
+[connection signal="animation_started" from="VShutterRect/VerticalShutterAP" to="." method="_on_vertical_shutter_ap_animation_started"]

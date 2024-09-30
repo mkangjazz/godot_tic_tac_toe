@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://v45x1kp6orko"]
+[gd_scene load_steps=14 format=3 uid="uid://v45x1kp6orko"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_e7rks"]
 [ext_resource type="PackedScene" uid="uid://ivf4hhmg6bao" path="res://ground_plane.glb" id="2_0xp7r"]
 [ext_resource type="Texture2D" uid="uid://1sv2v50r1au2" path="res://ground-texture.png" id="2_8rjbt"]
 [ext_resource type="PackedScene" uid="uid://dhevs2kgy42pf" path="res://tile_grid.tscn" id="2_hb3t2"]
-[ext_resource type="Texture2D" uid="uid://d1d5afhj84nbl" path="res://matte-background.png" id="2_md1gv"]
 [ext_resource type="Theme" uid="uid://b4145qp6hxvc3" path="res://theme.tres" id="3_p47nq"]
 [ext_resource type="Texture2D" uid="uid://dvawq6vfmelhp" path="res://tile-map.png" id="4_5o8i8"]
 [ext_resource type="Texture2D" uid="uid://ckfxsnra1s18v" path="res://logo.png" id="5_twumo"]
@@ -49,7 +48,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_k07ju"]
 resource_name = "begin_battle"
-length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -57,7 +55,7 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(0.594603, 0.307786),
 "update": 0,
 "values": [Vector3(0, 15, 8), Vector3(0, 3, 5)]
@@ -69,7 +67,7 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(0.34151, 0.329877),
 "update": 0,
 "values": [Vector3(-1.39626, 0, 0), Vector3(-0.785398, 0, 0)]
@@ -100,25 +98,39 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0nlas")
 [node name="TileGrid" parent="InGameUI" instance=ExtResource("2_hb3t2")]
 unique_name_in_owner = true
 
-[node name="TextureRect" type="TextureRect" parent="InGameUI"]
-visible = false
-anchors_preset = 15
+[node name="RoundWinnerContainer" type="MarginContainer" parent="InGameUI"]
+unique_name_in_owner = true
+anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_right = 40.0
-offset_bottom = -926.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-texture = ExtResource("2_md1gv")
-stretch_mode = 3
+anchor_bottom = 0.104
+offset_bottom = 17.68
+
+[node name="PanelContainer" type="PanelContainer" parent="InGameUI/RoundWinnerContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("10_o4x4j")
+
+[node name="MarginContainer" type="MarginContainer" parent="InGameUI/RoundWinnerContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 16
+
+[node name="RoundWinnerLabel" type="Label" parent="InGameUI/RoundWinnerContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_p47nq")
+theme_override_font_sizes/font_size = 60
+text = "X/O Wins!"
+horizontal_alignment = 1
 
 [node name="BottomUI" type="MarginContainer" parent="InGameUI"]
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.743
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 803.0
+offset_top = 0.559937
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 0
@@ -193,14 +205,26 @@ horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="InGameUI/BottomUI/GridContainer/GameContainer/MarginContainer/GameOver"]
 layout_mode = 2
-theme_override_constants/margin_left = 180
-theme_override_constants/margin_right = 180
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
 
 [node name="Continue" type="Button" parent="InGameUI/BottomUI/GridContainer/GameContainer/MarginContainer/GameOver/MarginContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme = ExtResource("3_p47nq")
+
+[node name="ContinueButtonLabel" type="Label" parent="InGameUI/BottomUI/GridContainer/GameContainer/MarginContainer/GameOver/MarginContainer/Continue"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Continue"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="YContainer" type="PanelContainer" parent="InGameUI/BottomUI/GridContainer"]
 layout_mode = 2
@@ -407,13 +431,26 @@ theme = ExtResource("3_p47nq")
 text = "First to 5"
 
 [node name="StartGameButton" type="Button" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3"]
-custom_minimum_size = Vector2(0, 60)
+clip_contents = true
+custom_minimum_size = Vector2(0, 140)
 layout_mode = 2
 theme = ExtResource("3_p47nq")
-text = "Start Game"
+
+[node name="Label" type="Label" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/StartGameButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 72
+text = "Start Battle"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SceneTransitions" parent="." instance=ExtResource("10_gsd7b")]
 unique_name_in_owner = true
+visible = false
 
 [connection signal="focused_tile_chosen" from="InGameUI/TileGrid" to="." method="_on_tile_grid_focused_tile_chosen"]
 [connection signal="tile_clicked" from="InGameUI/TileGrid" to="." method="_on_tile_grid_tile_clicked"]
