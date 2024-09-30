@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dvawq6vfmelhp" path="res://tile-map.png" id="4_5o8i8"]
 [ext_resource type="Texture2D" uid="uid://ckfxsnra1s18v" path="res://logo.png" id="5_twumo"]
 [ext_resource type="PackedScene" uid="uid://bo7o207lrnw1g" path="res://scene_transitions.tscn" id="10_gsd7b"]
-[ext_resource type="StyleBox" uid="uid://dmqcipnuf3pog" path="res://blue_stylebox.tres" id="10_o4x4j"]
+[ext_resource type="StyleBox" uid="uid://dmqcipnuf3pog" path="res://ff_stylebox.tres" id="10_o4x4j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0nlas"]
 diffuse_mode = 3
@@ -88,6 +88,7 @@ unique_name_in_owner = true
 
 [node name="InGameUI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="ground_plane" parent="InGameUI" instance=ExtResource("2_0xp7r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -3.1, 6)
@@ -284,7 +285,6 @@ directional_shadow_blend_splits = true
 
 [node name="MainMenu" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="Control" type="Control" parent="MainMenu"]
 clip_contents = true
@@ -339,7 +339,7 @@ layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 80
-theme_override_constants/margin_bottom = 80
+theme_override_constants/margin_bottom = 60
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="MainMenu/CenterContainer/Panel/MarginContainer"]
 layout_mode = 2
