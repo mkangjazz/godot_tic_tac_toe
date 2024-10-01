@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://c2es7rt7sbh5i"]
+[gd_scene load_steps=15 format=3 uid="uid://c2es7rt7sbh5i"]
 
 [ext_resource type="Script" path="res://tile.gd" id="1_yfdcu"]
+[ext_resource type="Shader" path="res://tile_selector.gdshader" id="3_gepxr"]
 [ext_resource type="PackedScene" uid="uid://byyvpeh2gnt5n" path="res://tile_selector.glb" id="4_5spic"]
 [ext_resource type="PackedScene" uid="uid://b4qnmsln3gj0a" path="res://x.glb" id="5_1b5ud"]
 [ext_resource type="PackedScene" uid="uid://ciid454gise72" path="res://o.glb" id="6_lclkh"]
@@ -26,8 +27,18 @@ albedo_color = Color(1, 1, 1, 0.294118)
 size = Vector3(2, 0.5, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yugyk"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.733333, 0.733333, 0.733333, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnc4g"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.733333, 0.733333, 0.733333, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wgxa8"]
+render_priority = 1
+shader = ExtResource("3_gepxr")
 
 [node name="GameTile" type="Node3D"]
 script = ExtResource("1_yfdcu")
@@ -56,13 +67,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_10cfj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0025985)
 shape = SubResource("BoxShape3D_j13e2")
 
-[node name="tile_selector" parent="Area3D" instance=ExtResource("4_5spic")]
-unique_name_in_owner = true
-transform = Transform3D(1.89, 0, 0, 0, 1.89, 0, 0, 0, 1.89, 0, 0, 0)
-
 [node name="x" parent="Area3D" instance=ExtResource("5_1b5ud")]
 unique_name_in_owner = true
-transform = Transform3D(0.212132, 0, 0.212132, 0, 0.3, 0, -0.212132, 0, 0.212132, 0, 0.15, 0)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.15, 0)
 
 [node name="Flattened" parent="Area3D/x" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_yugyk")
@@ -75,9 +82,17 @@ visible = false
 [node name="flattened" parent="Area3D/o" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_bnc4g")
 
+[node name="tile_selector" parent="Area3D" instance=ExtResource("4_5spic")]
+unique_name_in_owner = true
+transform = Transform3D(1.89, 0, 0, 0, 1.89, 0, 0, 0, 1.89, 0, 0.01, 0)
+
+[node name="Cube" parent="Area3D/tile_selector" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_wgxa8")
+
 [connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
 [connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
 
 [editable path="Area3D/x"]
 [editable path="Area3D/o"]
+[editable path="Area3D/tile_selector"]

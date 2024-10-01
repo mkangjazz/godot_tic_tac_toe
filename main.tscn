@@ -16,7 +16,7 @@ specular_mode = 1
 albedo_color = Color(0.538837, 0.45914, 0.225779, 0.756863)
 albedo_texture = ExtResource("2_8rjbt")
 uv1_scale = Vector3(260, 260, 260)
-texture_filter = 2
+texture_filter = 0
 distance_fade_mode = 1
 
 [sub_resource type="Animation" id="Animation_43ek1"]
@@ -475,17 +475,24 @@ libraries = {
 }
 
 [node name="LightMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7169, -63, -69.339)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="LightMarker"]
-transform = Transform3D(0.174647, -0.83803, 0.516918, 0.198026, 0.544154, 0.81528, -0.964512, -0.0400231, 0.260986, 19, 3, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 20)
+visible = false
 light_color = Color(0.970808, 0.924657, 0.729373, 1)
-light_energy = 1.518
-light_volumetric_fog_energy = 1.057
+light_energy = 2.0
+light_indirect_energy = 4.0
 shadow_enabled = true
-shadow_opacity = 0.45
+shadow_opacity = 0.7
 shadow_blur = 1.465
 directional_shadow_mode = 0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="LightMarker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 11, -4)
+light_energy = 2.5
+omni_range = 40.0
+omni_attenuation = 0.0
 
 [connection signal="focused_tile_chosen" from="InGameUI/TileGrid" to="." method="_on_tile_grid_focused_tile_chosen"]
 [connection signal="tile_clicked" from="InGameUI/TileGrid" to="." method="_on_tile_grid_tile_clicked"]
