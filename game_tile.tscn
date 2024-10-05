@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c2es7rt7sbh5i"]
+[gd_scene load_steps=13 format=3 uid="uid://c2es7rt7sbh5i"]
 
 [ext_resource type="Script" path="res://tile.gd" id="1_yfdcu"]
 [ext_resource type="Shader" path="res://tile_selector.gdshader" id="3_gepxr"]
@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://b4qnmsln3gj0a" path="res://x.glb" id="5_1b5ud"]
 [ext_resource type="PackedScene" uid="uid://ciid454gise72" path="res://o.glb" id="6_lclkh"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_1duvk"]
-size = Vector3(1, 0.5, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_j13e2"]
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rfmkf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_clwug"]
 transparency = 1
@@ -17,24 +19,15 @@ albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhg0p"]
 transparency = 1
-albedo_color = Color(0, 0, 0, 0.392157)
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0, 0, 0.0980392)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10cfj"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.294118)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_j13e2"]
-size = Vector3(2, 0.5, 2)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yugyk"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.733333, 0.733333, 0.733333, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnc4g"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.733333, 0.733333, 0.733333, 1)
+albedo_color = Color(1, 1, 1, 0.0980392)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wgxa8"]
 render_priority = 1
@@ -44,11 +37,14 @@ shader = ExtResource("3_gepxr")
 script = ExtResource("1_yfdcu")
 
 [node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0025985)
+shape = SubResource("BoxShape3D_j13e2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 0, -0.25, 0)
-mesh = SubResource("BoxMesh_1duvk")
+mesh = SubResource("PlaneMesh_rfmkf")
 surface_material_override/0 = SubResource("StandardMaterial3D_clwug")
 
 [node name="Darker" type="MeshInstance3D" parent="Area3D/MeshInstance3D"]
@@ -63,24 +59,14 @@ transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0.26, 0)
 mesh = SubResource("PlaneMesh_1vrwa")
 surface_material_override/0 = SubResource("StandardMaterial3D_10cfj")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0025985)
-shape = SubResource("BoxShape3D_j13e2")
-
 [node name="x" parent="Area3D" instance=ExtResource("5_1b5ud")]
 unique_name_in_owner = true
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.15, 0)
-
-[node name="Flattened" parent="Area3D/x" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_yugyk")
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.155, 0)
+visible = false
 
 [node name="o" parent="Area3D" instance=ExtResource("6_lclkh")]
 unique_name_in_owner = true
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.15, 0)
-visible = false
-
-[node name="flattened" parent="Area3D/o" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_bnc4g")
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.155, 0)
 
 [node name="tile_selector" parent="Area3D" instance=ExtResource("4_5spic")]
 unique_name_in_owner = true

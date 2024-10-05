@@ -38,11 +38,11 @@ void fragment() {
 //
 	//COLOR = mix(pixelColor, color, flashState);
 	//COLOR.a *= pixelColor.a;
-	
+
 	//COLOR = pixelColor;
 	//COLOR.rgb = COLOR.gbr;
 	//COLOR.rgb = COLOR.bgb;
-	
+
 	//float brightness = (pixelColor.r + pixelColor.g + pixelColor.b) / 5.0;
 	//vec4 grayScale = vec4(brightness, brightness, brightness, pixelColor.a);
 	//COLOR = grayScale;

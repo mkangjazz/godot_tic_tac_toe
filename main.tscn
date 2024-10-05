@@ -1,23 +1,30 @@
-[gd_scene load_steps=15 format=3 uid="uid://v45x1kp6orko"]
+[gd_scene load_steps=18 format=3 uid="uid://v45x1kp6orko"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_e7rks"]
 [ext_resource type="PackedScene" uid="uid://ivf4hhmg6bao" path="res://ground_plane.glb" id="2_0xp7r"]
-[ext_resource type="Texture2D" uid="uid://1sv2v50r1au2" path="res://ground-texture.png" id="2_8rjbt"]
 [ext_resource type="PackedScene" uid="uid://dhevs2kgy42pf" path="res://tile_grid.tscn" id="2_hb3t2"]
+[ext_resource type="Texture2D" uid="uid://dp1pf75wfus02" path="res://rocky_terrain_02_diff_4k.jpg" id="3_d106b"]
 [ext_resource type="Theme" uid="uid://b4145qp6hxvc3" path="res://theme.tres" id="3_p47nq"]
 [ext_resource type="Texture2D" uid="uid://dvawq6vfmelhp" path="res://tile-map.png" id="4_5o8i8"]
+[ext_resource type="Texture2D" uid="uid://bofxfo1ni2xa7" path="res://rocky_terrain_02_spec_4k.png" id="4_wna02"]
+[ext_resource type="Texture2D" uid="uid://bho3ipv7ch2aw" path="res://rocky_terrain_02_disp_4k.png" id="5_psmgx"]
 [ext_resource type="Texture2D" uid="uid://ckfxsnra1s18v" path="res://logo.png" id="5_twumo"]
 [ext_resource type="PackedScene" uid="uid://bo7o207lrnw1g" path="res://scene_transitions.tscn" id="10_gsd7b"]
 [ext_resource type="StyleBox" uid="uid://dmqcipnuf3pog" path="res://ff_stylebox.tres" id="10_o4x4j"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0nlas"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1g1sy"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.538837, 0.45914, 0.225779, 0.756863)
-albedo_texture = ExtResource("2_8rjbt")
-uv1_scale = Vector3(260, 260, 260)
+albedo_texture = ExtResource("3_d106b")
+metallic_texture = ExtResource("4_wna02")
+heightmap_texture = ExtResource("5_psmgx")
+uv1_scale = Vector3(20, 20, 20)
+uv2_scale = Vector3(0, 0, 0)
 texture_filter = 0
-distance_fade_mode = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iutmp"]
+material = SubResource("StandardMaterial3D_1g1sy")
+size = Vector2(200, 200)
 
 [sub_resource type="Animation" id="Animation_43ek1"]
 length = 0.5
@@ -70,11 +77,24 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(0.297302, 0.5),
 "update": 0,
-"values": [Vector3(0, 60, 75), Vector3(0, 54, 75)]
+"values": [Vector3(3, 60, 70), Vector3(3, 52, 75)]
 }
 
 [sub_resource type="Animation" id="Animation_rjc53"]
 resource_name = "shake"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(3.125, 52, 75), Vector3(2.875, 52, 75), Vector3(3.125, 52, 75), Vector3(3, 52, 75)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i6ysd"]
 _data = {
@@ -92,18 +112,16 @@ unique_name_in_owner = true
 
 [node name="InGameUI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="ground_plane" parent="InGameUI" instance=ExtResource("2_0xp7r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -3.1, 8)
 
 [node name="Ground" parent="InGameUI/ground_plane" index="0"]
-transform = Transform3D(41, 0, 0, 0, 0.07, 0, 0, 0, 3, 15.1022, 2.56334, -7.12063)
-surface_material_override/0 = SubResource("StandardMaterial3D_0nlas")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_iutmp")
 
 [node name="TileGrid" parent="InGameUI" instance=ExtResource("2_hb3t2")]
 unique_name_in_owner = true
-transform = Transform3D(1.125, 0, 0, 0, 1.125, 0, 0, 0, 1.125, 0, 0, -5)
+transform = Transform3D(1.125, 0, 0, 0, 1.125, 0, 0, 0, 1.125, 0, 0, 0)
 
 [node name="RoundWinnerContainer" type="MarginContainer" parent="InGameUI"]
 unique_name_in_owner = true
@@ -267,6 +285,7 @@ horizontal_alignment = 1
 
 [node name="MainMenu" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="Control" type="Control" parent="MainMenu"]
 clip_contents = true
@@ -280,6 +299,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MapBG" type="TextureRect" parent="MainMenu/Control"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -300,7 +320,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-color = Color(0.65098, 0.427451, 0, 0.721569)
+color = Color(0.957114, 0.67958, 0, 0.576471)
 
 [node name="CenterContainer" type="CenterContainer" parent="MainMenu"]
 anchors_preset = 15
@@ -364,7 +384,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 theme = ExtResource("3_p47nq")
-disabled = true
 alignment = 1
 
 [node name="Player" type="Label" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/TogglePlayer/HBoxContainer"]
@@ -403,7 +422,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 theme = ExtResource("3_p47nq")
-disabled = true
 alignment = 1
 
 [node name="Button4" type="Label" parent="MainMenu/CenterContainer/Panel/MarginContainer/VBoxContainer3/ToggleWins/Container"]
@@ -449,24 +467,18 @@ libraries = {
 "": SubResource("AnimationLibrary_i6ysd")
 }
 
-[node name="LightMarker" type="Marker3D" parent="."]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="LightMarker"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 20)
-visible = false
-light_color = Color(0.970808, 0.924657, 0.729373, 1)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 7, 2, 0)
+light_color = Color(1, 1, 0.941176, 1)
 light_energy = 2.0
-light_indirect_energy = 4.0
+light_angular_distance = 0.5
 shadow_enabled = true
-shadow_opacity = 0.7
-shadow_blur = 1.465
+shadow_bias = 1.0
+shadow_normal_bias = 4.0
+shadow_transmittance_bias = 1.0
 directional_shadow_mode = 0
-
-[node name="OmniLight3D" type="OmniLight3D" parent="LightMarker"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 11, -4)
-light_energy = 2.5
-omni_range = 40.0
-omni_attenuation = 0.0
+directional_shadow_max_distance = 5000.0
+directional_shadow_pancake_size = 111.7
 
 [connection signal="focused_tile_chosen" from="InGameUI/TileGrid" to="." method="_on_tile_grid_focused_tile_chosen"]
 [connection signal="tile_clicked" from="InGameUI/TileGrid" to="." method="_on_tile_grid_tile_clicked"]

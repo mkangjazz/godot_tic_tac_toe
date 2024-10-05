@@ -13,12 +13,12 @@ uniform float ratio = 0.5;
 void fragment() {
 	ALBEDO = vec3(0.75);
 	ROUGHNESS = 0.5;
-	
+
 	float s = 1.0/height;
 	float shift = float(int(UV.y*s)) / 2.0*width;
 	float x = mod(shift+UV.x, width)/width;
 	float y = mod(UV.y, height)/height;
-	
+
 	ALBEDO = texture(gap, vec2(UV.x, UV.y)).rgb / 2.5;
 	if(x > gap_x && x < 1.0-gap_x && y > gap_y && y < 1.0-gap_y){
 		NORMAL = vec3(0.0, 0.0, 0.0);

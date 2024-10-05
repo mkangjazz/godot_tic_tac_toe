@@ -171,7 +171,12 @@ func set_continue_button_text():
 		continue_button_label.text = "Next Round";
 	pass;
 
+func shake_camera():
+	camera_ap.queue("shake");
+	pass;
+
 func show_win():
+	shake_camera();
 	game_manager.isGamePaused = true;
 	tile_grid.hide_focus_indicator();
 
