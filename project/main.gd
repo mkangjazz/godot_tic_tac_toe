@@ -28,8 +28,6 @@ var player_manager:PlayerManager;
 var game_manager:GameManager;
 var scene_is_transitioning: bool = false;
 
-signal scene_has_transitioned;
-
 func _ready():
 	set_up_managers();
 	main_menu_scene.show();
@@ -40,6 +38,8 @@ func _ready():
 
 func _process(_delta):
 	if player_manager:
+		sync_menu_settings();
+
 		if player_manager.players.p1 and player_manager.players.p2:
 			x_score_label.text = game_manager.numerals[str(player_manager.players.p1.score)]
 			o_score_label.text = game_manager.numerals[str(player_manager.players.p2.score)]
@@ -74,6 +74,17 @@ func focus_player_switch():
 
 func focus_continue_button():
 	continue_button.grab_focus()
+	pass;
+
+func sync_menu_settings():
+	if toggle_player_switch.button_pressed:
+		player_manager.set_to_multiplayer();
+	else: 
+		player_manager.set_to_singleplayer();
+	if toggle_wins_switch.button_pressed:
+		game_manager.wins_per_round = 5;
+	else:
+		game_manager.wins_per_round = 3;
 	pass;
 
 func set_up_managers():
@@ -119,7 +130,6 @@ func _on_tile_grid_tile_clicked():
 	pass
 
 func _on_tile_grid_focused_tile_chosen():
-	print("_on_tile_grid_focused_tile_chosen")
 	if tile_grid.found_match_three_x():
 		player_manager.players.p1.score += 1;
 		show_win();
@@ -289,26 +299,14 @@ func _on_start_game_button_pressed():
 	start_battle();
 	pass
 
+# need to resync this...
+
 func _on_toggle_player_pressed():
-	var pressed:bool = toggle_player_btn.button_pressed;
-
-	toggle_player_switch.button_pressed = pressed;
-
-	if pressed:
-		player_manager.set_to_multiplayer();
-	else:
-		player_manager.set_to_singleplayer();
+	toggle_player_switch.button_pressed = !toggle_player_switch.button_pressed;
 	pass
 
 func _on_toggle_wins_pressed():
-	var pressed:bool = toggle_wins_btn.button_pressed;
-
-	toggle_wins_switch.button_pressed = pressed;
-
-	if pressed:
-		game_manager.wins_per_round = 5;
-	else:
-		game_manager.wins_per_round = 3;
+	toggle_wins_switch.button_pressed = !toggle_wins_switch.button_pressed;
 	pass
 
 func _on_tile_grid_tile_hovered(tile):
@@ -318,3 +316,9 @@ func _on_tile_grid_tile_hovered(tile):
 	else:
 		tile_grid.unfocus_all_tiles();
 	pass
+
+func _on_scene_transitions_transition_started() -> void:
+	pass # Replace with function body.
+
+func _on_scene_transitions_transition_ended() -> void:
+	pass # Replace with function body.
